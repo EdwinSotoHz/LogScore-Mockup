@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITICsLab — ContextLog Score</title>
+    <title>ITICsLab — LogScore</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
         rel="stylesheet">
     <style>
@@ -278,7 +278,7 @@
             font-size: 1.05rem;
         }
 
-        /* SECCIÓN 1: DOCUMENTACIÓN */
+        /* SECCIÓN 1: DOCUMENTACIÓN - REDISEÑADA */
         .docs-section {
             padding: 5rem 2rem 6rem;
             background: #ffffff;
@@ -304,37 +304,71 @@
             border-radius: 50%;
         }
 
-        .docs-grid {
+        .docs-grid-new {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
             margin-top: 2.5rem;
             position: relative;
             z-index: 2;
         }
 
-        .doc-card {
+        .doc-card-new {
             background: rgba(255, 255, 255, 0.07);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 1.8rem;
+            padding: 2rem 1.5rem;
             border-radius: 20px;
             backdrop-filter: blur(10px);
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .doc-card:hover {
+        .doc-card-new:hover {
             background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
         }
 
-        .doc-card h4 {
+        .doc-card-new .icon {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+
+        .doc-card-new h4 {
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             color: #60a5fa;
         }
 
-        .doc-card p {
+        .doc-card-new p {
             font-size: 0.88rem;
             color: #cbd5e1;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .doc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .doc-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.05);
         }
 
         /* SECCIÓN 2: EL PROYECTO */
@@ -370,7 +404,7 @@
             font-size: 1.2rem;
         }
 
-        /* SECCIÓN 3: NUESTRO EQUIPO */
+        /* SECCIÓN 3: NUESTRO EQUIPO - REDISEÑADA */
         .team-section {
             padding: 6rem 2rem;
             background: #ffffff;
@@ -389,6 +423,10 @@
             transition: all 0.3s ease;
             position: relative;
             border: 1px solid rgba(37, 99, 235, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .organic-card:nth-child(2) {
@@ -399,23 +437,56 @@
             border-radius: 30px 30px 10px 30px;
         }
 
+        .organic-card:nth-child(4) {
+            border-radius: 30px 10px 30px 30px;
+        }
+
         .organic-card:hover {
             transform: translateY(-8px);
             background: #ffffff;
             box-shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
         }
 
-        .icon-blob {
-            width: 55px;
-            height: 55px;
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2rem;
             color: white;
-            font-size: 1.4rem;
             margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .organic-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .organic-card .role {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .organic-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .organic-card .institution-detail {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            font-weight: 600;
         }
 
         /* --- FOOTER --- */
@@ -431,7 +502,6 @@
             color: #94a3b8;
             font-size: 0.9rem;
         }
-
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 900px) {
@@ -554,27 +624,30 @@
                 font-size: 0.9rem;
             }
 
-            .docs-grid {
+            .docs-grid-new {
                 grid-template-columns: 1fr;
                 gap: 1rem;
                 margin-top: 1.75rem;
             }
 
-            .doc-card {
+            .doc-card-new {
                 padding: 1.25rem;
                 border-radius: 17px;
             }
 
-            .doc-card h4 {
+            .doc-card-new .icon {
+                font-size: 2rem;
+            }
+
+            .doc-card-new h4 {
                 font-size: 1rem;
             }
 
-            .doc-card p {
+            .doc-card-new p {
                 font-size: 0.84rem;
             }
 
-            /* La sección de público B2C/B2B usa un grid inline.
-               Se fuerza a una sola columna en móvil. */
+            /* La sección de público B2C/B2B usa un grid inline. */
             .details-section .container>div[style*="grid-template-columns"] {
                 grid-template-columns: 1fr !important;
                 gap: 1rem !important;
@@ -611,15 +684,19 @@
                 border-radius: 22px !important;
             }
 
-            .icon-blob {
-                width: 48px;
-                height: 48px;
-                font-size: 1.2rem;
+            .avatar-placeholder {
+                width: 65px;
+                height: 65px;
+                font-size: 1.5rem;
                 margin-bottom: 1rem;
             }
 
             .organic-card h3 {
                 font-size: 1.15rem;
+            }
+
+            .organic-card .role {
+                font-size: 0.8rem;
             }
 
             .organic-card p {
@@ -750,21 +827,7 @@
             <!-- TARJETA CON RECORTES Y LOGO DE LOGSCORE -->
             <div class="blob-card">
                 <div class="blob-card-header">
-                    <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="18" y="10" width="64" height="100" rx="14" stroke="#2563eb" stroke-width="8"
-                            fill="none" />
-                        <line x1="32" y1="10" x2="32" y2="110" stroke="#2563eb" stroke-width="4" />
-                        <path d="M60 10 H70 V32 L65 26 L60 32 Z" fill="#f97316" />
-                        <rect x="40" y="70" width="8" height="25" rx="3" fill="#a855f7" />
-                        <rect x="52" y="55" width="8" height="40" rx="3" fill="#2563eb" />
-                        <rect x="64" y="40" width="8" height="55" rx="3" fill="#f97316" />
-                    </svg>
-                    <div>
-                        <h3>Log<span>Score</span></h3>
-                        <small
-                            style="text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); font-weight:700;">Diario
-                            Financiero</small>
-                    </div>
+                    <img src="assets/logo.svg" alt="">
                 </div>
                 <blockquote>
                     "Un diario financiero que no confía en lo que el usuario promete tener, sino en lo que demuestra
@@ -784,33 +847,45 @@
         </svg>
     </div>
 
-    <!-- 1. DOCUMENTACIÓN DE CONTEXTLOG SCORE -->
+    <!-- 1. DOCUMENTACIÓN DE LogScore - REDISEÑADA -->
     <section id="docs" class="docs-section">
         <div class="container">
             <div class="docs-banner">
-                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">1. Documentación de ContextLog Score</h2>
-                <p style="color: #94a3b8;">Especificaciones de la propuesta de ITICsLab para el Crevolution Hackatón
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">1. Documentación de LogScore</h2>
+                <p style="color: #94a3b8;">Recursos oficiales de la propuesta de ITICsLab para el Crevolution Hackatón
                     2026.</p>
 
-                <div class="docs-grid">
-                    <div class="doc-card">
-                        <h4>🔒 Privacidad (LFPDPPP)</h4>
-                        <p>Consentimiento Opt-In explícito y anonimización de conversaciones desde el origen mediante
-                            LLM.</p>
+                <div class="docs-grid-new">
+                    <!-- Tarjeta 1: Video Conócenos -->
+                    <div class="doc-card-new">
+                        <div class="icon">🎥</div>
+                        <h4>Conócenos</h4>
+                        <p>Mira nuestro video de presentación y descubre la visión detrás de LogScore.</p>
+                        <a href="#" target="_blank" class="doc-btn">Ver Video →</a>
                     </div>
-                    <div class="doc-card">
-                        <h4>💳 Modelo Freemium</h4>
-                        <p>Planes B2C de misiones gratuitas y opciones Premium con análisis conversacional e
-                            historiales.</p>
+
+                    <!-- Tarjeta 2: Desarrollo de la Propuesta -->
+                    <div class="doc-card-new">
+                        <div class="icon">📄</div>
+                        <h4>Desarrollo de la Propuesta</h4>
+                        <p>Documento técnico con la arquitectura, modelo de negocio y detalles del proyecto.</p>
+                        <a href="assets/pdf/LogScore_Propuesta_Crevolution.pdf" target="_blank" class="doc-btn">Ver Documento →</a>
                     </div>
-                    <div class="doc-card">
-                        <h4>🧩 Módulos Extra</h4>
-                        <p>Bóveda interactiva para certificados educativos y exploración de Huella Semántica a futuro.
-                        </p>
+
+                    <!-- Tarjeta 3: Presentación -->
+                    <div class="doc-card-new">
+                        <div class="icon">📊</div>
+                        <h4>Presentación</h4>
+                        <p>Diapositivas oficiales utilizadas en la presentación del hackatón.</p>
+                        <a href="assets/pdf/LogScorePresentationCrevolution.pdf" target="_blank" class="doc-btn">Ver Diapositivas →</a>
                     </div>
-                    <div class="doc-card">
-                        <h4>🛡️ Antifraude Explicable</h4>
-                        <p>Score 100% transparente sin cajas negras ni variables discriminatorias de zona o género.</p>
+
+                    <!-- Tarjeta 4: Repositorio Git -->
+                    <div class="doc-card-new">
+                        <div class="icon">💻</div>
+                        <h4>Repositorio</h4>
+                        <p>Código fuente, documentación técnica y recursos del proyecto en GitHub.</p>
+                        <a href="https://github.com/EdwinSotoHz/LogScore-Mockup.git" class="doc-btn">Ir al Repo →</a>
                     </div>
                 </div>
             </div>
@@ -824,11 +899,11 @@
         </svg>
     </div>
 
-    <!-- 2. EL PROYECTO: CONTEXTLOG SCORE -->
+    <!-- 2. EL PROYECTO: LogScore -->
     <section id="proyecto" class="details-section">
         <div class="container">
             <div class="section-header">
-                <h2>2. El Proyecto: ContextLog Score</h2>
+                <h2>2. El Proyecto: LogScore</h2>
                 <p>Puntos clave, audiencias objetivo y variables del sistema.</p>
             </div>
 
@@ -888,31 +963,48 @@
         </svg>
     </div>
 
-    <!-- 3. NUESTRO EQUIPO -->
+    <!-- 3. NUESTRO EQUIPO - REDISEÑADA -->
     <section id="equipo" class="team-section">
         <div class="container">
             <div class="section-header">
                 <h2>3. Nuestro Equipo</h2>
-                <p>Integrantes y pilares de trabajo en ITICsLab.</p>
+                <p>Conoce al talento detrás de ITICsLab y LogScore.</p>
             </div>
             <div class="organic-grid">
+                <!-- Tarjeta 1: Desarrollador -->
                 <div class="organic-card">
-                    <div class="icon-blob">👨‍💻</div>
-                    <h3>Desarrollo & Arquitectura</h3>
-                    <p>Enfocados en la integración de modelos de Machine Learning, OCR para procesamiento de tickets e
-                        infraestructura segura.</p>
+                    <div class="avatar-placeholder">👨‍💻</div>
+                    <h3>Edwin Salvador Soto Hernandez</h3>
+                    <p class="role">Desarrollador & Líder de Proyecto</p>
+                    <p>Encargado de la arquitectura, desarrollo e integración de los módulos de LogScore.</p>
+                    <p class="institution-detail">Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)</p>
                 </div>
+
+                <!-- Tarjeta 2: Mentor -->
                 <div class="organic-card">
-                    <div class="icon-blob">🎨</div>
-                    <h3>Diseño de Experiencia (UX/UI)</h3>
-                    <p>Creación de interfaces limpias, intuitivas y sistemas gamificados con misiones interactivas
-                        centradas en el usuario.</p>
+                    <div class="avatar-placeholder">👨‍🏫</div>
+                    <h3>Mtro. Saúl Isaí Soto Ortiz</h3>
+                    <p class="role">Mentor Académico</p>
+                    <p>Asesoría en el desarrollo técnico y metodológico del proyecto.</p>
+                    <p class="institution-detail">Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)</p>
                 </div>
+
+                <!-- Tarjeta 3: Mentora -->
                 <div class="organic-card">
-                    <div class="icon-blob">📊</div>
-                    <h3>Análisis de Riesgo & Datos</h3>
-                    <p>Modelado de datos no convencionales, análisis de comportamiento y algoritmos antifraude
-                        continuos.</p>
+                    <div class="avatar-placeholder">👩‍🏫</div>
+                    <h3>Yadira Eufemia Gaspar Morales</h3>
+                    <p class="role">Mentora Académica</p>
+                    <p>Apoyo en la validación del modelo de negocio y presentación ejecutiva.</p>
+                    <p class="institution-detail">Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)</p>
+                </div>
+
+                <!-- Tarjeta 4: Institución y Carrera -->
+                <div class="organic-card">
+                    <div class="avatar-placeholder">🎓</div>
+                    <h3>ITSOEH</h3>
+                    <p class="role">Institución Educativa</p>
+                    <p>Instituto Tecnológico Superior del Occidente del Estado de Hidalgo.</p>
+                    <p class="institution-detail">Carrera: Ingeniería en Tecnologías de la Información y Comunicaciones (TICs)</p>
                 </div>
             </div>
         </div>
@@ -921,8 +1013,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 <strong>ITICsLab</strong> — Desarrollado para Crevolution Hackatón 2026. Todos los derechos
-                reservados.</p>
+            <p>&copy; 2026 <strong>ITICsLab</strong> — Desarrollado para Crevolution Hackatón 2026.</p>
         </div>
     </footer>
 
