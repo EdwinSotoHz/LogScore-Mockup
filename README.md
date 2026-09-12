@@ -261,8 +261,6 @@ En la carpeta [`assets/pdf/`](./assets/pdf/) se encuentran los documentos comple
 ## 🚀 Cómo Visualizar y Ejecutar Localmente
 
 El proyecto está construido con tecnologías web estándar (HTML5, CSS3 y JavaScript moderno) sin dependencias complejas de compilación:
-
-### Opción 1: Apertura Directa en el Navegador
 1. Clona o descarga el repositorio:
    ```bash
    git clone https://github.com/EdwinSotoHz/LogScore-Mockup.git
@@ -271,24 +269,6 @@ El proyecto está construido con tecnologías web estándar (HTML5, CSS3 y JavaS
    - **Landing Page Completa:** `index.html`
    - **Simulador Interactivo de Smartphone:** `interactive-demo-viewer.html`
    - **Malla de Pruebas Multi-pantalla:** `test.html`
-
-### Opción 2: Servidor Local Ligero (Recomendado para hot reload)
-
-Con **Python**:
-```bash
-python -m http.server 8000
-```
-Luego ingresa a: `http://localhost:8000`
-
-Con **Node.js (serve o live-server)**:
-```bash
-npx serve .
-```
-
-Con **VS Code / Antigravity IDE**:
-- Haz clic derecho sobre `index.html` o `interactive-demo-viewer.html` y selecciona **"Open with Live Server"**.
-
----
 
 ## 👥 Equipo y Créditos
 
