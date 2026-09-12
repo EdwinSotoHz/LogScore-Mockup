@@ -255,24 +255,149 @@
         }
 
         /* Responsive */
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
+            html,
+            body {
+                height: auto;
+                min-height: 100%;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
             .hero {
+                min-height: 100vh;
+                height: auto;
                 grid-template-columns: 1fr;
-                padding: 1.5rem;
+                padding: 5.5rem 1rem 2rem;
                 gap: 1.5rem;
+                overflow: visible;
             }
 
             .info {
+                width: 100%;
+                max-width: none;
                 text-align: center;
                 align-items: center;
+                gap: 0.85rem;
+            }
+
+            .badge {
+                font-size: 0.72rem;
+                padding: 0.35rem 0.75rem;
+            }
+
+            .brand-title {
+                justify-content: center;
+            }
+
+            .info h1 {
+                font-size: clamp(2rem, 10vw, 2.8rem);
+            }
+
+            .subtitle {
+                font-size: 0.72rem;
+                margin-top: 0.35rem;
+            }
+
+            .info p {
+                max-width: 340px;
+                font-size: 0.9rem;
+                line-height: 1.45;
+            }
+
+            .team-tag {
+                font-size: 0.8rem;
+            }
+
+            .controls {
+                width: 100%;
+                max-width: 360px;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 0.25rem;
+            }
+
+            .btn {
+                padding: 0.65rem 0.9rem;
+                font-size: 0.78rem;
+                flex: 1 1 auto;
+            }
+
+            .screen-selector {
+                justify-content: center;
+                margin-top: 0.15rem;
+            }
+
+            .screen-dot {
+                width: 32px;
+                height: 32px;
+            }
+
+            .phone-wrapper {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                overflow: visible;
+                align-items: flex-start;
             }
 
             .phone-frame {
-                --phone-h: min(70vh, 600px);
+                /* El teléfono ocupa casi todo el ancho disponible */
+                --phone-w: min(82vw, 390px);
+                width: var(--phone-w);
+                height: calc(var(--phone-w) / 0.4615);
+                padding: calc(var(--phone-w) * 0.0303);
+                border-radius: calc(var(--phone-w) * 0.13);
+            }
+
+            .phone-notch {
+                top: calc(var(--phone-w) * 0.0303 + 5px);
+                height: calc(var(--phone-w) * 0.0693);
+            }
+
+            .phone-screen {
+                border-radius: calc(var(--phone-w) * 0.104);
+            }
+
+            .phone-frame::before,
+            .phone-frame::after {
+                width: 2px;
             }
         }
 
-        @media (max-height: 700px) {
+        @media (max-width: 420px) {
+            .hero {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+                padding-top: 5rem;
+                gap: 1.25rem;
+            }
+
+            .info h1 {
+                font-size: 2.15rem;
+            }
+
+            .info p {
+                font-size: 0.84rem;
+                max-width: 310px;
+            }
+
+            .controls {
+                max-width: 330px;
+            }
+
+            .btn {
+                padding: 0.6rem 0.65rem;
+                font-size: 0.72rem;
+            }
+
+            .phone-frame {
+                --phone-w: min(86vw, 360px);
+            }
+        }
+
+        @media (max-height: 700px) and (min-width: 901px) {
             .phone-frame {
                 --phone-h: min(88vh, 620px);
             }
