@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogScore — Misiones</title>
+    <style>
+        :root {
+            --ls-blue-vibrant: #0066FF;
+            --ls-blue-dark: #0052CC;
+            --ls-blue-light: #EBF3FF;
+            --ls-orange-vibrant: #FF5E36;
+            --ls-purple-vibrant: #8B5CF6;
+            --ls-purple-light: #F3E8FF;
+            --ls-green-vibrant: #10B981;
+            --ls-green-light: #ECFDF5;
+            --ls-yellow-vibrant: #F59E0B;
+
+            --ls-text-main: #0F172A;
+            --ls-text-sub: #64748B;
+            --ls-bg-screen: #F8FAFC;
+            --ls-border-soft: #E2E8F0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--ls-text-main);
+            background: var(--ls-bg-screen);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: var(--ls-bg-screen);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ─── Status bar ─── */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 22px 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ls-text-main);
+        }
+        .status-bar .icons { letter-spacing: 2px; }
+
+        /* ─── Top bar ─── */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 20px 8px;
+        }
+
+        .top-bar .icon-btn {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            color: var(--ls-text-sub);
+            cursor: pointer;
+            transition: background 0.2s;
+            background: transparent;
+            border: none;
+        }
+        .top-bar .icon-btn:hover { background: #EEF2F7; }
+
+        .top-bar .title-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.1;
+        }
+        .title-block .label {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--ls-text-sub);
+        }
+        .title-block .title {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: -0.2px;
+            color: var(--ls-text-main);
+            margin-top: 2px;
+        }
+
+        /* ─── Contenido ─── */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 4px 20px 16px;
+            scrollbar-width: none;
+        }
+        .content::-webkit-scrollbar { display: none; }
+
+        /* ─── Intro ─── */
+        .intro {
+            margin-bottom: 18px;
+        }
+        .intro h1 {
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            color: var(--ls-text-main);
+        }
+        .intro p {
+            font-size: 12px;
+            color: var(--ls-text-sub);
+            line-height: 1.4;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* ─── Sección header ─── */
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 4px 0 10px;
+        }
+        .section-head h4 {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--ls-text-sub);
+        }
+        .section-head .count {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--ls-blue-vibrant);
+            background: var(--ls-blue-light);
+            padding: 3px 9px;
+            border-radius: 999px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ─── Misión activa destacada ─── */
+        .mission-hero {
+            background: linear-gradient(150deg, #0066FF 0%, #0052CC 100%);
+            border-radius: 22px;
+            padding: 18px;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 14px 30px -12px rgba(0,102,255,0.5);
+        }
+        .mission-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 70%;
+            height: 180%;
+            background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .mission-hero .tag-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .mission-hero .tag {
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.22);
+            padding: 4px 10px;
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+        }
+        .mission-hero .streak {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.3px;
+            background: rgba(255,255,255,0.22);
+            padding: 4px 10px;
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+        }
+        .mission-hero .streak svg { width: 11px; height: 11px; }
+
+        .mission-hero h2 {
+            font-size: 17px;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -0.4px;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+        .mission-hero .desc {
+            font-size: 11px;
+            line-height: 1.4;
+            color: #DBEAFE;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        /* Progreso destacado */
+        .progress-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+        .progress-row .amounts {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: -0.2px;
+        }
+        .progress-row .amounts .total {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            margin-left: 3px;
+        }
+        .progress-row .pct {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.3px;
+        }
+
+        .progress-track {
+            height: 8px;
+            background: rgba(255,255,255,0.22);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #FFFFFF;
+            border-radius: 999px;
+            width: 0%;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 12px rgba(255,255,255,0.6);
+        }
+
+        /* Insignia de meta */
+        .badge-earned {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.22);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            backdrop-filter: blur(6px);
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: all 0.5s ease 0.6s;
+        }
+        .badge-earned.show { opacity: 1; transform: translateY(0); }
+        .badge-earned svg { width: 12px; height: 12px; }
+
+        /* ─── Card de misión secundaria ─── */
+        .mission-card {
+            background: #FFFFFF;
+            border-radius: 18px;
+            padding: 15px;
+            border: 1.5px solid var(--ls-border-soft);
+            box-shadow: 0 8px 20px -10px rgba(15,23,42,0.08);
+            margin-bottom: 10px;
+            transition: border-color 0.2s;
+        }
+        .mission-card:hover { border-color: var(--ls-blue-vibrant); }
+
+        .mc-head {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .mc-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: #FFF7ED;
+            color: #C2410C;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+        .mc-icon svg { width: 18px; height: 18px; }
+
+        .mc-body { flex: 1; min-width: 0; }
+        .mc-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--ls-text-main);
+            letter-spacing: -0.2px;
+            margin-bottom: 3px;
+        }
+        .mc-desc {
+            font-size: 11px;
+            color: var(--ls-text-sub);
+            line-height: 1.35;
+            font-weight: 500;
+        }
+
+        .mc-progress-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--ls-text-sub);
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+        .mc-progress-row .val { color: var(--ls-text-main); font-weight: 900; }
+
+        .mc-progress-track {
+            height: 6px;
+            background: #EEF2F7;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .mc-progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            width: 0%;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mc-progress-fill.orange { background: linear-gradient(90deg, #FF8A00, var(--ls-orange-vibrant)); }
+        .mc-progress-fill.purple { background: linear-gradient(90deg, var(--ls-purple-vibrant), #6366F1); }
+
+        /* ─── Badge de pre-evaluación (destacado) ─── */
+        .prequal-card {
+            margin-top: 16px;
+            background: linear-gradient(150deg, #F0FDF4 0%, #ECFDF5 100%);
+            border: 1.5px solid #BBF7D0;
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+        .prequal-card::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 50%;
+            height: 160%;
+            background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .prequal-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ls-green-vibrant), #059669);
+            color: #FFFFFF;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 8px 18px -6px rgba(16,185,129,0.5);
+            position: relative;
+            z-index: 1;
+        }
+        .prequal-icon svg { width: 22px; height: 22px; }
+
+        .prequal-body {
+            flex: 1;
+            min-width: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .prequal-body .k {
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: #047857;
+            margin-bottom: 3px;
+        }
+        .prequal-body .v {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--ls-text-main);
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+        }
+        .prequal-body .sub {
+            font-size: 10px;
+            color: #065F46;
+            font-weight: 600;
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
+        /* ─── Home indicator ─── */
+        .home-indicator {
+            width: 120px;
+            height: 4px;
+            background: #CBD5E1;
+            border-radius: 999px;
+            margin: 0 auto 8px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen">
+
+        <!-- Status bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span class="icons">•••  ᯤ  ▮</span>
+        </div>
+
+        <!-- Top bar -->
+        <div class="top-bar">
+            <button class="icon-btn" aria-label="Volver" id="backBtn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+
+            <div class="title-block">
+                <span class="label">Disciplina</span>
+                <span class="title">Misiones activas</span>
+            </div>
+
+            <button class="icon-btn" aria-label="Historial">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M12 8v4l3 2"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Contenido -->
+        <div class="content">
+
+            <!-- Intro breve -->
+            <div class="intro">
+                <h1>Tu prueba de estrés financiera</h1>
+                <p>Demuestra constancia y desbloquea mejores condiciones.</p>
+            </div>
+
+            <!-- Sección: Misión principal -->
+            <div class="section-head">
+                <h4>Misión en curso</h4>
+                <span class="count">Día 7 de 7</span>
+            </div>
+
+            <!-- Reto Retención (destacado) -->
+            <div class="mission-hero">
+                <div class="tag-row">
+                    <span class="tag">Reto Retención</span>
+                    <span class="streak">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                        7 días seguidos
+                    </span>
+                </div>
+
+                <h2>Reserva $50 MXN diarios durante 7 días</h2>
+                <p class="desc">El ahorro constante se convierte en tu colateral conductual.</p>
+
+                <div class="progress-row">
+                    <span class="amounts">$350.00<span class="total">/ $350.00</span></span>
+                    <span class="pct">100%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="heroFill"></div>
+                </div>
+
+                <div class="badge-earned" id="heroBadge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12l5 5L20 7"/>
+                    </svg>
+                    Meta alcanzada
+                </div>
+            </div>
+
+            <!-- Sección: Misiones secundarias -->
+            <div class="section-head">
+                <h4>Otras misiones</h4>
+                <span class="count">2 activas</span>
+            </div>
+
+            <!-- Misión Anti-Gastos Hormiga -->
+            <div class="mission-card">
+                <div class="mc-head">
+                    <div class="mc-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M15 9l-6 6M9 9l6 6"/>
+                        </svg>
+                    </div>
+                    <div class="mc-body">
+                        <div class="mc-title">Anti-Gastos Hormiga</div>
+                        <div class="mc-desc">Reduce tus suscripciones de ocio este mes.</div>
+                    </div>
+                </div>
+
+                <div class="mc-progress-row">
+                    <span>Progreso mensual</span>
+                    <span class="val">3 / 5 canceladas</span>
+                </div>
+                <div class="mc-progress-track">
+                    <div class="mc-progress-fill orange" id="antFill"></div>
+                </div>
+            </div>
+
+            <!-- Misión secundaria adicional (sobria) -->
+            <div class="mission-card">
+                <div class="mc-head">
+                    <div class="mc-icon" style="background: var(--ls-purple-light); color: var(--ls-purple-vibrant);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18"/>
+                            <path d="M7 14l4-4 4 4 5-5"/>
+                        </svg>
+                    </div>
+                    <div class="mc-body">
+                        <div class="mc-title">Prueba de Estrés</div>
+                        <div class="mc-desc">Mantén saldo positivo 14 días consecutivos.</div>
+                    </div>
+                </div>
+
+                <div class="mc-progress-row">
+                    <span>Racha actual</span>
+                    <span class="val">9 / 14 días</span>
+                </div>
+                <div class="mc-progress-track">
+                    <div class="mc-progress-fill purple" id="stressFill"></div>
+                </div>
+            </div>
+
+            <!-- Insignia destacada: pre-evaluación -->
+            <div class="prequal-card">
+                <div class="prequal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 15l-3 6 3-1.5L15 21l-3-6z"/>
+                        <circle cx="12" cy="9" r="6"/>
+                    </svg>
+                </div>
+                <div class="prequal-body">
+                    <div class="k">Pre-evaluación</div>
+                    <div class="v">Apto para Tarjeta Garantizada</div>
+                    <div class="sub">Basado en tus 7 días de constancia.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Home indicator -->
+        <div class="home-indicator"></div>
+
+    </div>
+
+    <script>
+        // ─── Animación de progreso al entrar ───
+        window.addEventListener('load', () => {
+            // Hero: 100%
+            setTimeout(() => {
+                document.getElementById('heroFill').style.width = '100%';
+                document.getElementById('heroBadge').classList.add('show');
+            }, 200);
+
+            // Anti-hormiga: 60%
+            setTimeout(() => {
+                document.getElementById('antFill').style.width = '60%';
+            }, 400);
+
+            // Prueba de estrés: 64%
+            setTimeout(() => {
+                document.getElementById('stressFill').style.width = '64%';
+            }, 600);
+        });
+
+        // ─── Volver al dashboard ───
+        document.getElementById('backBtn').addEventListener('click', () => {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ action: 'navigate', screen: 2 }, '*');
+            }
+        });
+    </script>
+</body>
+</html>
