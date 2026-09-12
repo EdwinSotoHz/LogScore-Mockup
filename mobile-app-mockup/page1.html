@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(160deg, #0f172a 0%, #1e3a8a 100%);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem 1.5rem 2rem;
+            position: relative;
+        }
+
+        /* Glow decorativo */
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -30%;
+            width: 80%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 3rem;
+            z-index: 1;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: grid;
+            place-items: center;
+            font-size: 1.3rem;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.03em;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2.5rem;
+            z-index: 1;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .field label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.02em;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 0.95rem 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .field input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .field input:focus {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.08);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .forgot {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #60a5fa;
+            text-decoration: none;
+            margin-top: -0.3rem;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+            margin-top: 0.5rem;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .socials {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.85rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .signup {
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .signup a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .home-indicator {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 999px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="brand">
+            <div class="brand-logo">💸</div>
+            <span class="brand-name">FinApp</span>
+        </div>
+
+        <h1 class="title">Bienvenido<br>de vuelta 👋</h1>
+        <p class="subtitle">Inicia sesión para continuar</p>
+
+        <form class="form" onsubmit="event.preventDefault(); go(2);">
+            <div class="field">
+                <label>Correo electrónico</label>
+                <input type="email" placeholder="tu@email.com" value="demo@finapp.com">
+            </div>
+
+            <div class="field">
+                <label>Contraseña</label>
+                <input type="password" placeholder="••••••••" value="12345678">
+            </div>
+
+            <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+
+            <button type="submit" class="btn-login">Iniciar sesión</button>
+
+            <div class="divider">o continúa con</div>
+
+            <div class="socials">
+                <button type="button" class="social-btn">🍎</button>
+                <button type="button" class="social-btn">🔵</button>
+                <button type="button" class="social-btn">📧</button>
+            </div>
+        </form>
+
+        <div class="signup">
+            ¿No tienes cuenta? <a href="#">Regístrate</a>
+        </div>
+
+        <div class="home-indicator"></div>
+    </div>
+
+    <script>
+        function go(n) {
+            parent.postMessage({ action: 'navigate', screen: n }, '*');
+        }
+    </script>
+</body>
+
+</html>

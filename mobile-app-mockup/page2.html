@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #0f172a;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .screen::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Header */
+        .header {
+            padding: 3rem 1.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .greeting {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .greeting span {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .greeting strong {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Balance card */
+        .balance-card {
+            margin: 0 1.25rem 1.25rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 20px;
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .balance-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.03em;
+        }
+
+        .balance-amount {
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.3rem;
+        }
+
+        .balance-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Quick actions */
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.6rem;
+            padding: 0 1.25rem 1.5rem;
+        }
+
+        .action {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 0.3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            color: #fff;
+        }
+
+        .action:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.2);
+            display: grid;
+            place-items: center;
+            font-size: 1rem;
+        }
+
+        .action span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Section */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem 0.9rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .section-link {
+            font-size: 0.78rem;
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Transactions */
+        .txn-list {
+            padding: 0 1.25rem 6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .txn {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 0.85rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            transition: all 0.2s;
+        }
+
+        .txn:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .txn-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .txn-icon.green {
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .txn-icon.red {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        .txn-icon.blue {
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .txn-icon.purple {
+            background: rgba(139, 92, 246, 0.15);
+        }
+
+        .txn-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .txn-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .txn-date {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .txn-amount {
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .txn-amount.positive {
+            color: #34d399;
+        }
+
+        /* Bottom nav */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 68px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 1rem 0.5rem;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            font-family: inherit;
+            padding: 0.5rem 0;
+        }
+
+        .nav-item.active {
+            color: #60a5fa;
+        }
+
+        .nav-item span {
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        .home-indicator {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 999px;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <!-- Header -->
+        <div class="header">
+            <div class="greeting">
+                <span>Buenos días</span>
+                <strong>Alex Ramírez 👋</strong>
+            </div>
+            <div class="avatar">AR</div>
+        </div>
+
+        <!-- Balance -->
+        <div class="balance-card">
+            <div class="balance-label">Balance total</div>
+            <div class="balance-amount">$24,580.00</div>
+            <div class="balance-change">↑ 12.4% este mes</div>
+        </div>
+
+        <!-- Acciones rápidas -->
+        <div class="actions">
+            <button class="action">
+                <div class="action-icon">↗</div>
+                <span>Enviar</span>
+            </button>
+            <button class="action">
+                <div class="action-icon">↙</div>
+                <span>Recibir</span>
+            </button>
+            <button class="action">
+                <div class="action-icon">💳</div>
+                <span>Pagar</span>
+            </button>
+            <button class="action">
+                <div class="action-icon">⋯</div>
+                <span>Más</span>
+            </button>
+        </div>
+
+        <!-- Transacciones -->
+        <div class="section-header">
+            <h2 class="section-title">Transacciones recientes</h2>
+            <a href="#" class="section-link">Ver todo</a>
+        </div>
+
+        <div class="txn-list">
+            <div class="txn">
+                <div class="txn-icon green">↓</div>
+                <div class="txn-info">
+                    <div class="txn-name">Nómina — Octubre</div>
+                    <div class="txn-date">Hoy, 09:15 AM</div>
+                </div>
+                <div class="txn-amount positive">+$3,200.00</div>
+            </div>
+
+            <div class="txn">
+                <div class="txn-icon red">↑</div>
+                <div class="txn-info">
+                    <div class="txn-name">Netflix Premium</div>
+                    <div class="txn-date">Ayer, 08:00 PM</div>
+                </div>
+                <div class="txn-amount">-$15.99</div>
+            </div>
+
+            <div class="txn">
+                <div class="txn-icon blue">↑</div>
+                <div class="txn-info">
+                    <div class="txn-name">Starbucks Coffee</div>
+                    <div class="txn-date">Ayer, 07:30 AM</div>
+                </div>
+                <div class="txn-amount">-$6.50</div>
+            </div>
+
+            <div class="txn">
+                <div class="txn-icon purple">↓</div>
+                <div class="txn-info">
+                    <div class="txn-name">Transferencia recibida</div>
+                    <div class="txn-date">12 Oct, 04:22 PM</div>
+                </div>
+                <div class="txn-amount positive">+$850.00</div>
+            </div>
+
+            <div class="txn">
+                <div class="txn-icon red">↑</div>
+                <div class="txn-info">
+                    <div class="txn-name">Amazon — Compra online</div>
+                    <div class="txn-date">11 Oct, 11:45 AM</div>
+                </div>
+                <div class="txn-amount">-$124.30</div>
+            </div>
+        </div>
+
+        <!-- Bottom nav -->
+        <nav class="bottom-nav">
+            <button class="nav-item active">
+                <span style="font-size:1.15rem;">🏠</span>
+                <span>Inicio</span>
+            </button>
+            <button class="nav-item">
+                <span style="font-size:1.15rem;">📊</span>
+                <span>Stats</span>
+            </button>
+            <button class="nav-item">
+                <span style="font-size:1.15rem;">💳</span>
+                <span>Tarjetas</span>
+            </button>
+            <button class="nav-item">
+                <span style="font-size:1.15rem;">👤</span>
+                <span>Perfil</span>
+            </button>
+        </nav>
+
+        <div class="home-indicator"></div>
+    </div>
+
+    <script>
+        // Marcar navegación activa (interacción simple)
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
