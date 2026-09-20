@@ -1,0 +1,149 @@
+/* --- Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Variables globales (paleta compartida) --- */
+:root {
+    --primary: #0075ea;
+    --primary-dark: #050c66;
+    --secondary: #2e017b;
+    --accent: #d13c3c;
+    --text-dark: #000000;
+    --text-muted: #333333;
+    --bg-light: #ffffff;
+
+    /* Tintes sutiles reutilizables */
+    --tint-blue: #f4f9ff;
+    --tint-violet: #f8f6ff;
+    --tint-mixed: #f5f8ff;
+    --tint-dark: #0f172a;
+}
+
+/* --- Tipografía base --- */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Botones genéricos (base compartida) --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 117, 234, 0.25);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 117, 234, 0.35);
+}
+
+.btn-ghost {
+    background: rgba(255, 255, 255, 0.7);
+    color: #1e293b;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-1px);
+}
+
+/* --- Contenedor centrado tipo "section" --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* --- Header de sección (título + subtítulo centrado) --- */
+.section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.section-header h2 {
+    font-size: 2.1rem;
+    font-weight: 800;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* --- Pill list (chips tipo etiqueta) --- */
+.pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 0.9rem;
+}
+
+.pill-item {
+    background: #ffffff;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pill-item::before {
+    content: '•';
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+/* ==========================================================
+   Responsive compartido (breakpoint general)
+   ========================================================== */
+@media (max-width: 900px) {
+    .section-header {
+        margin-bottom: 1.75rem;
+    }
+
+    .section-header h2 {
+        font-size: clamp(1.6rem, 7vw, 2.1rem);
+        line-height: 1.2;
+    }
+
+    .section-header p {
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+    }
+
+    .pill-list {
+        gap: 0.5rem;
+    }
+
+    .pill-item {
+        padding: 0.45rem 0.75rem;
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+}

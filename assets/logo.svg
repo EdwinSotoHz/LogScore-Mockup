@@ -1,30 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="100%" height="100%">
-  <!-- Icono Simple: Diario con Score (Paleta Crevolution) -->
+  <!-- Icono Simple: Diario con Score -->
   <g transform="translate(20, 20)">
-    <!-- Contorno del Libro/Diario (Azul Corporativo Crevolution) -->
-    <rect x="0" y="0" width="60" height="80" rx="8" fill="none" stroke="#2B6CB0" stroke-width="5"/>
+    <!-- Contorno del Libro/Diario -->
+    <rect x="0" y="0" width="60" height="80" rx="8" fill="none" stroke="#050c66" stroke-width="5"/>
     
-    <!-- Lomo del diario (Del mismo color que el libro) -->
-    <line x1="12" y1="0" x2="12" y2="80" stroke="#2B6CB0" stroke-width="3"/>
+    <!-- Lomo del diario -->
+    <line x1="12" y1="0" x2="12" y2="80" stroke="#050c66" stroke-width="3"/>
     
-    <!-- Marcador de página arriba (Naranja Naranja/Cobre Crevolution) -->
-    <path d="M 40 0 L 48 0 L 48 18 L 44 14 L 40 18 Z" fill="#E55B2B"/>
+    <!-- Marcador de página arriba -->
+    <path d="M 40 0 L 48 0 L 48 18 L 44 14 L 40 18 Z" fill="#bc0609"/>
 
-    <!-- Gráfica ascendente (Score) con degradado cromático Crevolution -->
-    <!-- Barra 1: Morado/Púrpura Crevolution -->
-    <rect x="20" y="50" width="6" height="15" rx="1" fill="#7C3AED"/>
+    <!-- Gráfica ascendente (Score) -->
+    <!-- Barra 1 -->
+    <rect x="20" y="50" width="6" height="15" rx="1" fill="#050c66"/>
     
-    <!-- Barra 2: Azul Crevolution -->
-    <rect x="30" y="40" width="6" height="25" rx="1" fill="#2B6CB0"/>
+    <!-- Barra 2 -->
+    <rect x="30" y="40" width="6" height="25" rx="1" fill="#3c9dd1"/>
     
-    <!-- Barra 3: Naranja/Cobre Crevolution (Pico máximo) -->
-    <rect x="40" y="28" width="6" height="37" rx="1" fill="#E55B2B"/>
+    <!-- Barra 3 (Pico máximo) -->
+    <rect x="40" y="28" width="6" height="37" rx="1" fill="#bc0609"/>
   </g>
 
   <!-- Texto LogScore -->
   <g transform="translate(100, 72)">
-    <!-- "Log" en Azul Oscuro / "Score" en Azul Crevolution -->
-    <text font-family="'Segoe UI', sans-serif" font-weight="bold" font-size="46" fill="#0F172A">Log<tspan fill="#2B6CB0">Score</tspan></text>
-    <text x="2" y="22" font-family="'Segoe UI', sans-serif" font-weight="600" font-size="12" fill="#64748B" letter-spacing="1">DIARIO FINANCIERO</text>
+    <!-- "Log" en Negro / "Score" en Azul Claro -->
+    <text font-family="'Segoe UI', sans-serif" font-weight="bold" font-size="46" fill="#000000">Log<tspan fill="#3c9dd1">Score</tspan></text>
+    <text x="2" y="22" font-family="'Segoe UI', sans-serif" font-weight="600" font-size="12" fill="#000000" letter-spacing="1">DIARIO FINANCIERO</text>
   </g>
 </svg>
