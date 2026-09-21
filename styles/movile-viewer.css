@@ -1,7 +1,6 @@
 /* ==========================================================
    mobile-viewer.css — Estilos exclusivos de
    interactive-demo-viewer.html
-   (Alineado con el lenguaje visual del home)
    ========================================================== */
 
 html,
@@ -44,12 +43,6 @@ body {
     font-weight: 700;
     border: 1px solid rgba(37, 99, 235, 0.2);
     width: fit-content;
-}
-
-.brand-title {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
 }
 
 .info h1 {
@@ -133,8 +126,8 @@ body {
     box-shadow: 0 0 12px rgba(37, 99, 235, 0.45);
 }
 
-/* --- Columna derecha: phone --- */
-.phone-wrapper {
+/* --- Columna derecha: recuadro blanco --- */
+.screen-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,67 +135,23 @@ body {
     overflow: hidden;
 }
 
-/* --- Marco del teléfono --- */
-.phone-frame {
-    --phone-h: min(90vh, 780px);
-    width: calc(var(--phone-h) * 0.4615);
-    height: var(--phone-h);
-    background: #0f172a;
-    border-radius: calc(var(--phone-h) * 0.06);
-    padding: calc(var(--phone-h) * 0.014);
+/* --- Recuadro blanco rectangular --- */
+.screen-frame {
+    --screen-h: min(90vh, 780px);
+    width: calc(var(--screen-h) * 0.48);
+    height: var(--screen-h);
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 0;
     box-shadow:
         0 25px 50px -12px rgba(15, 23, 42, 0.25),
-        0 0 0 2px rgba(255, 255, 255, 0.5),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        0 0 0 2px rgba(255, 255, 255, 0.5);
     position: relative;
     flex-shrink: 0;
-}
-
-/* --- Botones laterales del teléfono --- */
-.phone-frame::before,
-.phone-frame::after {
-    content: '';
-    position: absolute;
-    width: 3px;
-    background: #1e293b;
-    border-radius: 2px;
-}
-
-.phone-frame::before {
-    top: 18%;
-    right: -3px;
-    height: 12%;
-}
-
-.phone-frame::after {
-    top: 16%;
-    left: -3px;
-    height: 6%;
-}
-
-/* --- Notch / Dynamic Island --- */
-.phone-notch {
-    position: absolute;
-    top: calc(var(--phone-h) * 0.014 + 6px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 32%;
-    height: calc(var(--phone-h) * 0.032);
-    background: #000;
-    border-radius: 999px;
-    z-index: 20;
-}
-
-.phone-screen {
-    width: 100%;
-    height: 100%;
-    border-radius: calc(var(--phone-h) * 0.048);
     overflow: hidden;
-    background: #fff;
-    position: relative;
 }
 
-.phone-screen iframe {
+.screen-frame iframe {
     width: 100%;
     height: 100%;
     border: none;
@@ -242,10 +191,6 @@ body {
     .badge {
         font-size: 0.72rem;
         padding: 0.35rem 0.75rem;
-    }
-
-    .brand-title {
-        justify-content: center;
     }
 
     .info h1 {
@@ -291,7 +236,7 @@ body {
         height: 32px;
     }
 
-    .phone-wrapper {
+    .screen-wrapper {
         width: 100%;
         height: auto;
         min-height: 0;
@@ -299,26 +244,11 @@ body {
         align-items: flex-start;
     }
 
-    .phone-frame {
-        --phone-w: min(82vw, 390px);
-        width: var(--phone-w);
-        height: calc(var(--phone-w) / 0.4615);
-        padding: calc(var(--phone-w) * 0.0303);
-        border-radius: calc(var(--phone-w) * 0.13);
-    }
-
-    .phone-notch {
-        top: calc(var(--phone-w) * 0.0303 + 5px);
-        height: calc(var(--phone-w) * 0.0693);
-    }
-
-    .phone-screen {
-        border-radius: calc(var(--phone-w) * 0.104);
-    }
-
-    .phone-frame::before,
-    .phone-frame::after {
-        width: 2px;
+    .screen-frame {
+        --screen-w: min(82vw, 390px);
+        width: var(--screen-w);
+        height: calc(var(--screen-w) / 0.4615);
+        border-radius: 20px;
     }
 }
 
@@ -348,14 +278,14 @@ body {
         font-size: 0.72rem;
     }
 
-    .phone-frame {
-        --phone-w: min(86vw, 360px);
+    .screen-frame {
+        --screen-w: min(86vw, 360px);
     }
 }
 
 @media (max-height: 700px) and (min-width: 901px) {
-    .phone-frame {
-        --phone-h: min(88vh, 620px);
+    .screen-frame {
+        --screen-h: min(88vh, 620px);
     }
 
     .info h1 {
@@ -364,5 +294,206 @@ body {
 
     .info p {
         font-size: 0.9rem;
+    }
+}
+
+/* ==========================================================
+   Marco de teléfono y botones físicos laterales
+   ========================================================== */
+
+.phone-body {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Marco negro tipo teléfono */
+.phone-body .screen-frame {
+    border: 12px solid #0f172a;
+    border-radius: 32px;
+    box-shadow:
+        0 25px 50px -12px rgba(15, 23, 42, 0.35),
+        0 0 0 2px rgba(255, 255, 255, 0.5),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+}
+
+/* Botones físicos (pegados al marco y más grandes) */
+.phone-btn {
+    position: absolute;
+    right: -6px;
+    /* pegados al borde del marco */
+    width: 6px;
+    /* más gruesos */
+    background: #1e293b;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.5);
+    z-index: 2;
+}
+
+.phone-btn-power {
+    top: 220px;
+    height: 55px;
+}
+
+.phone-btn-volume {
+    top: 110px;
+    height: 100px;
+}
+
+@media (max-width: 900px) {
+    .status-bar {
+        height: 34px;
+        padding: 0 14px;
+        font-size: 0.76rem;
+    }
+
+    .camera-notch {
+        top: 8px;
+        width: 70px;
+        height: 18px;
+    }
+
+    .camera-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .status-icons {
+        font-size: 0.72rem;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 420px) {
+    .status-bar {
+        height: 32px;
+        padding: 0 12px;
+        font-size: 0.72rem;
+    }
+
+    .camera-notch {
+        top: 7px;
+        width: 64px;
+        height: 16px;
+    }
+
+    .camera-dot {
+        width: 7px;
+        height: 7px;
+    }
+
+    .status-icons {
+        font-size: 0.68rem;
+        gap: 5px;
+    }
+}
+
+.status-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: transparent;
+    z-index: 10;
+    pointer-events: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #000000;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-sizing: border-box;
+}
+
+.status-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-time {
+    letter-spacing: 0.02em;
+}
+
+.status-icon {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.status-dots {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+}
+
+/* Notch de cámaras */
+.camera-notch {
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 78px;
+    height: 20px;
+    background: #0f172a;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 7px;
+    box-sizing: border-box;
+}
+
+.camera-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #1e293b;
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.status-icons {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.78rem;
+    opacity: 0.9;
+}
+
+
+/* ==========================================================
+   Barra de gestos inferior (home indicator)
+   ========================================================== */
+
+.gesture-bar {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    background: #94a3b8;
+    border-radius: 999px;
+    opacity: 0.75;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Ajuste responsive */
+@media (max-width: 900px) {
+    .gesture-bar {
+        bottom: 7px;
+        width: 105px;
+        height: 4.5px;
+    }
+}
+
+@media (max-width: 420px) {
+    .gesture-bar {
+        bottom: 6px;
+        width: 90px;
+        height: 4px;
     }
 }

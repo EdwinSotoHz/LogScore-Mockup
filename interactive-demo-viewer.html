@@ -43,12 +43,33 @@
             </div>
         </div>
 
-        <!-- Marco del teléfono -->
-        <div class="phone-wrapper">
-            <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                    <iframe id="appScreen" src="mobile-app-mockup/page1.html" scrolling="no" loading="lazy"></iframe>
+        <!-- Recuadro blanco (antes marco del teléfono) -->
+        <div class="screen-wrapper">
+            <div class="phone-body">
+                <span class="phone-btn phone-btn-power"></span>
+                <span class="phone-btn phone-btn-volume"></span>
+                <div class="screen-frame">
+                    <!-- Barra de estado + notch de cámaras -->
+                    <div class="status-bar">
+                        <div class="status-left">
+                            <span class="status-time">9:41</span>
+                            <span class="status-icon">◈</span>
+                            <span class="status-icon">✧</span>
+                            <span class="status-dots">•••</span>
+                        </div>
+                        <div class="camera-notch">
+                            <span class="camera-dot"></span>
+                        </div>
+                        <div class="status-icons">
+                            <span class="status-signal">▂▄▆</span>
+                            <span class="status-wifi">ᯤ</span>
+                            <span class="status-battery">▮</span>
+                        </div>
+                    </div>
+                    <iframe id="appScreen" src="mobile-app-mockup/page1.html" scrolling="no" loading="lazy"
+                        style="background-color: blueviolet;"></iframe>
+                    <!-- Barra de gestos inferior -->
+                    <div class="gesture-bar"></div>
                 </div>
             </div>
         </div>
