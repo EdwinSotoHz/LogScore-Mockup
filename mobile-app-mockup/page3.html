@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,9 +24,15 @@
             --ls-border-soft: #E2E8F0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        html, body {
+        html,
+        body {
+            padding: 13px 0px 0px 0px;
             height: 100%;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -53,7 +60,10 @@
             font-weight: 700;
             color: var(--ls-text-main);
         }
-        .status-bar .icons { letter-spacing: 2px; }
+
+        .status-bar .icons {
+            letter-spacing: 2px;
+        }
 
         /* ─── Top bar ─── */
         .top-bar {
@@ -75,7 +85,10 @@
             background: transparent;
             border: none;
         }
-        .top-bar .icon-btn:hover { background: #EEF2F7; }
+
+        .top-bar .icon-btn:hover {
+            background: #EEF2F7;
+        }
 
         .top-bar .greeting {
             display: flex;
@@ -83,6 +96,7 @@
             align-items: center;
             line-height: 1.1;
         }
+
         .greeting .hello {
             font-size: 9px;
             font-weight: 800;
@@ -90,6 +104,7 @@
             text-transform: uppercase;
             color: var(--ls-text-sub);
         }
+
         .greeting .name {
             font-size: 13px;
             font-weight: 900;
@@ -108,7 +123,7 @@
             place-items: center;
             font-size: 12px;
             font-weight: 900;
-            box-shadow: 0 4px 10px -2px rgba(0,102,255,0.4);
+            box-shadow: 0 4px 10px -2px rgba(0, 102, 255, 0.4);
             cursor: pointer;
             border: none;
         }
@@ -117,10 +132,14 @@
         .content {
             flex: 1;
             overflow-y: auto;
-            padding: 4px 20px 100px; /* espacio para FAB */
+            padding: 4px 20px 100px;
+            /* espacio para FAB */
             scrollbar-width: none;
         }
-        .content::-webkit-scrollbar { display: none; }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
 
         /* ─── Score Card (semicircular) ─── */
         .score-card {
@@ -129,7 +148,7 @@
             padding: 18px 18px 16px;
             margin-bottom: 14px;
             border: 1.5px solid var(--ls-border-soft);
-            box-shadow: 0 12px 28px -12px rgba(15,23,42,0.1);
+            box-shadow: 0 12px 28px -12px rgba(15, 23, 42, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -140,6 +159,7 @@
             align-items: center;
             margin-bottom: 8px;
         }
+
         .score-head h3 {
             font-size: 12px;
             font-weight: 900;
@@ -147,6 +167,7 @@
             text-transform: uppercase;
             color: var(--ls-text-sub);
         }
+
         .score-head .range {
             font-size: 10px;
             font-weight: 800;
@@ -164,7 +185,12 @@
             height: 118px;
             margin: 6px auto 0;
         }
-        .gauge-svg { width: 100%; height: 100%; display: block; }
+
+        .gauge-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
 
         .gauge-center {
             position: absolute;
@@ -174,6 +200,7 @@
             text-align: center;
             width: 100%;
         }
+
         .gauge-value {
             font-size: 40px;
             font-weight: 900;
@@ -181,6 +208,7 @@
             line-height: 1;
             color: var(--ls-text-main);
         }
+
         .gauge-value small {
             font-size: 12px;
             font-weight: 800;
@@ -188,6 +216,7 @@
             margin-left: 3px;
             letter-spacing: 0;
         }
+
         .gauge-label {
             display: inline-flex;
             align-items: center;
@@ -213,9 +242,18 @@
             margin-top: -4px;
             letter-spacing: 0.3px;
         }
-        .gauge-scale .low { color: var(--ls-red-vibrant); }
-        .gauge-scale .mid { color: var(--ls-yellow-vibrant); }
-        .gauge-scale .high { color: var(--ls-green-vibrant); }
+
+        .gauge-scale .low {
+            color: var(--ls-red-vibrant);
+        }
+
+        .gauge-scale .mid {
+            color: var(--ls-yellow-vibrant);
+        }
+
+        .gauge-scale .high {
+            color: var(--ls-green-vibrant);
+        }
 
         /* ─── CTA row bajo el score ─── */
         .score-actions {
@@ -225,6 +263,7 @@
             padding-top: 12px;
             border-top: 1px dashed var(--ls-border-soft);
         }
+
         .score-action {
             flex: 1;
             background: transparent;
@@ -240,8 +279,18 @@
             transition: all 0.2s;
             color: var(--ls-text-main);
         }
-        .score-action:hover { border-color: var(--ls-blue-vibrant); background: var(--ls-blue-light); }
-        .score-action svg { width: 16px; height: 16px; color: var(--ls-blue-vibrant); }
+
+        .score-action:hover {
+            border-color: var(--ls-blue-vibrant);
+            background: var(--ls-blue-light);
+        }
+
+        .score-action svg {
+            width: 16px;
+            height: 16px;
+            color: var(--ls-blue-vibrant);
+        }
+
         .score-action span {
             font-size: 9px;
             font-weight: 800;
@@ -256,6 +305,7 @@
             align-items: center;
             margin: 4px 0 10px;
         }
+
         .section-head h4 {
             font-size: 12px;
             font-weight: 900;
@@ -263,6 +313,7 @@
             text-transform: uppercase;
             color: var(--ls-text-sub);
         }
+
         .section-head .link {
             font-size: 10px;
             font-weight: 800;
@@ -277,7 +328,7 @@
             border-radius: 20px;
             padding: 16px;
             border: 1.5px solid var(--ls-border-soft);
-            box-shadow: 0 8px 20px -10px rgba(15,23,42,0.08);
+            box-shadow: 0 8px 20px -10px rgba(15, 23, 42, 0.08);
             margin-bottom: 14px;
         }
 
@@ -287,6 +338,7 @@
             align-items: flex-end;
             margin-bottom: 14px;
         }
+
         .balance-head .label {
             font-size: 10px;
             font-weight: 800;
@@ -294,6 +346,7 @@
             text-transform: uppercase;
             color: var(--ls-text-sub);
         }
+
         .balance-head .value {
             font-size: 24px;
             font-weight: 900;
@@ -302,10 +355,12 @@
             line-height: 1;
             margin-top: 4px;
         }
+
         .balance-head .value .sign {
             font-size: 14px;
             margin-right: 2px;
         }
+
         .balance-head .range-pill {
             font-size: 10px;
             font-weight: 800;
@@ -331,6 +386,7 @@
             align-items: end;
             margin-bottom: 8px;
         }
+
         .bar-group {
             display: flex;
             flex-direction: column;
@@ -339,6 +395,7 @@
             height: 100%;
             justify-content: flex-end;
         }
+
         .bar-stack {
             display: flex;
             flex-direction: column;
@@ -347,12 +404,19 @@
             width: 100%;
             gap: 2px;
         }
+
         .bar {
             border-radius: 4px;
             transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .bar.in { background: linear-gradient(180deg, var(--ls-blue-vibrant), var(--ls-blue-dark)); }
-        .bar.out { background: #FED7AA; }
+
+        .bar.in {
+            background: linear-gradient(180deg, var(--ls-blue-vibrant), var(--ls-blue-dark));
+        }
+
+        .bar.out {
+            background: #FED7AA;
+        }
 
         .bar-day {
             font-size: 9px;
@@ -369,7 +433,13 @@
             padding-top: 12px;
             border-top: 1px dashed var(--ls-border-soft);
         }
-        .legend-item { display: flex; flex-direction: column; gap: 4px; }
+
+        .legend-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
         .legend-item .top {
             display: flex;
             align-items: center;
@@ -380,14 +450,22 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
+
         .dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
             flex-shrink: 0;
         }
-        .dot.in { background: var(--ls-blue-vibrant); }
-        .dot.out { background: #F59E0B; }
+
+        .dot.in {
+            background: var(--ls-blue-vibrant);
+        }
+
+        .dot.out {
+            background: #F59E0B;
+        }
+
         .legend-value {
             font-size: 13px;
             font-weight: 900;
@@ -400,10 +478,11 @@
             background: #FFFFFF;
             border-radius: 20px;
             border: 1.5px solid var(--ls-border-soft);
-            box-shadow: 0 8px 20px -10px rgba(15,23,42,0.08);
+            box-shadow: 0 8px 20px -10px rgba(15, 23, 42, 0.08);
             margin-bottom: 14px;
             overflow: hidden;
         }
+
         .factor {
             display: flex;
             align-items: center;
@@ -411,7 +490,10 @@
             padding: 12px 14px;
             border-bottom: 1px solid var(--ls-border-soft);
         }
-        .factor:last-child { border-bottom: none; }
+
+        .factor:last-child {
+            border-bottom: none;
+        }
 
         .factor-icon {
             width: 34px;
@@ -421,12 +503,32 @@
             place-items: center;
             flex-shrink: 0;
         }
-        .factor-icon.pos { background: var(--ls-green-light); color: var(--ls-green-vibrant); }
-        .factor-icon.neu { background: #F1F5F9; color: var(--ls-text-sub); }
-        .factor-icon.neg { background: #FEF2F2; color: var(--ls-red-vibrant); }
-        .factor-icon svg { width: 16px; height: 16px; }
 
-        .factor-body { flex: 1; min-width: 0; }
+        .factor-icon.pos {
+            background: var(--ls-green-light);
+            color: var(--ls-green-vibrant);
+        }
+
+        .factor-icon.neu {
+            background: #F1F5F9;
+            color: var(--ls-text-sub);
+        }
+
+        .factor-icon.neg {
+            background: #FEF2F2;
+            color: var(--ls-red-vibrant);
+        }
+
+        .factor-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .factor-body {
+            flex: 1;
+            min-width: 0;
+        }
+
         .factor-title {
             font-size: 12px;
             font-weight: 800;
@@ -434,6 +536,7 @@
             letter-spacing: -0.1px;
             margin-bottom: 2px;
         }
+
         .factor-desc {
             font-size: 10px;
             color: var(--ls-text-sub);
@@ -447,9 +550,18 @@
             letter-spacing: -0.3px;
             white-space: nowrap;
         }
-        .factor-pts.pos { color: var(--ls-green-vibrant); }
-        .factor-pts.neu { color: var(--ls-text-sub); }
-        .factor-pts.neg { color: var(--ls-red-vibrant); }
+
+        .factor-pts.pos {
+            color: var(--ls-green-vibrant);
+        }
+
+        .factor-pts.neu {
+            color: var(--ls-text-sub);
+        }
+
+        .factor-pts.neg {
+            color: var(--ls-red-vibrant);
+        }
 
         /* ─── FAB IA ─── */
         .fab-wrap {
@@ -462,6 +574,7 @@
             gap: 10px;
             pointer-events: none;
         }
+
         .fab-bubble {
             pointer-events: auto;
             background: #FFFFFF;
@@ -470,15 +583,23 @@
             font-weight: 800;
             padding: 9px 14px;
             border-radius: 14px;
-            box-shadow: 0 10px 24px -8px rgba(15,23,42,0.25);
+            box-shadow: 0 10px 24px -8px rgba(15, 23, 42, 0.25);
             border: 1.5px solid var(--ls-border-soft);
             letter-spacing: -0.1px;
             animation: bubbleFloat 2.6s ease-in-out infinite;
             white-space: nowrap;
         }
+
         @keyframes bubbleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
         }
 
         .fab {
@@ -493,15 +614,25 @@
             display: grid;
             place-items: center;
             box-shadow:
-                0 14px 28px -6px rgba(0,102,255,0.5),
-                0 0 0 4px rgba(255,255,255,0.9),
-                0 0 0 5px rgba(0,102,255,0.15);
+                0 14px 28px -6px rgba(0, 102, 255, 0.5),
+                0 0 0 4px rgba(255, 255, 255, 0.9),
+                0 0 0 5px rgba(0, 102, 255, 0.15);
             transition: transform 0.15s;
             font-family: inherit;
         }
-        .fab:hover { transform: translateY(-2px); }
-        .fab:active { transform: scale(0.96); }
-        .fab svg { width: 22px; height: 22px; }
+
+        .fab:hover {
+            transform: translateY(-2px);
+        }
+
+        .fab:active {
+            transform: scale(0.96);
+        }
+
+        .fab svg {
+            width: 22px;
+            height: 22px;
+        }
 
         /* ─── Home indicator ─── */
         .home-indicator {
@@ -514,20 +645,16 @@
         }
     </style>
 </head>
+
 <body>
     <div class="screen">
-
-        <!-- Status bar -->
-        <div class="status-bar">
-            <span>9:41</span>
-            <span class="icons">•••  ᯤ  ▮</span>
-        </div>
 
         <!-- Top bar con saludo -->
         <div class="top-bar">
             <button class="icon-btn" aria-label="Menú">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-                    <path d="M4 7h16M4 12h16M4 17h10"/>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
+                    stroke-linecap="round">
+                    <path d="M4 7h16M4 12h16M4 17h10" />
                 </svg>
             </button>
 
@@ -553,31 +680,30 @@
                     <svg class="gauge-svg" viewBox="0 0 200 118" preserveAspectRatio="xMidYMid meet">
                         <defs>
                             <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#EF4444"/>
-                                <stop offset="50%" stop-color="#F59E0B"/>
-                                <stop offset="100%" stop-color="#10B981"/>
+                                <stop offset="0%" stop-color="#EF4444" />
+                                <stop offset="50%" stop-color="#F59E0B" />
+                                <stop offset="100%" stop-color="#10B981" />
                             </linearGradient>
                         </defs>
 
                         <!-- Pista de fondo (semicírculo) -->
-                        <path d="M 20 108 A 80 80 0 0 1 180 108"
-                              fill="none" stroke="#E2E8F0" stroke-width="14" stroke-linecap="round"/>
+                        <path d="M 20 108 A 80 80 0 0 1 180 108" fill="none" stroke="#E2E8F0" stroke-width="14"
+                            stroke-linecap="round" />
 
                         <!-- Progreso: 740/1000 ≈ 74% del arco -->
-                        <path d="M 20 108 A 80 80 0 0 1 180 108"
-                              fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round"
-                              stroke-dasharray="251.2"
-                              stroke-dashoffset="65.3"/>
+                        <path d="M 20 108 A 80 80 0 0 1 180 108" fill="none" stroke="url(#gaugeGrad)" stroke-width="14"
+                            stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="65.3" />
 
                         <!-- Marcador (aguja) -->
-                        <circle cx="138.4" cy="42.6" r="7" fill="#FFFFFF" stroke="#0066FF" stroke-width="3.5"/>
+                        <circle cx="138.4" cy="42.6" r="7" fill="#FFFFFF" stroke="#0066FF" stroke-width="3.5" />
                     </svg>
 
                     <div class="gauge-center">
                         <div class="gauge-value">740<small>pts</small></div>
                         <div class="gauge-label">
-                            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12l5 5L20 7"/>
+                            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12l5 5L20 7" />
                             </svg>
                             Excelente
                         </div>
@@ -593,22 +719,25 @@
                 <!-- Acciones rápidas bajo el score -->
                 <div class="score-actions">
                     <button class="score-action">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 5v14M5 12h14"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14M5 12h14" />
                         </svg>
                         <span>Subir puntos</span>
                     </button>
                     <button class="score-action">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 3v18h18"/>
-                            <path d="M7 14l4-4 4 4 5-5"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18" />
+                            <path d="M7 14l4-4 4 4 5-5" />
                         </svg>
                         <span>Ver historial</span>
                     </button>
                     <button class="score-action">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="9"/>
-                            <path d="M12 8v4l3 2"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 8v4l3 2" />
                         </svg>
                         <span>Simular</span>
                     </button>
@@ -620,8 +749,9 @@
                 <h4>Excedente semanal</h4>
                 <button class="range-pill">
                     Últimos 7 días
-                    <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
-                        <path d="M6 9l6 6 6-6"/>
+                    <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round">
+                        <path d="M6 9l6 6 6-6" />
                     </svg>
                 </button>
             </div>
@@ -634,8 +764,9 @@
                     </div>
                     <button class="range-pill" style="background: var(--ls-blue-light); color: var(--ls-blue-vibrant);">
                         Ver detalle
-                        <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6"/>
+                        <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6" />
                         </svg>
                     </button>
                 </div>
@@ -715,8 +846,9 @@
 
                 <div class="factor">
                     <div class="factor-icon pos">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12l5 5L20 7"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12l5 5L20 7" />
                         </svg>
                     </div>
                     <div class="factor-body">
@@ -728,9 +860,10 @@
 
                 <div class="factor">
                     <div class="factor-icon pos">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="4" y="5" width="16" height="15" rx="3"/>
-                            <circle cx="12" cy="12" r="3"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="5" width="16" height="15" rx="3" />
+                            <circle cx="12" cy="12" r="3" />
                         </svg>
                     </div>
                     <div class="factor-body">
@@ -742,9 +875,10 @@
 
                 <div class="factor">
                     <div class="factor-icon pos">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 3v18h18"/>
-                            <path d="M7 14l4-4 4 4 5-5"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18" />
+                            <path d="M7 14l4-4 4 4 5-5" />
                         </svg>
                     </div>
                     <div class="factor-body">
@@ -756,9 +890,10 @@
 
                 <div class="factor">
                     <div class="factor-icon neu">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="9"/>
-                            <path d="M12 8v4l3 2"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 8v4l3 2" />
                         </svg>
                     </div>
                     <div class="factor-body">
@@ -770,8 +905,9 @@
 
                 <div class="factor">
                     <div class="factor-icon neg">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 6L6 18M6 6l12 12"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6L6 18M6 6l12 12" />
                         </svg>
                     </div>
                     <div class="factor-body">
@@ -789,18 +925,15 @@
         <div class="fab-wrap">
             <div class="fab-bubble">Pregúntame algo</div>
             <button class="fab" id="aiFab" aria-label="Abrir asistente LogScore">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-7a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/>
-                    <circle cx="9.5" cy="12" r="1" fill="currentColor"/>
-                    <circle cx="12.5" cy="12" r="1" fill="currentColor"/>
-                    <circle cx="15.5" cy="12" r="1" fill="currentColor"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-7a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z" />
+                    <circle cx="9.5" cy="12" r="1" fill="currentColor" />
+                    <circle cx="12.5" cy="12" r="1" fill="currentColor" />
+                    <circle cx="15.5" cy="12" r="1" fill="currentColor" />
                 </svg>
             </button>
         </div>
-
-        <!-- Home indicator -->
-        <div class="home-indicator"></div>
-
     </div>
 
     <script>
@@ -820,4 +953,5 @@
         });
     </script>
 </body>
+
 </html>

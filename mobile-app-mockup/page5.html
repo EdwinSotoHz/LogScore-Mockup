@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,9 +23,15 @@
             --ls-border-soft: #E2E8F0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        html, body {
+        html,
+        body {
+            padding: 13px 0px 0px 0px;
             height: 100%;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -52,7 +59,10 @@
             font-weight: 700;
             color: var(--ls-text-main);
         }
-        .status-bar .icons { letter-spacing: 2px; }
+
+        .status-bar .icons {
+            letter-spacing: 2px;
+        }
 
         /* ─── Top bar ─── */
         .top-bar {
@@ -74,7 +84,10 @@
             background: transparent;
             border: none;
         }
-        .top-bar .icon-btn:hover { background: #EEF2F7; }
+
+        .top-bar .icon-btn:hover {
+            background: #EEF2F7;
+        }
 
         .top-bar .title-block {
             display: flex;
@@ -82,6 +95,7 @@
             align-items: center;
             line-height: 1.1;
         }
+
         .title-block .label {
             font-size: 9px;
             font-weight: 800;
@@ -89,6 +103,7 @@
             text-transform: uppercase;
             color: var(--ls-text-sub);
         }
+
         .title-block .title {
             font-size: 13px;
             font-weight: 900;
@@ -104,12 +119,16 @@
             padding: 4px 20px 16px;
             scrollbar-width: none;
         }
-        .content::-webkit-scrollbar { display: none; }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
 
         /* ─── Intro ─── */
         .intro {
             margin-bottom: 18px;
         }
+
         .intro h1 {
             font-size: 20px;
             font-weight: 900;
@@ -117,6 +136,7 @@
             letter-spacing: -0.5px;
             color: var(--ls-text-main);
         }
+
         .intro p {
             font-size: 12px;
             color: var(--ls-text-sub);
@@ -132,6 +152,7 @@
             align-items: center;
             margin: 4px 0 10px;
         }
+
         .section-head h4 {
             font-size: 11px;
             font-weight: 900;
@@ -139,6 +160,7 @@
             text-transform: uppercase;
             color: var(--ls-text-sub);
         }
+
         .section-head .count {
             font-size: 10px;
             font-weight: 800;
@@ -158,8 +180,9 @@
             margin-bottom: 12px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 14px 30px -12px rgba(0,102,255,0.5);
+            box-shadow: 0 14px 30px -12px rgba(0, 102, 255, 0.5);
         }
+
         .mission-hero::before {
             content: '';
             position: absolute;
@@ -167,7 +190,7 @@
             right: -20%;
             width: 70%;
             height: 180%;
-            background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 65%);
             pointer-events: none;
         }
 
@@ -179,16 +202,18 @@
             position: relative;
             z-index: 1;
         }
+
         .mission-hero .tag {
             font-size: 9px;
             font-weight: 900;
             letter-spacing: 0.6px;
             text-transform: uppercase;
-            background: rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.22);
             padding: 4px 10px;
             border-radius: 999px;
             backdrop-filter: blur(6px);
         }
+
         .mission-hero .streak {
             display: flex;
             align-items: center;
@@ -196,12 +221,16 @@
             font-size: 10px;
             font-weight: 900;
             letter-spacing: 0.3px;
-            background: rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.22);
             padding: 4px 10px;
             border-radius: 999px;
             backdrop-filter: blur(6px);
         }
-        .mission-hero .streak svg { width: 11px; height: 11px; }
+
+        .mission-hero .streak svg {
+            width: 11px;
+            height: 11px;
+        }
 
         .mission-hero h2 {
             font-size: 17px;
@@ -212,6 +241,7 @@
             position: relative;
             z-index: 1;
         }
+
         .mission-hero .desc {
             font-size: 11px;
             line-height: 1.4;
@@ -231,17 +261,20 @@
             position: relative;
             z-index: 1;
         }
+
         .progress-row .amounts {
             font-size: 13px;
             font-weight: 900;
             letter-spacing: -0.2px;
         }
+
         .progress-row .amounts .total {
             font-size: 11px;
             font-weight: 700;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             margin-left: 3px;
         }
+
         .progress-row .pct {
             font-size: 11px;
             font-weight: 900;
@@ -250,19 +283,20 @@
 
         .progress-track {
             height: 8px;
-            background: rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.22);
             border-radius: 999px;
             overflow: hidden;
             position: relative;
             z-index: 1;
         }
+
         .progress-fill {
             height: 100%;
             background: #FFFFFF;
             border-radius: 999px;
             width: 0%;
             transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 12px rgba(255,255,255,0.6);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
         }
 
         /* Insignia de meta */
@@ -272,8 +306,8 @@
             gap: 6px;
             margin-top: 12px;
             padding: 6px 12px;
-            background: rgba(255,255,255,0.22);
-            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.35);
             border-radius: 999px;
             font-size: 10px;
             font-weight: 900;
@@ -286,8 +320,16 @@
             transform: translateY(6px);
             transition: all 0.5s ease 0.6s;
         }
-        .badge-earned.show { opacity: 1; transform: translateY(0); }
-        .badge-earned svg { width: 12px; height: 12px; }
+
+        .badge-earned.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .badge-earned svg {
+            width: 12px;
+            height: 12px;
+        }
 
         /* ─── Card de misión secundaria ─── */
         .mission-card {
@@ -295,11 +337,14 @@
             border-radius: 18px;
             padding: 15px;
             border: 1.5px solid var(--ls-border-soft);
-            box-shadow: 0 8px 20px -10px rgba(15,23,42,0.08);
+            box-shadow: 0 8px 20px -10px rgba(15, 23, 42, 0.08);
             margin-bottom: 10px;
             transition: border-color 0.2s;
         }
-        .mission-card:hover { border-color: var(--ls-blue-vibrant); }
+
+        .mission-card:hover {
+            border-color: var(--ls-blue-vibrant);
+        }
 
         .mc-head {
             display: flex;
@@ -307,6 +352,7 @@
             gap: 12px;
             margin-bottom: 12px;
         }
+
         .mc-icon {
             width: 38px;
             height: 38px;
@@ -317,9 +363,17 @@
             place-items: center;
             flex-shrink: 0;
         }
-        .mc-icon svg { width: 18px; height: 18px; }
 
-        .mc-body { flex: 1; min-width: 0; }
+        .mc-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .mc-body {
+            flex: 1;
+            min-width: 0;
+        }
+
         .mc-title {
             font-size: 13px;
             font-weight: 900;
@@ -327,6 +381,7 @@
             letter-spacing: -0.2px;
             margin-bottom: 3px;
         }
+
         .mc-desc {
             font-size: 11px;
             color: var(--ls-text-sub);
@@ -344,7 +399,11 @@
             margin-bottom: 6px;
             letter-spacing: 0.3px;
         }
-        .mc-progress-row .val { color: var(--ls-text-main); font-weight: 900; }
+
+        .mc-progress-row .val {
+            color: var(--ls-text-main);
+            font-weight: 900;
+        }
 
         .mc-progress-track {
             height: 6px;
@@ -352,14 +411,21 @@
             border-radius: 999px;
             overflow: hidden;
         }
+
         .mc-progress-fill {
             height: 100%;
             border-radius: 999px;
             width: 0%;
             transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .mc-progress-fill.orange { background: linear-gradient(90deg, #FF8A00, var(--ls-orange-vibrant)); }
-        .mc-progress-fill.purple { background: linear-gradient(90deg, var(--ls-purple-vibrant), #6366F1); }
+
+        .mc-progress-fill.orange {
+            background: linear-gradient(90deg, #FF8A00, var(--ls-orange-vibrant));
+        }
+
+        .mc-progress-fill.purple {
+            background: linear-gradient(90deg, var(--ls-purple-vibrant), #6366F1);
+        }
 
         /* ─── Badge de pre-evaluación (destacado) ─── */
         .prequal-card {
@@ -374,6 +440,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .prequal-card::after {
             content: '';
             position: absolute;
@@ -381,7 +448,7 @@
             right: -20%;
             width: 50%;
             height: 160%;
-            background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 65%);
             pointer-events: none;
         }
 
@@ -394,11 +461,15 @@
             display: grid;
             place-items: center;
             flex-shrink: 0;
-            box-shadow: 0 8px 18px -6px rgba(16,185,129,0.5);
+            box-shadow: 0 8px 18px -6px rgba(16, 185, 129, 0.5);
             position: relative;
             z-index: 1;
         }
-        .prequal-icon svg { width: 22px; height: 22px; }
+
+        .prequal-icon svg {
+            width: 22px;
+            height: 22px;
+        }
 
         .prequal-body {
             flex: 1;
@@ -406,6 +477,7 @@
             position: relative;
             z-index: 1;
         }
+
         .prequal-body .k {
             font-size: 9px;
             font-weight: 900;
@@ -414,6 +486,7 @@
             color: #047857;
             margin-bottom: 3px;
         }
+
         .prequal-body .v {
             font-size: 14px;
             font-weight: 900;
@@ -421,6 +494,7 @@
             letter-spacing: -0.3px;
             line-height: 1.2;
         }
+
         .prequal-body .sub {
             font-size: 10px;
             color: #065F46;
@@ -440,20 +514,16 @@
         }
     </style>
 </head>
+
 <body>
     <div class="screen">
-
-        <!-- Status bar -->
-        <div class="status-bar">
-            <span>9:41</span>
-            <span class="icons">•••  ᯤ  ▮</span>
-        </div>
 
         <!-- Top bar -->
         <div class="top-bar">
             <button class="icon-btn" aria-label="Volver" id="backBtn">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 18l-6-6 6-6"/>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
                 </svg>
             </button>
 
@@ -463,9 +533,10 @@
             </div>
 
             <button class="icon-btn" aria-label="Historial">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="9"/>
-                    <path d="M12 8v4l3 2"/>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 8v4l3 2" />
                 </svg>
             </button>
         </div>
@@ -490,8 +561,9 @@
                 <div class="tag-row">
                     <span class="tag">Reto Retención</span>
                     <span class="streak">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                         </svg>
                         7 días seguidos
                     </span>
@@ -509,8 +581,9 @@
                 </div>
 
                 <div class="badge-earned" id="heroBadge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12l5 5L20 7"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12l5 5L20 7" />
                     </svg>
                     Meta alcanzada
                 </div>
@@ -526,9 +599,10 @@
             <div class="mission-card">
                 <div class="mc-head">
                     <div class="mc-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="9"/>
-                            <path d="M15 9l-6 6M9 9l6 6"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M15 9l-6 6M9 9l6 6" />
                         </svg>
                     </div>
                     <div class="mc-body">
@@ -550,9 +624,10 @@
             <div class="mission-card">
                 <div class="mc-head">
                     <div class="mc-icon" style="background: var(--ls-purple-light); color: var(--ls-purple-vibrant);">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 3v18h18"/>
-                            <path d="M7 14l4-4 4 4 5-5"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18" />
+                            <path d="M7 14l4-4 4 4 5-5" />
                         </svg>
                     </div>
                     <div class="mc-body">
@@ -573,9 +648,10 @@
             <!-- Insignia destacada: pre-evaluación -->
             <div class="prequal-card">
                 <div class="prequal-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 15l-3 6 3-1.5L15 21l-3-6z"/>
-                        <circle cx="12" cy="9" r="6"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 15l-3 6 3-1.5L15 21l-3-6z" />
+                        <circle cx="12" cy="9" r="6" />
                     </svg>
                 </div>
                 <div class="prequal-body">
@@ -586,9 +662,6 @@
             </div>
 
         </div>
-
-        <!-- Home indicator -->
-        <div class="home-indicator"></div>
 
     </div>
 
@@ -620,4 +693,5 @@
         });
     </script>
 </body>
+
 </html>
