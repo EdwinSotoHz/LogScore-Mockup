@@ -4,22 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LogScore — Centro de Consentimiento</title>
+    <title>LogScore — Onboarding Paso 2 (Consentimientos y Seguridad)</title>
     <style>
         :root {
-            --ls-blue-vibrant: #0066FF;
-            --ls-blue-dark: #0052CC;
+            /* ─── Variables base (mismas que page1) ─── */
+            --ls-blue-vibrant: #0047AB;
+            --ls-blue-dark: #002D62;
             --ls-blue-light: #EBF3FF;
+            --ls-blue-special: #70a5ff;
             --ls-orange-vibrant: #FF5E36;
+            --ls-orange-light: #FFF0ED;
             --ls-purple-vibrant: #8B5CF6;
             --ls-purple-light: #F3E8FF;
             --ls-green-vibrant: #10B981;
             --ls-green-light: #ECFDF5;
 
-            --ls-text-main: #0F172A;
-            --ls-text-sub: #64748B;
-            --ls-bg-screen: #F8FAFC;
-            --ls-border-soft: #E2E8F0;
+            --ls-text-main: #002D62;
+            --ls-text-sub: #4A607A;
+            --ls-text-highlight: #2563EB;
+            --ls-bg-screen: #9ec0ff;
+            --ls-border-soft: #D0E1FD;
+
+            /* ─── NUEVAS variables por sección ─── */
+
+            /* Sección 1: Seguridad y acceso → Azul claro / Aqua */
+            --ls-aqua-vibrant: #06B6D4;
+            /* aqua principal */
+            --ls-aqua-dark: #0E7490;
+            /* aqua oscuro */
+            --ls-aqua-light: #ECFEFF;
+            /* aqua muy claro (fondo selección) */
+            --ls-aqua-border: #A5F3FC;
+            /* borde suave aqua */
+
+            /* Sección 2: Permisos y hábitos → Verde */
+            --ls-green-sec-vibrant: #059669;
+            /* verde sección (distinto al verde de page1) */
+            --ls-green-sec-dark: #047857;
+            --ls-green-sec-light: #ECFDF5;
+            --ls-green-sec-border: #A7F3D0;
         }
 
         * {
@@ -48,21 +71,6 @@
             overflow: hidden;
         }
 
-        /* ─── Status bar ─── */
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 22px 4px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--ls-text-main);
-        }
-
-        .status-bar .icons {
-            letter-spacing: 2px;
-        }
-
         /* ─── Top bar ─── */
         .top-bar {
             display: flex;
@@ -78,14 +86,19 @@
             place-items: center;
             border-radius: 50%;
             color: var(--ls-text-sub);
+            background: #FFFFFF;
+            border: 1.5px solid var(--ls-border-soft);
             cursor: pointer;
-            transition: background 0.2s;
-            background: transparent;
-            border: none;
+            transition: all 0.2s;
         }
 
         .top-bar .icon-btn:hover {
-            background: #EEF2F7;
+            border-color: var(--ls-blue-special);
+        }
+
+        .top-bar .icon-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
         .top-bar .step {
@@ -96,18 +109,46 @@
             text-transform: uppercase;
         }
 
-        /* ─── Progress segments ─── */
+        /* Tooltip de ayuda */
+        .help-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-box {
+            position: absolute;
+            right: 0;
+            top: 42px;
+            width: 220px;
+            background: #FFFFFF;
+            border: 1px solid var(--ls-border-soft);
+            box-shadow: 0 8px 24px rgba(0, 45, 98, 0.15);
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 11px;
+            color: var(--ls-text-sub);
+            line-height: 1.4;
+            font-weight: 500;
+            z-index: 50;
+            display: none;
+        }
+
+        .help-container.active .tooltip-box {
+            display: block;
+        }
+
+        /* ─── Progress (3 segmentos, 2do activo) ─── */
         .steps {
             display: flex;
             gap: 6px;
-            margin: 2px 20px 16px;
+            margin: 2px 20px 14px;
             flex-shrink: 0;
         }
 
         .step-seg {
             height: 5px;
             flex: 1;
-            background: var(--ls-border-soft);
+            background: #FFFFFF;
             border-radius: 10px;
             transition: background 0.3s;
         }
@@ -120,88 +161,71 @@
         .content {
             flex: 1;
             overflow-y: auto;
-            padding: 0 20px 16px;
+            padding: 16px 20px;
+            background: #FFFFFF;
+            border-top-left-radius: 32px;
+            border-top-right-radius: 32px;
             scrollbar-width: none;
+            box-shadow: 0 -4px 20px rgba(0, 45, 98, 0.08);
         }
 
         .content::-webkit-scrollbar {
             display: none;
         }
 
-        /* ─── Hero ─── */
+        /* ─── Mascota / Ilustración ─── */
+        .mascot-wrap {
+            display: flex;
+            justify-content: center;
+            margin: 4px 0 10px;
+            position: relative;
+        }
+
+        .mascot {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            background: var(--ls-blue-light);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            border: 2px solid var(--ls-blue-special);
+        }
+
+        .mascot img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+        }
+
+        /* ─── Hero título + eslogan ─── */
         .hero-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 900;
             line-height: 1.18;
             letter-spacing: -0.6px;
             color: var(--ls-text-main);
             margin-bottom: 8px;
+            text-align: center;
         }
 
         .hero-title em {
             font-style: normal;
-            background: linear-gradient(135deg, var(--ls-blue-vibrant), var(--ls-purple-vibrant));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--ls-text-highlight);
         }
 
         .hero-sub {
-            font-size: 12.5px;
+            font-size: 12px;
             color: var(--ls-text-sub);
             line-height: 1.45;
             margin-bottom: 16px;
             font-weight: 500;
+            text-align: center;
+            padding: 0 4px;
         }
 
-        /* ─── Banner de seguridad ─── */
-        .security-banner {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 12px 14px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #F0F7FF 0%, #F5F3FF 100%);
-            border: 1px solid #DBEAFE;
-            margin-bottom: 18px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .security-banner .shield {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #FFFFFF;
-            display: grid;
-            place-items: center;
-            flex-shrink: 0;
-            box-shadow: 0 2px 6px rgba(0, 102, 255, 0.15);
-        }
-
-        .security-banner .shield svg {
-            width: 15px;
-            height: 15px;
-            color: var(--ls-blue-vibrant);
-        }
-
-        .security-banner p {
-            font-size: 11.5px;
-            line-height: 1.4;
-            color: #1E3A8A;
-            font-weight: 600;
-        }
-
-        .security-banner p strong {
-            color: var(--ls-blue-vibrant);
-            font-weight: 800;
-        }
-
-        /* ─── Section head ─── */
+        /* ─── Sección Headings ─── */
         .section-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin: 16px 0 10px;
         }
 
@@ -213,64 +237,171 @@
             color: var(--ls-text-sub);
         }
 
-        .section-head .count {
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--ls-blue-vibrant);
-            background: var(--ls-blue-light);
-            padding: 3px 9px;
-            border-radius: 999px;
-            letter-spacing: 0.3px;
+        /* ═══════════════════════════════════════════════════════════
+           SECCIÓN 1: SEGURIDAD Y ACCESO (2FA) → AZUL CLARO / AQUA
+           ═══════════════════════════════════════════════════════════ */
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
-        /* ─── Permission cards ─── */
-        .perm-card {
-            background: #FFFFFF;
-            border-radius: 18px;
-            padding: 14px;
-            margin-bottom: 10px;
-            box-shadow: 0 8px 20px -8px rgba(15, 23, 42, 0.08);
-            border: 1.5px solid var(--ls-border-soft);
-            transition: border-color 0.25s, background 0.25s, transform 0.15s;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .perm-card:active {
-            transform: scale(0.99);
-        }
-
-        .perm-card.on {
-            border-color: var(--ls-blue-vibrant);
-            background: linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 100%);
-        }
-
-        .perm-card.on .perm-icon {
-            background: var(--ls-blue-vibrant);
-            color: #FFFFFF;
-        }
-
-        .perm-header {
+        .radio-card {
             display: flex;
             align-items: center;
             gap: 12px;
+            padding: 12px 14px;
+            background: #FFFFFF;
+            border: 1.5px solid var(--ls-border-soft);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+            font-family: inherit;
+            text-align: left;
+            width: 100%;
         }
 
-        .perm-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
-            background: var(--ls-blue-light);
-            color: var(--ls-blue-vibrant);
+        .radio-card:hover {
+            border-color: var(--ls-aqua-vibrant);
+        }
+
+        .radio-card.selected {
+            border-color: var(--ls-aqua-vibrant);
+            background: var(--ls-aqua-light);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.12);
+        }
+
+        .radio-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            background: var(--ls-aqua-light);
+            color: var(--ls-aqua-dark);
             display: grid;
             place-items: center;
             flex-shrink: 0;
-            transition: all 0.25s;
+            transition: all 0.2s;
+        }
+
+        .radio-card.selected .radio-icon {
+            background: var(--ls-aqua-vibrant);
+            color: #FFFFFF;
+        }
+
+        .radio-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .radio-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .radio-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--ls-text-main);
+            letter-spacing: -0.2px;
+            margin-bottom: 1px;
+        }
+
+        .radio-desc {
+            font-size: 10.5px;
+            color: var(--ls-text-sub);
+            line-height: 1.3;
+            font-weight: 500;
+        }
+
+        .radio-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1.5px solid var(--ls-aqua-border);
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            transition: all 0.2s;
+        }
+
+        .radio-card.selected .radio-check {
+            background: var(--ls-aqua-vibrant);
+            border-color: var(--ls-aqua-vibrant);
+        }
+
+        .radio-check::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .radio-card.selected .radio-check::after {
+            opacity: 1;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           SECCIÓN 2: PERMISOS Y HÁBITOS → VERDE
+           ═══════════════════════════════════════════════════════════ */
+
+        .perm-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .perm-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: #FFFFFF;
+            border: 1.5px solid var(--ls-border-soft);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .perm-card:hover {
+            border-color: var(--ls-green-sec-vibrant);
+        }
+
+        .perm-card.on {
+            border-color: var(--ls-green-sec-vibrant);
+            background: var(--ls-green-sec-light);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.10);
+        }
+
+        .perm-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            background: var(--ls-green-sec-light);
+            color: var(--ls-green-sec-dark);
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .perm-card.on .perm-icon {
+            background: var(--ls-green-sec-vibrant);
+            color: #FFFFFF;
         }
 
         .perm-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
         }
 
         .perm-body {
@@ -282,21 +413,21 @@
             font-size: 13px;
             font-weight: 800;
             color: var(--ls-text-main);
-            margin-bottom: 2px;
             letter-spacing: -0.2px;
+            margin-bottom: 1px;
         }
 
         .perm-desc {
-            font-size: 11px;
+            font-size: 10.5px;
             color: var(--ls-text-sub);
-            line-height: 1.35;
+            line-height: 1.3;
             font-weight: 500;
         }
 
-        /* ─── Toggle switch ─── */
+        /* Toggle Switch UI */
         .switch {
-            width: 42px;
-            height: 24px;
+            width: 38px;
+            height: 22px;
             border-radius: 999px;
             background: #CBD5E1;
             position: relative;
@@ -307,8 +438,8 @@
         .switch::after {
             content: '';
             position: absolute;
-            top: 3px;
-            left: 3px;
+            top: 2px;
+            left: 2px;
             width: 18px;
             height: 18px;
             border-radius: 50%;
@@ -318,190 +449,17 @@
         }
 
         .perm-card.on .switch {
-            background: var(--ls-blue-vibrant);
+            background: var(--ls-green-sec-vibrant);
         }
 
         .perm-card.on .switch::after {
-            transform: translateX(18px);
-        }
-
-        /* ─── Tags dentro de cards ─── */
-        .perm-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--ls-border-soft);
-        }
-
-        .tag {
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            padding: 3px 8px;
-            border-radius: 999px;
-            background: #F1F5F9;
-            color: var(--ls-text-sub);
-        }
-
-        .tag.blue {
-            background: var(--ls-blue-light);
-            color: var(--ls-blue-vibrant);
-        }
-
-        .tag.purple {
-            background: var(--ls-purple-light);
-            color: var(--ls-purple-vibrant);
-        }
-
-        .tag.green {
-            background: var(--ls-green-light);
-            color: var(--ls-green-vibrant);
-        }
-
-        /* ─── Vinculaciones opcionales ─── */
-        .link-card {
-            background: #FFFFFF;
-            border-radius: 18px;
-            padding: 14px;
-            margin-bottom: 10px;
-            border: 1.5px solid var(--ls-border-soft);
-            box-shadow: 0 8px 20px -8px rgba(15, 23, 42, 0.08);
-            transition: border-color 0.25s, background 0.25s;
-        }
-
-        .link-card.connected {
-            border-color: var(--ls-green-vibrant);
-            background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
-        }
-
-        .link-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .link-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
-            display: grid;
-            place-items: center;
-            flex-shrink: 0;
-            font-size: 16px;
-            font-weight: 900;
-            color: #FFFFFF;
-        }
-
-        .link-icon.chatgpt {
-            background: linear-gradient(135deg, #10A37F, #0E8A6B);
-        }
-
-        .link-icon.bureau {
-            background: linear-gradient(135deg, #8B5CF6, #6366F1);
-        }
-
-        .link-icon svg {
-            width: 20px;
-            height: 20px;
-            color: #FFFFFF;
-        }
-
-        .link-body {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .link-title {
-            font-size: 13px;
-            font-weight: 800;
-            color: var(--ls-text-main);
-            letter-spacing: -0.2px;
-            margin-bottom: 2px;
-        }
-
-        .link-desc {
-            font-size: 11px;
-            color: var(--ls-text-sub);
-            line-height: 1.35;
-            font-weight: 500;
-        }
-
-        .link-action {
-            width: 100%;
-            border: 1.5px dashed var(--ls-blue-vibrant);
-            background: var(--ls-blue-light);
-            color: var(--ls-blue-vibrant);
-            padding: 10px;
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: 0.2px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-
-        .link-action:hover {
-            background: var(--ls-blue-vibrant);
-            color: #FFFFFF;
-            border-style: solid;
-        }
-
-        .link-action svg {
-            width: 13px;
-            height: 13px;
-        }
-
-        /* Estado conectado */
-        .link-status {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 9px 12px;
-            background: var(--ls-green-light);
-            border-radius: 12px;
-            border: 1px solid #BBF7D0;
-        }
-
-        .link-status .left {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            font-size: 11px;
-            font-weight: 800;
-            color: #047857;
-            letter-spacing: 0.2px;
-        }
-
-        .link-status .left svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .link-status .disconnect {
-            font-size: 10px;
-            font-weight: 800;
-            color: #047857;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            text-decoration: underline;
-            letter-spacing: 0.2px;
+            transform: translateX(16px);
         }
 
         /* ─── CTA fija ─── */
         .footer-cta {
             padding: 12px 20px 20px;
-            background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, var(--ls-bg-screen) 40%);
+            background: #FFFFFF;
             flex-shrink: 0;
         }
 
@@ -510,7 +468,7 @@
             border: none;
             border-radius: 999px;
             padding: 15px 20px;
-            background: linear-gradient(135deg, var(--ls-blue-vibrant) 0%, var(--ls-blue-dark) 100%);
+            background: var(--ls-blue-vibrant);
             color: #FFFFFF;
             font-family: inherit;
             font-size: 14px;
@@ -521,13 +479,13 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 10px 24px -6px rgba(0, 102, 255, 0.5);
-            transition: transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 10px 24px -6px rgba(0, 71, 171, 0.35);
+            transition: transform 0.15s, opacity 0.2s;
         }
 
         .btn-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 14px 30px -6px rgba(0, 102, 255, 0.55);
+            background: var(--ls-blue-dark);
         }
 
         .btn-primary:active {
@@ -548,16 +506,6 @@
             text-decoration: none;
             font-weight: 800;
         }
-
-        /* ─── Home indicator ─── */
-        .home-indicator {
-            width: 120px;
-            height: 4px;
-            background: #CBD5E1;
-            border-radius: 999px;
-            margin: 8px auto 0;
-            flex-shrink: 0;
-        }
     </style>
 </head>
 
@@ -572,83 +520,135 @@
                     <path d="M15 18l-6-6 6-6" />
                 </svg>
             </button>
-            <span class="step">Paso 2 de 4</span>
-            <button class="icon-btn" aria-label="Ayuda">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7" />
-                    <circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none" />
-                </svg>
-            </button>
+            <span class="step">Paso 2 de 3</span>
+            <div class="help-container" id="helpContainer">
+                <button class="icon-btn" aria-label="Ayuda" id="helpBtn">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7" />
+                        <circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none" />
+                    </svg>
+                </button>
+                <div class="tooltip-box">
+                    Tus datos son analizados bajo estrictos protocolos de cifrado de extremo a extremo y anonimización
+                    para proteger tu privacidad financiera.
+                </div>
+            </div>
         </div>
 
-        <!-- Progress -->
+        <!-- Progress (3 segmentos, 2do activo) -->
         <div class="steps">
             <div class="step-seg active"></div>
             <div class="step-seg active"></div>
-            <div class="step-seg"></div>
             <div class="step-seg"></div>
         </div>
 
         <!-- Contenido -->
         <div class="content">
 
-            <!-- Hero -->
+            <!-- Mascota / Seguridad -->
+            <div class="mascot-wrap">
+                <div class="mascot">
+                    <img src="../assets/ALVO_Analisis_Logro_Variable_Organizacion/alvo_sec.png"
+                        alt="Mascota ALVO Seguridad">
+                </div>
+            </div>
+
+            <!-- Título y subtítulo -->
             <h1 class="hero-title">
-                Tú decides <em>qué compartir</em> y con quién.
+                Activa tu <em>motor de análisis inteligente</em>
             </h1>
             <p class="hero-sub">
-                Cada permiso es opcional, revocable y explicado en una línea clara.
+                Autoriza las fuentes de información que analizaremos de forma segura para construir tu reputación
+                financiera alternativa.
             </p>
 
-            <!-- Banner de seguridad -->
-            <div class="security-banner">
-                <div class="shield">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" />
-                        <path d="M9 12l2 2 4-4" />
-                    </svg>
-                </div>
-                <p>
-                    Tus datos se <strong>anonimizan desde el origen</strong>. No guardamos texto crudo ni ubicaciones
-                    exactas.
-                </p>
-            </div>
-
-            <!-- Sección: Permisos graduales -->
+            <!-- ═══════════════════════════════════════════════════════
+                 SECCIÓN 1: Seguridad y Acceso (2FA) → AQUA
+                 ═══════════════════════════════════════════════════════ -->
             <div class="section-head">
-                <h4>Permisos graduales</h4>
-                <span class="count">Opt-In</span>
+                <h4>Seguridad y acceso</h4>
             </div>
 
-            <!-- Permiso 1: Geolocalización -->
-            <div class="perm-card" data-perm="geo" role="button" tabindex="0" aria-pressed="false">
-                <div class="perm-header">
-                    <div class="perm-icon">
+            <div class="radio-group" id="twoFASelector" role="radiogroup" aria-label="Método de doble verificación">
+                <button class="radio-card selected" data-2fa="sms" role="radio" aria-checked="true">
+                    <span class="radio-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                            <path d="M12 18h.01" />
+                        </svg>
+                    </span>
+                    <span class="radio-body">
+                        <span class="radio-title">Autenticación por mensaje (SMS / WhatsApp)</span>
+                        <span class="radio-desc">Recibe códigos rápidos de verificación en tu número móvil.</span>
+                    </span>
+                    <span class="radio-check"></span>
+                </button>
+
+                <button class="radio-card" data-2fa="app" role="radio" aria-checked="false">
+                    <span class="radio-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                    </span>
+                    <span class="radio-body">
+                        <span class="radio-title">App de código (Google Authenticator / Authy)</span>
+                        <span class="radio-desc">Máxima seguridad sin depender de red celular.</span>
+                    </span>
+                    <span class="radio-check"></span>
+                </button>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════
+                 SECCIÓN 2: Permisos de Análisis y Hábitos → VERDE
+                 ═══════════════════════════════════════════════════════ -->
+            <div class="section-head">
+                <h4>Permisos de análisis y hábitos</h4>
+            </div>
+
+            <div class="perm-list" id="permList">
+
+                <!-- Toggle 1: Geolocalización -->
+                <div class="perm-card on" data-perm="geo" role="button" tabindex="0" aria-pressed="true">
+                    <span class="perm-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z" />
                             <circle cx="12" cy="10" r="2.6" />
                         </svg>
-                    </div>
-                    <div class="perm-body">
-                        <div class="perm-title">Geolocalización y rutinas</div>
-                        <div class="perm-desc">Detecta patrones de movilidad para estimar estabilidad.</div>
-                    </div>
-                    <div class="switch" aria-hidden="true"></div>
+                    </span>
+                    <span class="perm-body">
+                        <span class="perm-title">Geolocalización y Rutinas</span>
+                        <span class="perm-desc">Monitorea patrones de movilidad para detectar de forma preventiva
+                            micro-gastos y gastos hormiga cotidianos.</span>
+                    </span>
+                    <span class="switch"></span>
                 </div>
-                <div class="perm-tags">
-                    <span class="tag blue">Anonimizada</span>
-                    <span class="tag">Sin GPS exacto</span>
-                </div>
-            </div>
 
-            <!-- Permiso 2: OCR -->
-            <div class="perm-card" data-perm="ocr" role="button" tabindex="0" aria-pressed="false">
-                <div class="perm-header">
-                    <div class="perm-icon">
+                <!-- Toggle 2: Hábitos de Consumo -->
+                <div class="perm-card on" data-perm="consumption" role="button" tabindex="0" aria-pressed="true">
+                    <span class="perm-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <path d="M2 10h20" />
+                        </svg>
+                    </span>
+                    <span class="perm-body">
+                        <span class="perm-title">Hábitos de Consumo y Suscripciones</span>
+                        <span class="perm-desc">Diferencia automáticamente entre gastos esenciales, ocio (streaming) y
+                            productivos (herramientas de IA o trabajo).</span>
+                    </span>
+                    <span class="switch"></span>
+                </div>
+
+                <!-- Toggle 3: Escáner de Tickets -->
+                <div class="perm-card on" data-perm="ocr" role="button" tabindex="0" aria-pressed="true">
+                    <span class="perm-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 8V6a2 2 0 0 1 2-2h2" />
@@ -657,113 +657,73 @@
                             <path d="M8 20H6a2 2 0 0 1-2-2v-2" />
                             <path d="M8 12h8" />
                         </svg>
-                    </div>
-                    <div class="perm-body">
-                        <div class="perm-title">Escáner OCR de comprobantes</div>
-                        <div class="perm-desc">Extrae monto, fecha y categoría en tu dispositivo.</div>
-                    </div>
-                    <div class="switch" aria-hidden="true"></div>
-                </div>
-                <div class="perm-tags">
-                    <span class="tag purple">OCR local</span>
-                    <span class="tag">Solo monto y categoría</span>
-                </div>
-            </div>
-
-            <!-- Sección: Vinculaciones opcionales -->
-            <div class="section-head">
-                <h4>Vinculaciones opcionales</h4>
-                <span class="count">Integraciones</span>
-            </div>
-
-            <!-- Vinculación 1: ChatGPT / Gemini -->
-            <div class="link-card" id="cardAI">
-                <div class="link-header">
-                    <div class="link-icon chatgpt">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 3a3 3 0 0 1 3 3v3" />
-                            <path d="M12 21a3 3 0 0 1-3-3v-3" />
-                            <path d="M3 12a3 3 0 0 1 3-3h3" />
-                            <path d="M21 12a3 3 0 0 1-3 3h-3" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-                    </div>
-                    <div class="link-body">
-                        <div class="link-title">Historial de IA</div>
-                        <div class="link-desc">Analiza tu Huella Semántica vía extensión o API voluntaria.</div>
-                    </div>
+                    </span>
+                    <span class="perm-body">
+                        <span class="perm-title">Escáner de Tickets y Compras</span>
+                        <span class="perm-desc">Permite digitalizar comprobantes físicos para extraer información clave
+                            y registrar futuros gastos imprevistos.</span>
+                    </span>
+                    <span class="switch"></span>
                 </div>
 
-                <!-- Estado por defecto: no conectado -->
-                <button class="link-action" data-connect="ai">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M12 5v14M5 12h14" />
-                    </svg>
-                    Conectar ChatGPT / Gemini
-                </button>
-
-                <!-- Estado conectado (oculto por defecto) -->
-                <div class="link-status" data-connected="ai" hidden>
-                    <div class="left">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12l5 5L20 7" />
-                        </svg>
-                        Conectado · Huella Semántica activa
-                    </div>
-                    <button class="disconnect" data-disconnect="ai">Desconectar</button>
-                </div>
-            </div>
-
-            <!-- Vinculación 2: Reporte de Buró -->
-            <div class="link-card" id="cardBureau">
-                <div class="link-header">
-                    <div class="link-icon bureau">
+                <!-- Toggle 4: Buró / Círculo de Crédito -->
+                <div class="perm-card" data-perm="bureau" role="button" tabindex="0" aria-pressed="false">
+                    <span class="perm-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 4h12l4 4v12H4z" />
                             <path d="M16 4v4h4" />
                             <path d="M8 14h8M8 18h5" />
                         </svg>
-                    </div>
-                    <div class="link-body">
-                        <div class="link-title">Reporte de Crédito</div>
-                        <div class="link-desc">Sube tu PDF de Buró o Círculo para detectar deudas ocultas.</div>
-                    </div>
+                    </span>
+                    <span class="perm-body">
+                        <span class="perm-title">Acceso a Buró / Círculo de Crédito (Opcional)</span>
+                        <span class="perm-desc">Consulta estatus de deudas actuales y verifica si alguna fue subastada
+                            para planear estrategias de salida.</span>
+                    </span>
+                    <span class="switch"></span>
                 </div>
 
-                <!-- Estado por defecto: no cargado -->
-                <button class="link-action" data-connect="bureau">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M12 3v12" />
-                        <path d="M7 8l5-5 5 5" />
-                        <path d="M5 21h14" />
-                    </svg>
-                    Cargar PDF de Buró / Círculo
-                </button>
-
-                <!-- Estado cargado (oculto por defecto) -->
-                <div class="link-status" data-connected="bureau" hidden>
-                    <div class="left">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                <!-- Toggle 5: Análisis Conversacional -->
+                <div class="perm-card on" data-perm="ai" role="button" tabindex="0" aria-pressed="true">
+                    <span class="perm-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                             stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12l5 5L20 7" />
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                         </svg>
-                        Reporte analizado · 0 alertas
-                    </div>
-                    <button class="disconnect" data-disconnect="bureau">Quitar</button>
+                    </span>
+                    <span class="perm-body">
+                        <span class="perm-title">Análisis Conversacional y Comportamiento E-shop</span>
+                        <span class="perm-desc">Habilita a la IA interna para registrar tu rutina diaria y activar
+                            notificaciones de prevención en compras impulsivas.</span>
+                    </span>
+                    <span class="switch"></span>
                 </div>
+
+                <!-- Toggle 6: Sector de Desempeño -->
+                <div class="perm-card on" data-perm="sector" role="button" tabindex="0" aria-pressed="true">
+                    <span class="perm-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
+                    </span>
+                    <span class="perm-body">
+                        <span class="perm-title">Sector de Desempeño y Estrategias Comunitarias</span>
+                        <span class="perm-desc">Evalúa el riesgo inherente de tu actividad económica para compararlo con
+                            casos de éxito similares.</span>
+                    </span>
+                    <span class="switch"></span>
+                </div>
+
             </div>
 
         </div>
 
-        <!-- CTA -->
+        <!-- CTA fija -->
         <div class="footer-cta">
             <button class="btn-primary" id="confirmBtn">
-                Confirmar y Crear mi Diario
+                Guardar preferencias y continuar
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M5 12h14" />
@@ -771,15 +731,42 @@
                 </svg>
             </button>
             <p class="cta-sub">
-                Al continuar aceptas los <a href="#">Términos</a> y el <a href="#">Aviso de Privacidad</a> (INAI ·
-                LFPDPPP).
+                Tus datos están protegidos bajo estrictas normas de privacidad. Puedes modificar estos permisos en
+                cualquier momento desde tu perfil.
             </p>
         </div>
 
     </div>
 
     <script>
-        // ─── Toggles de permisos ───
+        const helpContainer = document.getElementById('helpContainer');
+        const helpBtn = document.getElementById('helpBtn');
+
+        // Toggle Tooltip de ayuda
+        helpBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            helpContainer.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            helpContainer.classList.remove('active');
+        });
+
+        // ─── Selección de Método 2FA ───
+        let selected2FA = 'sms';
+        document.querySelectorAll('#twoFASelector .radio-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('#twoFASelector .radio-card').forEach(c => {
+                    c.classList.remove('selected');
+                    c.setAttribute('aria-checked', 'false');
+                });
+                card.classList.add('selected');
+                card.setAttribute('aria-checked', 'true');
+                selected2FA = card.dataset['2fa'];
+            });
+        });
+
+        // ─── Toggles de Permisos Interactivos ───
         document.querySelectorAll('.perm-card').forEach(card => {
             const toggle = () => {
                 card.classList.toggle('on');
@@ -794,62 +781,24 @@
             });
         });
 
-        // ─── Vinculaciones opcionales ───
-        document.querySelectorAll('[data-connect]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const key = btn.dataset.connect;
-                const card = btn.closest('.link-card');
-                const status = card.querySelector(`[data-connected="${key}"]`);
-
-                // Simular conexión con un pequeño delay
-                btn.disabled = true;
-                const original = btn.innerHTML;
-                btn.innerHTML = `
-                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
-                        <path d="M21 12a9 9 0 1 1-6.2-8.6"/>
-                    </svg>
-                    Conectando...
-                `;
-
-                if (!document.getElementById('spinStyle')) {
-                    const s = document.createElement('style');
-                    s.id = 'spinStyle';
-                    s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-                    document.head.appendChild(s);
-                }
-
-                setTimeout(() => {
-                    btn.hidden = true;
-                    btn.disabled = false;
-                    btn.innerHTML = original;
-                    status.hidden = false;
-                    card.classList.add('connected');
-                }, 900);
-            });
-        });
-
-        // ─── Desconectar ───
-        document.querySelectorAll('[data-disconnect]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const key = btn.dataset.disconnect;
-                const card = btn.closest('.link-card');
-                const status = card.querySelector(`[data-connected="${key}"]`);
-                const connectBtn = card.querySelector(`[data-connect="${key}"]`);
-
-                status.hidden = true;
-                connectBtn.hidden = false;
-                card.classList.remove('connected');
-            });
-        });
-
-        // ─── CTA Confirmar → Page3 (Dashboard) ───
+        // ─── Navegación Botones ───
         document.getElementById('confirmBtn').addEventListener('click', () => {
+            try {
+                const permissions = {};
+                document.querySelectorAll('.perm-card').forEach(card => {
+                    permissions[card.dataset.perm] = card.classList.contains('on');
+                });
+                sessionStorage.setItem('ls_security', JSON.stringify({
+                    twoFA: selected2FA,
+                    permissions: permissions
+                }));
+            } catch (e) { /* noop */ }
+
             if (window.parent && window.parent !== window) {
                 window.parent.postMessage({ action: 'navigate', screen: 3 }, '*');
             }
         });
 
-        // ─── Back → Page1 ───
         document.getElementById('backBtn').addEventListener('click', () => {
             if (window.parent && window.parent !== window) {
                 window.parent.postMessage({ action: 'navigate', screen: 1 }, '*');

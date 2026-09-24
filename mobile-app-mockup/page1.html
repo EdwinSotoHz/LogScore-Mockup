@@ -12,6 +12,7 @@
             --ls-blue-light: #EBF3FF;
             --ls-blue-special: #70a5ff;
             --ls-orange-vibrant: #FF5E36;
+            --ls-orange-light: #FFF0ED;
             --ls-purple-vibrant: #8B5CF6;
             --ls-purple-light: #F3E8FF;
             --ls-green-vibrant: #10B981;
@@ -19,6 +20,8 @@
 
             --ls-text-main: #002D62;
             --ls-text-sub: #4A607A;
+            --ls-text-highlight: #2563EB;
+            /* Azul rey intermedio, menos serio */
             --ls-bg-screen: #9ec0ff;
             --ls-border-soft: #D0E1FD;
         }
@@ -156,8 +159,8 @@
         }
 
         .mascot {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             position: relative;
             background: var(--ls-blue-light);
             border-radius: 50%;
@@ -167,8 +170,8 @@
         }
 
         .mascot img {
-            width: 75%;
-            height: 75%;
+            width: 85%;
+            height: 85%;
             object-fit: contain;
         }
 
@@ -185,7 +188,7 @@
 
         .hero-title em {
             font-style: normal;
-            color: var(--ls-blue-vibrant);
+            color: var(--ls-text-highlight);
         }
 
         .hero-sub {
@@ -239,27 +242,16 @@
             border-color: var(--ls-blue-special);
         }
 
-        .chip.selected {
-            border-color: var(--ls-blue-vibrant);
-            background: var(--ls-blue-light);
-            box-shadow: 0 0 0 3px rgba(0, 71, 171, 0.12);
-        }
-
         .chip-icon {
             width: 36px;
             height: 36px;
             border-radius: 11px;
             background: var(--ls-blue-light);
-            color: var(--ls-blue-vibrant);
+            color: var(--ls-text-sub);
             display: grid;
             place-items: center;
             flex-shrink: 0;
             transition: all 0.2s;
-        }
-
-        .chip.selected .chip-icon {
-            background: var(--ls-blue-vibrant);
-            color: #FFFFFF;
         }
 
         .chip-icon svg {
@@ -298,11 +290,6 @@
             transition: all 0.2s;
         }
 
-        .chip.selected .chip-check {
-            background: var(--ls-blue-vibrant);
-            border-color: var(--ls-blue-vibrant);
-        }
-
         .chip-check svg {
             width: 11px;
             height: 11px;
@@ -311,9 +298,92 @@
             transition: opacity 0.2s;
         }
 
-        .chip.selected .chip-check svg {
+        /* ESTILOS DE SELECCIÓN POR COLOR CARACTERÍSTICO */
+
+        /* 1. Mi primer crédito (Azul Vibrante) */
+        .chip[data-goal="first"].selected {
+            border-color: var(--ls-blue-vibrant);
+            background: var(--ls-blue-light);
+            box-shadow: 0 0 0 3px rgba(0, 71, 171, 0.12);
+        }
+
+        .chip[data-goal="first"].selected .chip-icon {
+            background: var(--ls-blue-vibrant);
+            color: #FFFFFF;
+        }
+
+        .chip[data-goal="first"].selected .chip-check {
+            background: var(--ls-blue-vibrant);
+            border-color: var(--ls-blue-vibrant);
+        }
+
+        .chip[data-goal="first"].selected .chip-check svg {
             opacity: 1;
         }
+
+        /* 2. Salir de deudas (Verde) */
+        .chip[data-goal="debt"].selected {
+            border-color: var(--ls-green-vibrant);
+            background: var(--ls-green-light);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+        }
+
+        .chip[data-goal="debt"].selected .chip-icon {
+            background: var(--ls-green-vibrant);
+            color: #FFFFFF;
+        }
+
+        .chip[data-goal="debt"].selected .chip-check {
+            background: var(--ls-green-vibrant);
+            border-color: var(--ls-green-vibrant);
+        }
+
+        .chip[data-goal="debt"].selected .chip-check svg {
+            opacity: 1;
+        }
+
+        /* 3. Ahorrar (Morado) */
+        .chip[data-goal="save"].selected {
+            border-color: var(--ls-purple-vibrant);
+            background: var(--ls-purple-light);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+        }
+
+        .chip[data-goal="save"].selected .chip-icon {
+            background: var(--ls-purple-vibrant);
+            color: #FFFFFF;
+        }
+
+        .chip[data-goal="save"].selected .chip-check {
+            background: var(--ls-purple-vibrant);
+            border-color: var(--ls-purple-vibrant);
+        }
+
+        .chip[data-goal="save"].selected .chip-check svg {
+            opacity: 1;
+        }
+
+        /* 4. Prevención (Naranja) */
+        .chip[data-goal="prevention"].selected {
+            border-color: var(--ls-orange-vibrant);
+            background: var(--ls-orange-light);
+            box-shadow: 0 0 0 3px rgba(255, 94, 54, 0.12);
+        }
+
+        .chip[data-goal="prevention"].selected .chip-icon {
+            background: var(--ls-orange-vibrant);
+            color: #FFFFFF;
+        }
+
+        .chip[data-goal="prevention"].selected .chip-check {
+            background: var(--ls-orange-vibrant);
+            border-color: var(--ls-orange-vibrant);
+        }
+
+        .chip[data-goal="prevention"].selected .chip-check svg {
+            opacity: 1;
+        }
+
 
         /* ─── CTA fija ─── */
         .footer-cta {
@@ -380,7 +450,6 @@
 
         <!-- Top bar -->
         <div class="top-bar">
-            <!-- Botón Go Back deshabilitado por ser el primer paso -->
             <button class="icon-btn" aria-label="Atrás" id="backBtn" disabled>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -388,7 +457,6 @@
                 </svg>
             </button>
             <span class="step">Paso 1 de 3</span>
-            <!-- Icono de ayuda con tooltip -->
             <div class="help-container" id="helpContainer">
                 <button class="icon-btn" aria-label="Ayuda" id="helpBtn">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
@@ -418,7 +486,7 @@
             <!-- Mascota / Bienvenida -->
             <div class="mascot-wrap">
                 <div class="mascot">
-                    <img src="../assets/ALVO_Analisis_Logro_Variable_Organizacion/alvo_coin1.jpg" alt="Mascota ALVO">
+                    <img src="../assets/ALVO_Analisis_Logro_Variable_Organizacion/alvo_coin1.png" alt="Mascota ALVO">
                 </div>
             </div>
 
@@ -503,7 +571,7 @@
                     </span>
                 </button>
 
-                <!-- Opción D (Nueva sugerida) -->
+                <!-- Opción D -->
                 <button class="chip" data-goal="prevention" role="radio" aria-checked="false">
                     <span class="chip-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"

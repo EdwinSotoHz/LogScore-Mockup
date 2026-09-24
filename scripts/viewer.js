@@ -1,7 +1,7 @@
 const iframe = document.getElementById('appScreen');
 const selector = document.getElementById('screenSelector');
 
-const numPages = 6;
+const numPages = 7;
 const screens = [];
 
 for (let i = 1; i <= numPages; i++) {
@@ -9,12 +9,14 @@ for (let i = 1; i <= numPages; i++) {
 }
 
 const titles = [
-    'Onboarding',
+    'Onboarding 1',
+    'Onboarding 2',
+    'Onboarding 3',
     'Dashboard',
     'Registro Conversacional & Escanner',
-    'Dashboard',
-    'Dashboard',
-    'Dashboard'
+    'Metas',
+    'Anaisis',
+    'Perfil'
 ];
 
 let currentScreen = 1;

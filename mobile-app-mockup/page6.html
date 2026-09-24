@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LogScore — Expediente Pre-evaluado</title>
+    <title>LogScore — Misiones</title>
     <style>
         :root {
             --ls-blue-vibrant: #0066FF;
@@ -15,6 +15,7 @@
             --ls-purple-light: #F3E8FF;
             --ls-green-vibrant: #10B981;
             --ls-green-light: #ECFDF5;
+            --ls-yellow-vibrant: #F59E0B;
 
             --ls-text-main: #0F172A;
             --ls-text-sub: #64748B;
@@ -48,6 +49,20 @@
             overflow: hidden;
         }
 
+        /* ─── Status bar ─── */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 22px 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ls-text-main);
+        }
+
+        .status-bar .icons {
+            letter-spacing: 2px;
+        }
 
         /* ─── Top bar ─── */
         .top-bar {
@@ -109,144 +124,25 @@
             display: none;
         }
 
-        /* ─── Expediente ejecutivo (compacto) ─── */
-        .certificate {
-            background: linear-gradient(150deg, #0F172A 0%, #1E3A8A 100%);
-            border-radius: 22px;
-            padding: 18px;
-            color: #FFFFFF;
-            margin-bottom: 14px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 16px 32px -14px rgba(15, 23, 42, 0.55);
+        /* ─── Intro ─── */
+        .intro {
+            margin-bottom: 18px;
         }
 
-        .certificate::before {
-            content: '';
-            position: absolute;
-            top: -40%;
-            right: -20%;
-            width: 70%;
-            height: 180%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, transparent 65%);
-            pointer-events: none;
-        }
-
-        .cert-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cert-brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cert-brand .mark {
-            width: 26px;
-            height: 26px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--ls-blue-vibrant), var(--ls-purple-vibrant));
-            display: grid;
-            place-items: center;
+        .intro h1 {
+            font-size: 20px;
             font-weight: 900;
-            font-size: 11px;
-            color: #FFFFFF;
+            line-height: 1.2;
             letter-spacing: -0.5px;
+            color: var(--ls-text-main);
         }
 
-        .cert-brand .name {
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-        }
-
-        .cert-brand .name span {
-            color: #93C5FD;
-        }
-
-        .cert-id {
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 0.6px;
-            color: rgba(255, 255, 255, 0.55);
-            background: rgba(255, 255, 255, 0.08);
-            padding: 4px 9px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .cert-title {
-            font-size: 18px;
-            font-weight: 900;
-            line-height: 1.2;
-            letter-spacing: -0.4px;
-            margin-bottom: 4px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cert-sub {
-            font-size: 11px;
-            color: #93C5FD;
-            margin-bottom: 16px;
-            position: relative;
-            z-index: 1;
-            font-weight: 600;
-            letter-spacing: 0.1px;
-        }
-
-        /* Bloque "listo para compartir" */
-        .cert-ready {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 12px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.35);
-            border-radius: 14px;
-            position: relative;
-            z-index: 1;
-            backdrop-filter: blur(6px);
-        }
-
-        .cert-ready .check {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: var(--ls-green-vibrant);
-            display: grid;
-            place-items: center;
-            flex-shrink: 0;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
-        }
-
-        .cert-ready .check svg {
-            width: 14px;
-            height: 14px;
-            color: #FFFFFF;
-        }
-
-        .cert-ready .txt {
-            font-size: 11.5px;
-            font-weight: 800;
-            letter-spacing: 0.2px;
-            line-height: 1.2;
-        }
-
-        .cert-ready .txt small {
-            display: block;
-            font-size: 9.5px;
-            font-weight: 600;
-            color: #A7F3D0;
-            margin-top: 2px;
-            letter-spacing: 0.3px;
+        .intro p {
+            font-size: 12px;
+            color: var(--ls-text-sub);
+            line-height: 1.4;
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         /* ─── Sección header ─── */
@@ -254,7 +150,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 16px 0 10px;
+            margin: 4px 0 10px;
         }
 
         .section-head h4 {
@@ -275,232 +171,336 @@
             letter-spacing: 0.3px;
         }
 
-        /* ─── Bóveda académica ─── */
-        .vault-list {
-            background: #FFFFFF;
-            border-radius: 20px;
-            border: 1.5px solid var(--ls-border-soft);
-            box-shadow: 0 8px 20px -10px rgba(15, 23, 42, 0.08);
+        /* ─── Misión activa destacada ─── */
+        .mission-hero {
+            background: linear-gradient(150deg, #0066FF 0%, #0052CC 100%);
+            border-radius: 22px;
+            padding: 18px;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            position: relative;
             overflow: hidden;
+            box-shadow: 0 14px 30px -12px rgba(0, 102, 255, 0.5);
         }
 
-        .vault-item {
+        .mission-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 70%;
+            height: 180%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .mission-hero .tag-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mission-hero .tag {
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.22);
+            padding: 4px 10px;
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+        }
+
+        .mission-hero .streak {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 13px 14px;
-            border-bottom: 1px solid var(--ls-border-soft);
-        }
-
-        .vault-item:last-child {
-            border-bottom: none;
-        }
-
-        .vault-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 11px;
-            background: var(--ls-purple-light);
-            color: var(--ls-purple-vibrant);
-            display: grid;
-            place-items: center;
-            flex-shrink: 0;
-        }
-
-        .vault-icon svg {
-            width: 17px;
-            height: 17px;
-        }
-
-        .vault-body {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .vault-title {
-            font-size: 12px;
-            font-weight: 800;
-            color: var(--ls-text-main);
-            letter-spacing: -0.1px;
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .vault-issuer {
-            font-size: 10px;
-            color: var(--ls-text-sub);
-            font-weight: 600;
-            letter-spacing: 0.1px;
-        }
-
-        /* Botón "Ver" tipo LinkedIn */
-        .vault-view {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+            gap: 5px;
             font-size: 10px;
             font-weight: 900;
             letter-spacing: 0.3px;
-            text-transform: uppercase;
-            color: var(--ls-blue-vibrant);
-            background: var(--ls-blue-light);
-            border: 1px solid transparent;
-            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.22);
+            padding: 4px 10px;
             border-radius: 999px;
-            cursor: pointer;
-            font-family: inherit;
-            flex-shrink: 0;
-            transition: all 0.2s;
+            backdrop-filter: blur(6px);
         }
 
-        .vault-view:hover {
-            background: var(--ls-blue-vibrant);
-            color: #FFFFFF;
-        }
-
-        .vault-view svg {
+        .mission-hero .streak svg {
             width: 11px;
             height: 11px;
         }
 
-        /* ─── Autenticación continua (antifraude) ─── */
-        .auth-card {
+        .mission-hero h2 {
+            font-size: 17px;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -0.4px;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mission-hero .desc {
+            font-size: 11px;
+            line-height: 1.4;
+            color: #DBEAFE;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        /* Progreso destacado */
+        .progress-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-row .amounts {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: -0.2px;
+        }
+
+        .progress-row .amounts .total {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            margin-left: 3px;
+        }
+
+        .progress-row .pct {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.3px;
+        }
+
+        .progress-track {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-fill {
+            height: 100%;
             background: #FFFFFF;
-            border-radius: 20px;
+            border-radius: 999px;
+            width: 0%;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Insignia de meta */
+        .badge-earned {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            backdrop-filter: blur(6px);
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: all 0.5s ease 0.6s;
+        }
+
+        .badge-earned.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .badge-earned svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* ─── Card de misión secundaria ─── */
+        .mission-card {
+            background: #FFFFFF;
+            border-radius: 18px;
+            padding: 15px;
             border: 1.5px solid var(--ls-border-soft);
             box-shadow: 0 8px 20px -10px rgba(15, 23, 42, 0.08);
-            padding: 15px;
+            margin-bottom: 10px;
+            transition: border-color 0.2s;
+        }
+
+        .mission-card:hover {
+            border-color: var(--ls-blue-vibrant);
+        }
+
+        .mc-head {
             display: flex;
-            gap: 13px;
             align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
-        .auth-seal {
-            width: 48px;
-            height: 48px;
+        .mc-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: #FFF7ED;
+            color: #C2410C;
+            display: grid;
+            place-items: center;
             flex-shrink: 0;
-            position: relative;
-            display: grid;
-            place-items: center;
         }
 
-        .auth-seal svg {
-            width: 100%;
-            height: 100%;
+        .mc-icon svg {
+            width: 18px;
+            height: 18px;
         }
 
-        .auth-seal .seal-icon {
-            position: absolute;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            color: #FFFFFF;
-        }
-
-        .auth-seal .seal-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .auth-body {
+        .mc-body {
             flex: 1;
             min-width: 0;
         }
 
-        .auth-title {
-            font-size: 12px;
+        .mc-title {
+            font-size: 13px;
             font-weight: 900;
             color: var(--ls-text-main);
-            letter-spacing: -0.1px;
+            letter-spacing: -0.2px;
             margin-bottom: 3px;
         }
 
-        .auth-desc {
-            font-size: 10.5px;
+        .mc-desc {
+            font-size: 11px;
             color: var(--ls-text-sub);
-            line-height: 1.4;
+            line-height: 1.35;
             font-weight: 500;
-            margin-bottom: 9px;
         }
 
-        .auth-metrics {
+        .mc-progress-row {
             display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .auth-metric {
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            color: var(--ls-text-main);
-            background: #F1F5F9;
-            padding: 4px 8px;
-            border-radius: 999px;
-            display: inline-flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 5px;
-        }
-
-        .auth-metric .dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--ls-green-vibrant);
-        }
-
-        /* ─── CTA Exportar ─── */
-        .footer-cta {
-            padding: 12px 20px 20px;
-            background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, var(--ls-bg-screen) 40%);
-            flex-shrink: 0;
-        }
-
-        .btn-export {
-            width: 100%;
-            border: none;
-            border-radius: 999px;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, var(--ls-blue-vibrant) 0%, var(--ls-blue-dark) 100%);
-            color: #FFFFFF;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 0.2px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 10px 24px -6px rgba(0, 102, 255, 0.5);
-            transition: transform 0.15s, box-shadow 0.2s;
-        }
-
-        .btn-export:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 14px 30px -6px rgba(0, 102, 255, 0.55);
-        }
-
-        .btn-export:active {
-            transform: translateY(0);
-        }
-
-        .export-note {
-            text-align: center;
             font-size: 10px;
+            font-weight: 800;
             color: var(--ls-text-sub);
-            margin-top: 9px;
-            font-weight: 600;
-            letter-spacing: 0.2px;
-            line-height: 1.4;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
         }
 
-        .export-note strong {
+        .mc-progress-row .val {
             color: var(--ls-text-main);
-            font-weight: 800;
+            font-weight: 900;
+        }
+
+        .mc-progress-track {
+            height: 6px;
+            background: #EEF2F7;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .mc-progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            width: 0%;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mc-progress-fill.orange {
+            background: linear-gradient(90deg, #FF8A00, var(--ls-orange-vibrant));
+        }
+
+        .mc-progress-fill.purple {
+            background: linear-gradient(90deg, var(--ls-purple-vibrant), #6366F1);
+        }
+
+        /* ─── Badge de pre-evaluación (destacado) ─── */
+        .prequal-card {
+            margin-top: 16px;
+            background: linear-gradient(150deg, #F0FDF4 0%, #ECFDF5 100%);
+            border: 1.5px solid #BBF7D0;
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prequal-card::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 50%;
+            height: 160%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .prequal-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ls-green-vibrant), #059669);
+            color: #FFFFFF;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 8px 18px -6px rgba(16, 185, 129, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .prequal-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .prequal-body {
+            flex: 1;
+            min-width: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .prequal-body .k {
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: #047857;
+            margin-bottom: 3px;
+        }
+
+        .prequal-body .v {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--ls-text-main);
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+        }
+
+        .prequal-body .sub {
+            font-size: 10px;
+            color: #065F46;
+            font-weight: 600;
+            margin-top: 3px;
+            line-height: 1.3;
         }
 
         /* ─── Home indicator ─── */
@@ -528,17 +528,15 @@
             </button>
 
             <div class="title-block">
-                <span class="label">Expediente</span>
-                <span class="title">Proof of Knowledge</span>
+                <span class="label">Disciplina</span>
+                <span class="title">Misiones activas</span>
             </div>
 
-            <button class="icon-btn" aria-label="Compartir">
+            <button class="icon-btn" aria-label="Historial">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
                     stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="18" cy="5" r="3" />
-                    <circle cx="6" cy="12" r="3" />
-                    <circle cx="18" cy="19" r="3" />
-                    <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" />
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 8v4l3 2" />
                 </svg>
             </button>
         </div>
@@ -546,269 +544,152 @@
         <!-- Contenido -->
         <div class="content">
 
-            <!-- Certificado ejecutivo (compacto) -->
-            <div class="certificate">
-                <div class="cert-top">
-                    <div class="cert-brand">
-                        <span class="mark">LS</span>
-                        <span class="name">Log<span>Score</span></span>
-                    </div>
-                    <span class="cert-id">ID 740-AX-2024</span>
-                </div>
-
-                <h2 class="cert-title">Certificado de Reputación Conductual</h2>
-                <p class="cert-sub">Expediente pre-evaluado · Verificable</p>
-
-                <div class="cert-ready">
-                    <div class="check">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12l5 5L20 7" />
-                        </svg>
-                    </div>
-                    <div class="txt">
-                        Listo para compartir
-                        <small>Verificado hace 2 min</small>
-                    </div>
-                </div>
+            <!-- Intro breve -->
+            <div class="intro">
+                <h1>Tu prueba de estrés financiera</h1>
+                <p>Demuestra constancia y desbloquea mejores condiciones.</p>
             </div>
 
-            <!-- Bóveda académica -->
+            <!-- Sección: Misión principal -->
             <div class="section-head">
-                <h4>Bóveda académica</h4>
-                <span class="count">3 validadas</span>
+                <h4>Misión en curso</h4>
+                <span class="count">Día 7 de 7</span>
             </div>
 
-            <div class="vault-list">
-                <div class="vault-item">
-                    <div class="vault-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 10L12 5 2 10l10 5 10-5z" />
-                            <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
-                        </svg>
-                    </div>
-                    <div class="vault-body">
-                        <div class="vault-title">Educación Financiera Básica</div>
-                        <div class="vault-issuer">CONDUSEF · 2024</div>
-                    </div>
-                    <button class="vault-view" data-cert="Educación Financiera Básica">
-                        Ver
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="vault-item">
-                    <div class="vault-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h12l4 4v12H4z" />
-                            <path d="M16 4v4h4" />
-                            <path d="M8 14h8M8 18h5" />
-                        </svg>
-                    </div>
-                    <div class="vault-body">
-                        <div class="vault-title">Presupuesto Personal Aplicado</div>
-                        <div class="vault-issuer">Banco de México · 2024</div>
-                    </div>
-                    <button class="vault-view" data-cert="Presupuesto Personal Aplicado">
-                        Ver
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="vault-item">
-                    <div class="vault-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M12 7v5l3 2" />
-                        </svg>
-                    </div>
-                    <div class="vault-body">
-                        <div class="vault-title">Prevención de Fraudes Digitales</div>
-                        <div class="vault-issuer">CNBV · 2023</div>
-                    </div>
-                    <button class="vault-view" data-cert="Prevención de Fraudes Digitales">
-                        Ver
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Autenticación continua -->
-            <div class="section-head">
-                <h4>Autenticación continua</h4>
-                <span class="count">Antifraude</span>
-            </div>
-
-            <div class="auth-card">
-                <div class="auth-seal">
-                    <svg viewBox="0 0 48 48" fill="none">
-                        <defs>
-                            <linearGradient id="sealGrad" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="#0066FF" />
-                                <stop offset="100%" stop-color="#10B981" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M24 3l17 6v14c0 10-7 17-17 22C14 40 7 33 7 23V9l17-6z" fill="url(#sealGrad)" />
-                        <path d="M24 3l17 6v14c0 10-7 17-17 22C14 40 7 33 7 23V9l17-6z" fill="none"
-                            stroke="rgba(255,255,255,0.25)" stroke-width="1" />
-                    </svg>
-                    <div class="seal-icon">
+            <!-- Reto Retención (destacado) -->
+            <div class="mission-hero">
+                <div class="tag-row">
+                    <span class="tag">Reto Retención</span>
+                    <span class="streak">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
                             stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" />
-                            <path d="M9 12l2 2 4-4" />
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                         </svg>
-                    </div>
+                        7 días seguidos
+                    </span>
                 </div>
 
-                <div class="auth-body">
-                    <div class="auth-title">Sello de identidad verificada</div>
-                    <p class="auth-desc">
-                        Patrones de rutina sostenidos durante 90 días confirman identidad continua.
-                    </p>
-                    <div class="auth-metrics">
-                        <span class="auth-metric"><span class="dot"></span> 90 días activos</span>
-                        <span class="auth-metric"><span class="dot"></span> 0 alertas</span>
-                        <span class="auth-metric"><span class="dot"></span> Biometría ok</span>
-                    </div>
+                <h2>Reserva $50 MXN diarios durante 7 días</h2>
+                <p class="desc">El ahorro constante se convierte en tu colateral conductual.</p>
+
+                <div class="progress-row">
+                    <span class="amounts">$350.00<span class="total">/ $350.00</span></span>
+                    <span class="pct">100%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="heroFill"></div>
+                </div>
+
+                <div class="badge-earned" id="heroBadge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12l5 5L20 7" />
+                    </svg>
+                    Meta alcanzada
                 </div>
             </div>
 
-        </div>
+            <!-- Sección: Misiones secundarias -->
+            <div class="section-head">
+                <h4>Otras misiones</h4>
+                <span class="count">2 activas</span>
+            </div>
 
-        <!-- CTA Exportar -->
-        <div class="footer-cta">
-            <button class="btn-export" id="exportBtn">
-                Exportar Reporte a Institución
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 3v12" />
-                    <path d="M7 10l5 5 5-5" />
-                    <path d="M5 21h14" />
-                </svg>
-            </button>
+            <!-- Misión Anti-Gastos Hormiga -->
+            <div class="mission-card">
+                <div class="mc-head">
+                    <div class="mc-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M15 9l-6 6M9 9l6 6" />
+                        </svg>
+                    </div>
+                    <div class="mc-body">
+                        <div class="mc-title">Anti-Gastos Hormiga</div>
+                        <div class="mc-desc">Reduce tus suscripciones de ocio este mes.</div>
+                    </div>
+                </div>
+
+                <div class="mc-progress-row">
+                    <span>Progreso mensual</span>
+                    <span class="val">3 / 5 canceladas</span>
+                </div>
+                <div class="mc-progress-track">
+                    <div class="mc-progress-fill orange" id="antFill"></div>
+                </div>
+            </div>
+
+            <!-- Misión secundaria adicional (sobria) -->
+            <div class="mission-card">
+                <div class="mc-head">
+                    <div class="mc-icon" style="background: var(--ls-purple-light); color: var(--ls-purple-vibrant);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18" />
+                            <path d="M7 14l4-4 4 4 5-5" />
+                        </svg>
+                    </div>
+                    <div class="mc-body">
+                        <div class="mc-title">Prueba de Estrés</div>
+                        <div class="mc-desc">Mantén saldo positivo 14 días consecutivos.</div>
+                    </div>
+                </div>
+
+                <div class="mc-progress-row">
+                    <span>Racha actual</span>
+                    <span class="val">9 / 14 días</span>
+                </div>
+                <div class="mc-progress-track">
+                    <div class="mc-progress-fill purple" id="stressFill"></div>
+                </div>
+            </div>
+
+            <!-- Insignia destacada: pre-evaluación -->
+            <div class="prequal-card">
+                <div class="prequal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 15l-3 6 3-1.5L15 21l-3-6z" />
+                        <circle cx="12" cy="9" r="6" />
+                    </svg>
+                </div>
+                <div class="prequal-body">
+                    <div class="k">Pre-evaluación</div>
+                    <div class="v">Apto para Tarjeta Garantizada</div>
+                    <div class="sub">Basado en tus 7 días de constancia.</div>
+                </div>
+            </div>
+
         </div>
 
     </div>
 
     <script>
+        // ─── Animación de progreso al entrar ───
+        window.addEventListener('load', () => {
+            // Hero: 100%
+            setTimeout(() => {
+                document.getElementById('heroFill').style.width = '100%';
+                document.getElementById('heroBadge').classList.add('show');
+            }, 200);
+
+            // Anti-hormiga: 60%
+            setTimeout(() => {
+                document.getElementById('antFill').style.width = '60%';
+            }, 400);
+
+            // Prueba de estrés: 64%
+            setTimeout(() => {
+                document.getElementById('stressFill').style.width = '64%';
+            }, 600);
+        });
+
         // ─── Volver al dashboard ───
         document.getElementById('backBtn').addEventListener('click', () => {
             if (window.parent && window.parent !== window) {
                 window.parent.postMessage({ action: 'navigate', screen: 2 }, '*');
             }
-        });
-
-        // ─── Botones "Ver" de certificados ───
-        // Simula abrir la credencial pública (estilo LinkedIn) en una nueva pestaña.
-        // En producción apuntaría a algo como:
-        //   https://logscore.app/c/740-AX-2024/<slug>
-        document.querySelectorAll('.vault-view').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const certName = btn.dataset.cert;
-                const slug = certName
-                    .toLowerCase()
-                    .normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, '')
-                    .replace(/[^a-z0-9]+/g, '-')
-                    .replace(/(^-|-$)/g, '');
-
-                const url = `https://logscore.app/c/740-AX-2024/${slug}`;
-
-                // Si el viewer permite popups, abre; si no, muestra feedback inline.
-                const opened = window.open(url, '_blank', 'noopener,noreferrer');
-                if (!opened) {
-                    // Fallback cuando los popups están bloqueados dentro del iframe
-                    showToast(`Abriendo credencial pública: ${certName}`);
-                }
-            });
-        });
-
-        // ─── Toast de fallback ───
-        function showToast(text) {
-            const existing = document.getElementById('lsToast');
-            if (existing) existing.remove();
-
-            const toast = document.createElement('div');
-            toast.id = 'lsToast';
-            toast.style.cssText = `
-                position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%);
-                background: rgba(15,23,42,0.95); color: #FFFFFF;
-                padding: 12px 18px; border-radius: 14px;
-                font-size: 12px; font-weight: 700; letter-spacing: 0.2px;
-                box-shadow: 0 20px 40px -12px rgba(0,0,0,0.6);
-                display: flex; align-items: center; gap: 8px;
-                z-index: 999; max-width: 88%;
-                animation: toastIn 0.25s ease;
-                text-align: center;
-            `;
-            toast.innerHTML = `
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#60A5FA" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 3h7v7"/>
-                    <path d="M21 3l-9 9"/>
-                    <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/>
-                </svg>
-                ${text}
-            `;
-            document.body.appendChild(toast);
-
-            if (!document.getElementById('toastStyle')) {
-                const s = document.createElement('style');
-                s.id = 'toastStyle';
-                s.textContent = `@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }`;
-                document.head.appendChild(s);
-            }
-
-            setTimeout(() => {
-                toast.style.transition = 'opacity 0.3s';
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 2200);
-        }
-
-        // ─── Exportar: simula descarga y feedback ───
-        const exportBtn = document.getElementById('exportBtn');
-        exportBtn.addEventListener('click', () => {
-            const original = exportBtn.innerHTML;
-            exportBtn.disabled = true;
-            exportBtn.innerHTML = `
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
-                    <path d="M21 12a9 9 0 1 1-6.2-8.6"/>
-                </svg>
-                Generando expediente...
-            `;
-
-            if (!document.getElementById('spinStyle')) {
-                const s = document.createElement('style');
-                s.id = 'spinStyle';
-                s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-                document.head.appendChild(s);
-            }
-
-            setTimeout(() => {
-                exportBtn.innerHTML = `
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12l5 5L20 7"/>
-                    </svg>
-                    Reporte enviado correctamente
-                `;
-                setTimeout(() => {
-                    exportBtn.innerHTML = original;
-                    exportBtn.disabled = false;
-                }, 1800);
-            }, 1600);
         });
     </script>
 </body>

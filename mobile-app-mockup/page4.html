@@ -4,24 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LogScore — Registro Diario</title>
+    <title>LogScore — Dashboard Principal</title>
     <style>
         :root {
-            --ls-blue-vibrant: #0066FF;
-            --ls-blue-dark: #0052CC;
+            /* ─── Variables base alineadas al onboarding ─── */
+            --ls-blue-vibrant: #005bd2;
+            --ls-blue-dark: #002D62;
             --ls-blue-light: #EBF3FF;
-            --ls-orange-vibrant: #FF5E36;
-            --ls-purple-vibrant: #8B5CF6;
-            --ls-purple-light: #F3E8FF;
+            --ls-blue-special: #70a5ff;
+
             --ls-green-vibrant: #10B981;
             --ls-green-light: #ECFDF5;
-            --ls-red-vibrant: #EF4444;
-            --ls-yellow-vibrant: #F59E0B;
+            --ls-green-dark: #047857;
 
-            --ls-text-main: #0F172A;
-            --ls-text-sub: #64748B;
-            --ls-bg-screen: #F8FAFC;
-            --ls-border-soft: #E2E8F0;
+            --ls-orange-vibrant: #FF5E36;
+            --ls-orange-light: #FFF0ED;
+
+            --ls-purple-vibrant: #8B5CF6;
+            --ls-purple-light: #F3E8FF;
+
+            --ls-yellow-vibrant: #F59E0B;
+            --ls-yellow-light: #FFFBEB;
+
+            --ls-red-vibrant: #EF4444;
+            --ls-red-light: #FEF2F2;
+
+            --ls-text-main: #002D62;
+            --ls-text-sub: #4A607A;
+            --ls-text-highlight: #2563EB;
+            --ls-bg-screen: #9ec0ff;
+            --ls-border-soft: #D0E1FD;
+
+            /* Fondos suaves para tarjetas (sin blanco puro) */
+            --ls-card-bg: #FFFFFF;
+            --ls-card-bg-soft: #F8FAFF;
         }
 
         * {
@@ -55,7 +71,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 20px 10px;
+            padding: 6px 20px 8px;
         }
 
         .top-bar .icon-btn {
@@ -65,764 +81,437 @@
             place-items: center;
             border-radius: 50%;
             color: var(--ls-text-sub);
+            background: #FFFFFF;
+            border: 1.5px solid var(--ls-border-soft);
             cursor: pointer;
-            transition: background 0.2s;
-            background: transparent;
-            border: none;
+            transition: all 0.2s;
         }
 
         .top-bar .icon-btn:hover {
-            background: #EEF2F7;
+            border-color: var(--ls-blue-special);
         }
 
-        .top-bar .title-block {
+        .greeting {
             display: flex;
             flex-direction: column;
             align-items: center;
             line-height: 1.1;
         }
 
-        .title-block .label {
-            font-size: 9px;
+        .greeting .hello {
+            font-size: 10px;
             font-weight: 800;
             letter-spacing: 0.6px;
             text-transform: uppercase;
             color: var(--ls-text-sub);
         }
 
-        .title-block .title {
-            font-size: 13px;
+        .greeting .name {
+            font-size: 14px;
             font-weight: 900;
+            color: var(--ls-text-main);
             letter-spacing: -0.2px;
-            color: var(--ls-text-main);
             margin-top: 2px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
-        .title-block .title .live {
-            width: 6px;
-            height: 6px;
-            background: var(--ls-green-vibrant);
+        .avatar {
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
-            animation: pulse 1.8s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.4;
-            }
-        }
-
-        /* ─── Tabs de modo (Chat / Escanear) ─── */
-        .mode-tabs {
-            display: flex;
-            gap: 4px;
-            background: #EEF2F7;
-            border-radius: 999px;
-            padding: 4px;
-            margin: 2px 20px 12px;
-        }
-
-        .mode-tab {
-            flex: 1;
-            border: none;
-            background: transparent;
-            padding: 9px 10px;
-            border-radius: 999px;
-            font-family: inherit;
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--ls-text-sub);
-            letter-spacing: 0.3px;
+            background: var(--ls-blue-vibrant);
+            color: #FFFFFF;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            font-weight: 900;
             cursor: pointer;
-            transition: all 0.25s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            border: 1.5px solid var(--ls-blue-special);
+            box-shadow: 0 4px 10px -2px rgba(0, 71, 171, 0.35);
         }
 
-        .mode-tab svg {
-            width: 13px;
-            height: 13px;
-        }
-
-        .mode-tab.active {
-            background: #FFFFFF;
-            color: var(--ls-text-main);
-            box-shadow: 0 4px 10px -4px rgba(15, 23, 42, 0.15);
-        }
-
-        /* ─── Contenido ─── */
+        /* ─── Contenido scrolleable (sin margen blanco) ─── */
         .content {
             flex: 1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        /* ─── Vista CHAT ─── */
-        .chat-view {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .chat-view.hidden {
-            display: none;
-        }
-
-        .chat-scroll {
-            flex: 1;
             overflow-y: auto;
-            padding: 4px 20px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            padding: 0 20px 90px;
             scrollbar-width: none;
         }
 
-        .chat-scroll::-webkit-scrollbar {
+        .content::-webkit-scrollbar {
             display: none;
         }
 
-        .day-pill {
-            align-self: center;
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--ls-text-sub);
-            background: #EEF2F7;
-            padding: 4px 12px;
-            border-radius: 999px;
-            letter-spacing: 0.4px;
+        /* ─── Tarjetas base (radios alineados a page1/2) ─── */
+        .card {
+            background: var(--ls-card-bg);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border: 1.5px solid var(--ls-border-soft);
+            box-shadow: 0 8px 20px -10px rgba(0, 45, 98, 0.08);
+        }
+
+        /* ─── A. Encabezado de Salud Financiera (Gauge) ─── */
+        .score-card {
+            text-align: center;
+            padding: 16px 18px 14px;
+        }
+
+        .score-head h3 {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
+            color: var(--ls-text-sub);
             margin-bottom: 4px;
         }
 
-        /* Burbujas */
-        .msg {
-            display: flex;
-            gap: 8px;
-            max-width: 88%;
-            animation: fadeUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .gauge-wrap {
+            position: relative;
+            width: 210px;
+            height: 125px;
+            margin: 0 auto;
         }
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .gauge-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
-        .msg.bot {
-            align-self: flex-start;
+        .gauge-center {
+            position: absolute;
+            left: 50%;
+            bottom: 6px;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
         }
 
-        .msg.user {
-            align-self: flex-end;
-            flex-direction: row-reverse;
+        .gauge-value {
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1;
+            color: var(--ls-text-main);
         }
 
-        .msg-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            display: grid;
-            place-items: center;
+        .gauge-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 4px;
             font-size: 10px;
             font-weight: 900;
-            color: #FFFFFF;
-        }
-
-        .msg-avatar.bot {
-            background: linear-gradient(135deg, var(--ls-blue-vibrant), var(--ls-purple-vibrant));
-        }
-
-        .msg-avatar.user {
-            background: linear-gradient(135deg, #64748B, #334155);
-        }
-
-        .bubble {
-            padding: 10px 13px;
-            border-radius: 16px;
-            font-size: 12.5px;
-            line-height: 1.4;
-            font-weight: 600;
-            letter-spacing: -0.1px;
-        }
-
-        .msg.bot .bubble {
-            background: #FFFFFF;
-            color: var(--ls-text-main);
-            border: 1.5px solid var(--ls-border-soft);
-            border-top-left-radius: 4px;
-            box-shadow: 0 4px 12px -6px rgba(15, 23, 42, 0.08);
-        }
-
-        .msg.user .bubble {
-            background: linear-gradient(135deg, var(--ls-blue-vibrant), var(--ls-blue-dark));
-            color: #FFFFFF;
-            border-top-right-radius: 4px;
-            box-shadow: 0 6px 14px -6px rgba(0, 102, 255, 0.4);
-        }
-
-        /* Botones de respuesta rápida */
-        .quick-replies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 8px;
-        }
-
-        .qr {
-            background: #FFFFFF;
-            border: 1.5px solid var(--ls-blue-light);
-            color: var(--ls-blue-vibrant);
-            padding: 7px 12px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            color: var(--ls-green-dark);
+            background: var(--ls-green-light);
+            padding: 4px 10px;
             border-radius: 999px;
-            font-family: inherit;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* ─── B. Gráfica de Ingresos y Gastos ─── */
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .chart-title {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--ls-text-sub);
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 12px;
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--ls-text-sub);
+            letter-spacing: 0.2px;
+        }
+
+        .chart-legend span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dot-in {
+            color: var(--ls-blue-vibrant);
+            font-size: 14px;
+        }
+
+        .dot-out {
+            color: var(--ls-yellow-vibrant);
+            font-size: 14px;
+        }
+
+        .chart-bars {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            height: 100px;
+            align-items: end;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed var(--ls-border-soft);
+            padding-bottom: 4px;
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .bar-twin {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 3px;
+            height: 100%;
+            width: 100%;
+        }
+
+        .bar {
+            width: 10px;
+            border-radius: 4px 4px 0 0;
+            transition: height 0.4s ease;
+        }
+
+        .bar.in {
+            background: var(--ls-blue-vibrant);
+        }
+
+        .bar.out {
+            background: var(--ls-yellow-vibrant);
+        }
+
+        .bar-label {
+            font-size: 9px;
+            font-weight: 800;
+            color: var(--ls-text-sub);
+        }
+
+        /* ─── C. Módulo Breve de Metas e Historial ─── */
+        .goals-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--ls-blue-light) 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .goals-info h4 {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--ls-text-main);
+            margin-bottom: 4px;
+        }
+
+        .goals-info p {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ls-text-sub);
+        }
+
+        .goals-btn {
+            background: var(--ls-blue-light);
+            color: var(--ls-blue-vibrant);
+            border: 1.5px solid var(--ls-blue-special);
+            padding: 8px 12px;
+            border-radius: 12px;
             font-size: 11px;
             font-weight: 800;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             transition: all 0.2s;
-            letter-spacing: -0.1px;
+            font-family: inherit;
         }
 
-        .qr:hover {
+        .goals-btn:hover {
             background: var(--ls-blue-vibrant);
             color: #FFFFFF;
             border-color: var(--ls-blue-vibrant);
         }
 
-        /* Indicador "escribiendo" */
-        .typing {
-            display: inline-flex;
-            gap: 3px;
-            padding: 4px 0;
+        /* ─── D. Barra de Progreso del Escaneo Diario ─── */
+        .progress-section {
+            margin-bottom: 14px;
         }
 
-        .typing span {
-            width: 6px;
-            height: 6px;
-            background: var(--ls-text-sub);
-            border-radius: 50%;
-            animation: typing 1.2s infinite;
-        }
-
-        .typing span:nth-child(2) {
-            animation-delay: 0.15s;
-        }
-
-        .typing span:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        @keyframes typing {
-
-            0%,
-            60%,
-            100% {
-                opacity: 0.3;
-                transform: translateY(0);
-            }
-
-            30% {
-                opacity: 1;
-                transform: translateY(-3px);
-            }
-        }
-
-        /* Input del chat */
-        .chat-input-wrap {
-            padding: 10px 16px 14px;
-            background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, var(--ls-bg-screen) 40%);
+        .progress-header {
             display: flex;
-            gap: 8px;
+            justify-content: space-between;
             align-items: center;
-            flex-shrink: 0;
-        }
-
-        .chat-input {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            background: #FFFFFF;
-            border: 1.5px solid var(--ls-border-soft);
-            border-radius: 999px;
-            padding: 8px 8px 8px 16px;
-            gap: 8px;
-            transition: border-color 0.2s;
-        }
-
-        .chat-input:focus-within {
-            border-color: var(--ls-blue-vibrant);
-        }
-
-        .chat-input input {
-            flex: 1;
-            border: none;
-            outline: none;
-            background: transparent;
-            font-family: inherit;
-            font-size: 12.5px;
-            font-weight: 600;
-            color: var(--ls-text-main);
-        }
-
-        .chat-input input::placeholder {
-            color: var(--ls-text-sub);
-            font-weight: 500;
-        }
-
-        .send-btn {
-            width: 34px;
-            height: 34px;
-            border: none;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--ls-blue-vibrant), var(--ls-blue-dark));
-            color: #FFFFFF;
-            display: grid;
-            place-items: center;
-            cursor: pointer;
-            flex-shrink: 0;
-            box-shadow: 0 4px 10px -3px rgba(0, 102, 255, 0.5);
-            transition: transform 0.15s;
-            font-family: inherit;
-        }
-
-        .send-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .send-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* ─── Vista OCR / CÁMARA ─── */
-        .scan-view {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            padding: 0 20px 12px;
-        }
-
-        .scan-view.hidden {
-            display: none;
-        }
-
-        /* Marco de cámara simulada */
-        .camera-frame {
-            position: relative;
-            flex: 1;
-            border-radius: 22px;
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 30% 20%, #1e293b 0%, #0f172a 60%),
-                #0f172a;
-            box-shadow: 0 14px 30px -12px rgba(15, 23, 42, 0.4);
-            min-height: 0;
-        }
-
-        /* Ticket simulado dentro de la cámara */
-        .receipt {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-2deg);
-            width: 62%;
-            background: #FFFFFF;
-            border-radius: 6px;
-            padding: 14px 12px 18px;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
-            font-family: 'Courier New', monospace;
-            color: #0F172A;
-        }
-
-        .receipt::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -6px;
-            height: 10px;
-            background:
-                linear-gradient(45deg, transparent 50%, #FFFFFF 50%) 0 0 / 10px 10px repeat-x,
-                linear-gradient(-45deg, transparent 50%, #FFFFFF 50%) 0 0 / 10px 10px repeat-x;
-        }
-
-        .receipt-head {
-            text-align: center;
-            font-weight: 900;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            padding-bottom: 6px;
-            border-bottom: 1.5px dashed #CBD5E1;
             margin-bottom: 8px;
         }
 
-        .receipt-line {
-            display: flex;
-            justify-content: space-between;
-            font-size: 9.5px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            letter-spacing: 0.3px;
-        }
-
-        .receipt-line.total {
-            font-size: 12px;
+        .progress-header h4 {
+            font-size: 11px;
             font-weight: 900;
-            margin-top: 8px;
-            padding-top: 6px;
-            border-top: 1.5px dashed #CBD5E1;
-        }
-
-        .receipt-ghost {
-            opacity: 0.35;
-            font-weight: 600;
-        }
-
-        /* Overlay del marco con esquinas */
-        .camera-overlay {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-        }
-
-        .corner {
-            position: absolute;
-            width: 34px;
-            height: 34px;
-            border-color: #FFFFFF;
-            border-style: solid;
-            border-width: 0;
-            filter: drop-shadow(0 0 4px rgba(0, 102, 255, 0.6));
-        }
-
-        .corner.tl {
-            top: 22%;
-            left: 16%;
-            border-top-width: 3.5px;
-            border-left-width: 3.5px;
-            border-top-left-radius: 10px;
-        }
-
-        .corner.tr {
-            top: 22%;
-            right: 16%;
-            border-top-width: 3.5px;
-            border-right-width: 3.5px;
-            border-top-right-radius: 10px;
-        }
-
-        .corner.bl {
-            bottom: 26%;
-            left: 16%;
-            border-bottom-width: 3.5px;
-            border-left-width: 3.5px;
-            border-bottom-left-radius: 10px;
-        }
-
-        .corner.br {
-            bottom: 26%;
-            right: 16%;
-            border-bottom-width: 3.5px;
-            border-right-width: 3.5px;
-            border-bottom-right-radius: 10px;
-        }
-
-        /* Línea de escaneo animada */
-        .scan-line {
-            position: absolute;
-            left: 16%;
-            right: 16%;
-            top: 22%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--ls-blue-vibrant), transparent);
-            box-shadow: 0 0 12px 2px rgba(0, 102, 255, 0.7);
-            animation: scanMove 2.2s ease-in-out infinite;
-            border-radius: 2px;
-            pointer-events: none;
-        }
-
-        @keyframes scanMove {
-
-            0%,
-            100% {
-                top: 22%;
-                opacity: 0.9;
-            }
-
-            50% {
-                top: 72%;
-                opacity: 1;
-            }
-        }
-
-        /* Chip de estado OCR en vivo */
-        .ocr-status {
-            position: absolute;
-            top: 14px;
-            left: 14px;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #FFFFFF;
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .ocr-status .dot {
-            width: 6px;
-            height: 6px;
-            background: var(--ls-green-vibrant);
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
-            animation: pulse 1.5s infinite;
-        }
-
-        /* Botón flotante de captura */
-        .capture-row {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .capture-side {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
-            color: #FFFFFF;
-            display: grid;
-            place-items: center;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .capture-side:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        .capture-btn {
-            width: 62px;
-            height: 62px;
-            border-radius: 50%;
-            background: #FFFFFF;
-            border: 4px solid rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            display: grid;
-            place-items: center;
-            transition: transform 0.15s;
-            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.5);
-            font-family: inherit;
-        }
-
-        .capture-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .capture-btn:active {
-            transform: scale(0.94);
-        }
-
-        .capture-btn .inner {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--ls-blue-vibrant), var(--ls-blue-dark));
-            display: grid;
-            place-items: center;
-            color: #FFFFFF;
-        }
-
-        .capture-btn .inner svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Panel de resultados OCR (aparece tras capturar) */
-        .ocr-result {
-            position: absolute;
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
-            background: #FFFFFF;
-            border-radius: 20px;
-            padding: 14px 16px;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
-            transform: translateY(120%);
-            opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .ocr-result.show {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .ocr-result-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .ocr-result-head .label {
-            font-size: 10px;
-            font-weight: 900;
-            color: var(--ls-green-vibrant);
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .ocr-result-head .label svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        .ocr-result-head .time {
-            font-size: 10px;
-            font-weight: 700;
             color: var(--ls-text-sub);
         }
 
-        .ocr-field {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--ls-border-soft);
-            font-size: 12px;
+        .progress-header span {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--ls-text-main);
         }
 
-        .ocr-field:last-of-type {
+        .progress-bar-container {
+            display: flex;
+            gap: 4px;
+            height: 8px;
+        }
+
+        .progress-segment {
+            flex: 1;
+            background: var(--ls-border-soft);
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .progress-segment.done {
+            background: var(--ls-green-vibrant);
+        }
+
+        /* ─── E. Lista de Verificación Diaria ─── */
+        .checklist {
+            padding: 6px 12px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 4px;
+            border-bottom: 1px solid var(--ls-border-soft);
+        }
+
+        .check-item:last-child {
             border-bottom: none;
         }
 
-        .ocr-field .k {
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-            color: var(--ls-text-sub);
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            font-size: 12px;
         }
 
-        .ocr-field .v {
-            font-size: 13px;
-            font-weight: 900;
+        .check-icon.done {
+            background: var(--ls-green-light);
+            color: var(--ls-green-dark);
+        }
+
+        .check-icon.pending {
+            background: var(--ls-orange-light);
+            color: var(--ls-orange-vibrant);
+        }
+
+        .check-text {
+            font-size: 12px;
+            font-weight: 700;
             color: var(--ls-text-main);
-            letter-spacing: -0.2px;
         }
 
-        .ocr-field .v.amount {
+        .check-text.strikethrough {
+            color: var(--ls-text-sub);
+            text-decoration: line-through;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           BOTTOM BAR (Navegación Inferior) → AZUL SUAVE + BORDE AZUL
+           ═══════════════════════════════════════════════════════════ */
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            height: 68px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1.5px solid var(--ls-border-soft);
+            box-shadow: 0 -4px 20px rgba(0, 45, 98, 0.08);
+            z-index: 50;
+            padding-bottom: 22px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin-top: 5px;
+            color: var(--ls-text-sub);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--ls-blue-light);
+            border: 1.5px solid var(--ls-border-soft);
+            border-radius: 10px;
+        }
+
+        .nav-item:hover {
+            border-color: var(--ls-blue-special);
             color: var(--ls-blue-vibrant);
         }
 
-        /* Chip de categoría */
-        .cat-chip {
-            font-size: 10px;
-            font-weight: 900;
-            padding: 4px 10px;
-            border-radius: 999px;
-            letter-spacing: 0.3px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+        .nav-item.active {
+            background: var(--ls-blue-light);
+            border-color: var(--ls-blue-vibrant);
+            color: var(--ls-blue-vibrant);
         }
 
-        .cat-chip.essential {
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke-width: 2.2;
+        }
+
+        /* Elemento central sobresaliente — fondo azul suave + borde azul vibrante */
+        .nav-item.center-fab {
+            position: relative;
+            top: -16px;
+            width: 56px;
+            height: 56px;
             background: var(--ls-blue-light);
             color: var(--ls-blue-vibrant);
+            border-radius: 50%;
+            border: 2.5px solid var(--ls-blue-vibrant);
+            box-shadow: 0 8px 20px -6px rgba(0, 71, 171, 0.35);
         }
 
-        .cat-chip.ant {
-            background: #FFF7ED;
-            color: #C2410C;
-        }
-
-        .ocr-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .ocr-btn {
-            flex: 1;
-            padding: 11px;
-            border-radius: 14px;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 0.2px;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-
-        .ocr-btn.ghost {
-            background: #FFFFFF;
-            color: var(--ls-text-sub);
-            border: 1.5px solid var(--ls-border-soft);
-        }
-
-        .ocr-btn.ghost:hover {
-            border-color: var(--ls-red-vibrant);
-            color: var(--ls-red-vibrant);
-        }
-
-        .ocr-btn.primary {
-            background: linear-gradient(135deg, var(--ls-blue-vibrant), var(--ls-blue-dark));
+        .nav-item.center-fab:hover {
+            background: var(--ls-blue-vibrant);
             color: #FFFFFF;
-            box-shadow: 0 8px 18px -6px rgba(0, 102, 255, 0.5);
+            border-color: var(--ls-blue-vibrant);
         }
 
-        .ocr-btn.primary:hover {
-            transform: translateY(-1px);
-        }
-
-        /* ─── Home indicator ─── */
-        .home-indicator {
-            width: 120px;
-            height: 4px;
-            background: #CBD5E1;
-            border-radius: 999px;
-            margin: 0 auto 8px;
-            flex-shrink: 0;
+        .nav-item.center-fab svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
         }
     </style>
 </head>
@@ -832,449 +521,234 @@
 
         <!-- Top bar -->
         <div class="top-bar">
-            <button class="icon-btn" aria-label="Cerrar" id="backBtn">
+            <button class="icon-btn" aria-label="Notificaciones">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
                     stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 6l12 12M18 6L6 18" />
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                 </svg>
             </button>
 
-            <div class="title-block">
-                <span class="label">Registro diario</span>
-                <span class="title">
-                    <span class="live"></span>
-                    Asistente LogScore
-                </span>
+            <div class="greeting">
+                <span class="hello">Resumen Financiero</span>
+                <span class="name">Hola, Edwin</span>
             </div>
 
-            <button class="icon-btn" aria-label="Ayuda">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7" />
-                    <circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none" />
-                </svg>
-            </button>
+            <button class="avatar" aria-label="Perfil">ES</button>
         </div>
 
-        <!-- Tabs de modo -->
-        <div class="mode-tabs" role="tablist">
-            <button class="mode-tab active" data-mode="chat" role="tab" aria-selected="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-7a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z" />
-                </svg>
-                Conversar
-            </button>
-            <button class="mode-tab" data-mode="scan" role="tab" aria-selected="false">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <path
-                        d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2" />
-                    <path d="M8 12h8" />
-                </svg>
-                Escanear ticket
-            </button>
-        </div>
-
-        <!-- Contenido -->
+        <!-- Contenido scrolleable -->
         <div class="content">
 
-            <!-- ─── Vista CHAT ─── -->
-            <div class="chat-view" id="chatView">
-                <div class="chat-scroll" id="chatScroll">
-
-                    <span class="day-pill">Hoy · Registro diario</span>
-
-                    <!-- Mensaje 1 IA -->
-                    <div class="msg bot">
-                        <div class="msg-avatar bot">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 3l1.8 4.5L18 9l-4.2 1.5L12 15l-1.8-4.5L6 9l4.2-1.5L12 3z" />
-                            </svg>
-                        </div>
-                        <div class="bubble">
-                            ¡Hola Edwin! ¿Cómo estuvo tu día?
-                        </div>
-                    </div>
-
-                    <!-- Mensaje 2 IA -->
-                    <div class="msg bot">
-                        <div class="msg-avatar bot">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 3l1.8 4.5L18 9l-4.2 1.5L12 15l-1.8-4.5L6 9l4.2-1.5L12 3z" />
-                            </svg>
-                        </div>
-                        <div class="bubble">
-                            ¿Realizaste algún gasto no planificado?
-                            <div class="quick-replies" id="qr1">
-                                <button class="qr" data-r="si">Sí, uno pequeño</button>
-                                <button class="qr" data-r="no">No, todo en orden</button>
-                                <button class="qr" data-r="scan">Escanear ticket</button>
-                            </div>
-                        </div>
-                    </div>
-
+            <!-- A. Encabezado de Salud Financiera (Gauge) -->
+            <div class="card score-card">
+                <div class="score-head">
+                    <h3>Salud Financiera General</h3>
                 </div>
 
-                <!-- Input del chat -->
-                <div class="chat-input-wrap">
-                    <div class="chat-input">
-                        <input type="text" id="chatInput" placeholder="Escribe o usa una opción rápida..."
-                            autocomplete="off">
-                        <button class="send-btn" id="sendBtn" aria-label="Enviar">
-                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
-                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14" />
-                                <path d="M13 5l7 7-7 7" />
+                <div class="gauge-wrap">
+                    <svg class="gauge-svg" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#EF4444" />
+                                <stop offset="50%" stop-color="#F59E0B" />
+                                <stop offset="100%" stop-color="#10B981" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Pista de fondo (semicírculo) -->
+                        <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="#E2E8F0" stroke-width="16"
+                            stroke-linecap="round" />
+                        <!-- Progreso (~80%) -->
+                        <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="16"
+                            stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="50" />
+                        <!-- Marcador / Aguja -->
+                        <circle cx="158" cy="62" r="6" fill="#FFFFFF" stroke="#0047AB" stroke-width="3" />
+                    </svg>
+
+                    <div class="gauge-center">
+                        <div class="gauge-value">8.2</div>
+                        <div class="gauge-label">
+                            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12l5 5L20 7" />
                             </svg>
-                        </button>
+                            Óptimo
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ─── Vista ESCANEAR ─── -->
-            <div class="scan-view hidden" id="scanView">
-                <div class="camera-frame">
-                    <!-- Chip de estado OCR -->
-                    <div class="ocr-status">
-                        <span class="dot"></span>
-                        OCR EN VIVO
-                    </div>
-
-                    <!-- Ticket simulado -->
-                    <div class="receipt">
-                        <div class="receipt-head">SUPERMERCADO LA ESQUINA</div>
-                        <div class="receipt-line"><span>Leche 1L</span><span>$28.00</span></div>
-                        <div class="receipt-line"><span>Pan integral</span><span>$42.00</span></div>
-                        <div class="receipt-line"><span>Huevos 12pz</span><span>$45.00</span></div>
-                        <div class="receipt-line receipt-ghost"><span>Café molido</span><span>$89.00</span></div>
-                        <div class="receipt-line receipt-ghost"><span>Galletas</span><span>$24.00</span></div>
-                        <div class="receipt-line total"><span>TOTAL</span><span>$204.00</span></div>
-                        <div
-                            style="text-align:center; font-size:8px; color:#64748B; margin-top:8px; letter-spacing:1px;">
-                            GRACIAS POR SU COMPRA
-                        </div>
-                    </div>
-
-                    <!-- Marco con esquinas + línea de escaneo -->
-                    <div class="camera-overlay">
-                        <span class="corner tl"></span>
-                        <span class="corner tr"></span>
-                        <span class="corner bl"></span>
-                        <span class="corner br"></span>
-                        <div class="scan-line"></div>
-                    </div>
-
-                    <!-- Controles de captura -->
-                    <div class="capture-row">
-                        <button class="capture-side" aria-label="Encender flash">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                            </svg>
-                        </button>
-
-                        <button class="capture-btn" id="captureBtn" aria-label="Capturar y analizar">
-                            <span class="inner">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="4" />
-                                    <path
-                                        d="M3 8a2 2 0 0 1 2-2h1l1.5-2h9L18 6h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" />
-                                </svg>
-                            </span>
-                        </button>
-
-                        <button class="capture-side" aria-label="Galería">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="16" rx="2" />
-                                <circle cx="8.5" cy="9.5" r="1.5" />
-                                <path d="M21 15l-5-5L5 20" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Resultado OCR (aparece tras capturar) -->
-                    <div class="ocr-result" id="ocrResult">
-                        <div class="ocr-result-head">
-                            <span class="label">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M5 12l5 5L20 7" />
-                                </svg>
-                                Datos extraídos
-                            </span>
-                            <span class="time">hace 1s</span>
-                        </div>
-
-                        <div class="ocr-field">
-                            <span class="k">Comercio</span>
-                            <span class="v">Supermercado La Esquina</span>
-                        </div>
-
-                        <div class="ocr-field">
-                            <span class="k">Monto total</span>
-                            <span class="v amount">$204.00 MXN</span>
-                        </div>
-
-                        <div class="ocr-field">
-                            <span class="k">Categoría</span>
-                            <span class="cat-chip essential">
-                                <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor"
-                                    stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                                </svg>
-                                Esencial
-                            </span>
-                        </div>
-
-                        <div class="ocr-actions">
-                            <button class="ocr-btn ghost" id="retakeBtn">Reintentar</button>
-                            <button class="ocr-btn primary" id="confirmBtn">Confirmar y guardar</button>
-                        </div>
+            <!-- B. Gráfica de Ingresos y Gastos (Histograma) -->
+            <div class="card">
+                <div class="chart-header">
+                    <span class="chart-title">Flujo Actual</span>
+                    <div class="chart-legend">
+                        <span><b class="dot-in">•</b> Ingresos</span>
+                        <span><b class="dot-out">•</b> Egresos</span>
                     </div>
                 </div>
+
+                <div class="chart-bars">
+                    <div class="bar-group">
+                        <div class="bar-twin">
+                            <div class="bar in" style="height: 60%;"></div>
+                            <div class="bar out" style="height: 40%;"></div>
+                        </div>
+                        <span class="bar-label">S1</span>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-twin">
+                            <div class="bar in" style="height: 40%;"></div>
+                            <div class="bar out" style="height: 80%;"></div>
+                        </div>
+                        <span class="bar-label">S2</span>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-twin">
+                            <div class="bar in" style="height: 90%;"></div>
+                            <div class="bar out" style="height: 30%;"></div>
+                        </div>
+                        <span class="bar-label">S3</span>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-twin">
+                            <div class="bar in" style="height: 50%;"></div>
+                            <div class="bar out" style="height: 20%;"></div>
+                        </div>
+                        <span class="bar-label">S4</span>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-twin">
+                            <div class="bar in" style="height: 70%;"></div>
+                            <div class="bar out" style="height: 45%;"></div>
+                        </div>
+                        <span class="bar-label">S5</span>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-twin">
+                            <div class="bar in" style="height: 65%;"></div>
+                            <div class="bar out" style="height: 60%;"></div>
+                        </div>
+                        <span class="bar-label">S6</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C. Módulo Breve de Metas e Historial Previos -->
+            <div class="card goals-card">
+                <div class="goals-info">
+                    <h4>Registros anteriores</h4>
+                    <p>Mejora notable: 45%</p>
+                </div>
+                <button class="goals-btn">
+                    Historial
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- D. Barra de Progreso del Escaneo / Análisis Diario -->
+            <div class="progress-section">
+                <div class="progress-header">
+                    <h4>Escaneo Diario</h4>
+                    <span>3 de 4 completados</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-segment done"></div>
+                    <div class="progress-segment done"></div>
+                    <div class="progress-segment"></div>
+                    <div class="progress-segment done"></div>
+                </div>
+            </div>
+
+            <!-- E. Lista Breve de Verificación Diaria (Checklist) -->
+            <div class="card checklist">
+
+                <div class="check-item">
+                    <div class="check-icon done">✔️</div>
+                    <div class="check-text strikethrough">Escaneo de ticket principal del día</div>
+                </div>
+
+                <div class="check-item">
+                    <div class="check-icon done">✔️</div>
+                    <div class="check-text strikethrough">Registro de micro-compras</div>
+                </div>
+
+                <div class="check-item">
+                    <div class="check-icon pending">❌</div>
+                    <div class="check-text">Revisión de excedentes y proyecciones</div>
+                </div>
+
+                <div class="check-item">
+                    <div class="check-icon done">✔️</div>
+                    <div class="check-text strikethrough">Actualización de rutina conversacional</div>
+                </div>
+
             </div>
 
         </div>
 
+        <!-- Bottom Bar (Navegación Inferior) -->
+        <nav class="bottom-bar">
+            <!-- Dashboard (Activo) -->
+            <a href="#">
+                <button class="nav-item active" aria-label="Dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="9" rx="1" />
+                        <rect x="14" y="3" width="7" height="5" rx="1" />
+                        <rect x="14" y="12" width="7" height="9" rx="1" />
+                        <rect x="3" y="16" width="7" height="5" rx="1" />
+                    </svg>
+                </button>
+            </a>
+
+            <!-- Chat / Escáner -->
+            <a href="page5.html">
+                <button class="nav-item" aria-label="Chat y Escáner">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        <circle cx="12" cy="11" r="3" />
+                    </svg>
+                </button>
+            </a>
+
+            <!-- Centro Sobresaliente: Metas y Pruebas -->
+            <a href="page6.html">
+                <button class="nav-item center-fab" aria-label="Metas y Pruebas de Estrés">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                    </svg>
+                </button>
+            </a>
+
+            <!-- Variables a Trackear -->
+            <a href="#">
+                <button class="nav-item" aria-label="Variables a Trackear">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                </button>
+            </a>
+
+            <!-- Perfil -->
+            <a href="page7.html">
+                <button class="nav-item" aria-label="Perfil">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </button>
+            </a>
+        </nav>
+
     </div>
-
-    <script>
-        /* ─── Switch de modo Chat / Escanear ─── */
-        const tabs = document.querySelectorAll('.mode-tab');
-        const chatView = document.getElementById('chatView');
-        const scanView = document.getElementById('scanView');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
-
-                if (tab.dataset.mode === 'chat') {
-                    chatView.classList.remove('hidden');
-                    scanView.classList.add('hidden');
-                } else {
-                    chatView.classList.add('hidden');
-                    scanView.classList.remove('hidden');
-                    // Reset del resultado al entrar
-                    document.getElementById('ocrResult').classList.remove('show');
-                }
-            });
-        });
-
-        /* ─── Chat: respuesta rápida ─── */
-        const chatScroll = document.getElementById('chatScroll');
-        const chatInput = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('sendBtn');
-
-        function appendUserMessage(text) {
-            const msg = document.createElement('div');
-            msg.className = 'msg user';
-            msg.innerHTML = `
-                <div class="msg-avatar user">AR</div>
-                <div class="bubble">${text}</div>
-            `;
-            chatScroll.appendChild(msg);
-            chatScroll.scrollTop = chatScroll.scrollHeight;
-        }
-
-        function appendBotTyping() {
-            const msg = document.createElement('div');
-            msg.className = 'msg bot';
-            msg.id = 'botTyping';
-            msg.innerHTML = `
-                <div class="msg-avatar bot">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3l1.8 4.5L18 9l-4.2 1.5L12 15l-1.8-4.5L6 9l4.2-1.5L12 3z"/>
-                    </svg>
-                </div>
-                <div class="bubble">
-                    <span class="typing"><span></span><span></span><span></span></span>
-                </div>
-            `;
-            chatScroll.appendChild(msg);
-            chatScroll.scrollTop = chatScroll.scrollHeight;
-        }
-
-        function replaceTypingWithMessage(text, quickReplies) {
-            const typing = document.getElementById('botTyping');
-            if (!typing) return;
-            typing.remove();
-
-            const msg = document.createElement('div');
-            msg.className = 'msg bot';
-            let html = `
-                <div class="msg-avatar bot">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3l1.8 4.5L18 9l-4.2 1.5L12 15l-1.8-4.5L6 9l4.2-1.5L12 3z"/>
-                    </svg>
-                </div>
-                <div class="bubble">${text}`;
-            if (quickReplies && quickReplies.length) {
-                html += `<div class="quick-replies">`;
-                quickReplies.forEach(qr => {
-                    html += `<button class="qr" data-r="${qr.value}">${qr.label}</button>`;
-                });
-                html += `</div>`;
-            }
-            html += `</div>`;
-            msg.innerHTML = html;
-            chatScroll.appendChild(msg);
-            chatScroll.scrollTop = chatScroll.scrollHeight;
-            bindQuickReplies(msg);
-        }
-
-        // Flujo de respuestas IA
-        const botReplies = {
-            si: {
-                text: 'Entiendo. Escanea el ticket y extraigo monto y categoría al instante.',
-                quick: [
-                    { label: 'Abrir cámara', value: 'scan' },
-                    { label: 'Lo escribo yo', value: 'manual' }
-                ]
-            },
-            no: {
-                text: '¡Excelente! Eso suma puntos en tu LogScore. ¿Quieres registrar otro ingreso?',
-                quick: [
-                    { label: 'Sí, agregar', value: 'income' },
-                    { label: 'Terminar por hoy', value: 'end' }
-                ]
-            },
-            manual: {
-                text: 'Perfecto. Puedes escribir el monto y una nota breve. ¿Cuánto gastaste?',
-                quick: [
-                    { label: '$100 o menos', value: 'low' },
-                    { label: '$100 - $500', value: 'mid' },
-                    { label: 'Más de $500', value: 'high' }
-                ]
-            },
-            income: {
-                text: 'Registrado. Tu balance semanal se actualizará automáticamente. ¿Algo más?',
-                quick: [
-                    { label: 'No, gracias', value: 'end' }
-                ]
-            },
-            end: {
-                text: 'Perfecto, Alex. Nos vemos mañana. Tu racha va en 8 días.',
-                quick: []
-            },
-            default: {
-                text: 'Anotado. Puedo analizarlo con tu historial si quieres un resumen.',
-                quick: [
-                    { label: 'Resumir mi mes', value: 'income' },
-                    { label: 'Terminar', value: 'end' }
-                ]
-            }
-        };
-
-        function handleUserReply(value) {
-            if (value === 'scan') {
-                // Cambiar a la vista de escaneo
-                document.querySelector('.mode-tab[data-mode="scan"]').click();
-                return;
-            }
-            appendBotTyping();
-            setTimeout(() => {
-                const reply = botReplies[value] || botReplies.default;
-                replaceTypingWithMessage(reply.text, reply.quick);
-            }, 800);
-        }
-
-        function bindQuickReplies(scope) {
-            (scope || document).querySelectorAll('.qr').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const val = btn.dataset.r;
-                    appendUserMessage(btn.textContent);
-                    // Ocultar quick replies de la misma burbuja
-                    const wrap = btn.closest('.quick-replies');
-                    if (wrap) wrap.remove();
-                    setTimeout(() => handleUserReply(val), 300);
-                });
-            });
-        }
-
-        bindQuickReplies();
-
-        // Envío manual
-        function sendMessage() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-            appendUserMessage(text);
-            chatInput.value = '';
-            appendBotTyping();
-            setTimeout(() => {
-                replaceTypingWithMessage(botReplies.default.text, botReplies.default.quick);
-            }, 900);
-        }
-
-        sendBtn.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-
-        /* ─── Escáner OCR ─── */
-        const captureBtn = document.getElementById('captureBtn');
-        const ocrResult = document.getElementById('ocrResult');
-        const retakeBtn = document.getElementById('retakeBtn');
-        const confirmBtn = document.getElementById('confirmBtn');
-
-        captureBtn.addEventListener('click', () => {
-            // Efecto de captura: flash breve
-            captureBtn.style.background = '#EBF3FF';
-            setTimeout(() => { captureBtn.style.background = '#FFFFFF'; }, 180);
-            // Mostrar resultado OCR
-            setTimeout(() => {
-                ocrResult.classList.add('show');
-            }, 400);
-        });
-
-        retakeBtn.addEventListener('click', () => {
-            ocrResult.classList.remove('show');
-        });
-
-        confirmBtn.addEventListener('click', () => {
-            ocrResult.classList.remove('show');
-            // Mensaje de confirmación
-            const toast = document.createElement('div');
-            toast.style.cssText = `
-                position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-                background:rgba(15,23,42,0.92); color:#fff; padding:12px 20px;
-                border-radius:14px; font-size:12px; font-weight:800; letter-spacing:0.3px;
-                box-shadow:0 20px 40px -10px rgba(0,0,0,0.5);
-                display:flex; align-items:center; gap:8px;
-                animation: fadeUp 0.3s ease;
-                z-index:100;
-            `;
-            toast.innerHTML = `
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12l5 5L20 7"/>
-                </svg>
-                Gasto registrado · +5 pts
-            `;
-            scanView.querySelector('.camera-frame').appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.3s';
-                setTimeout(() => toast.remove(), 300);
-            }, 1800);
-        });
-
-        /* ─── Botón cerrar (X) → volver al dashboard ─── */
-        document.getElementById('backBtn').addEventListener('click', () => {
-            if (window.parent && window.parent !== window) {
-                window.parent.postMessage({ action: 'navigate', screen: 2 }, '*');
-            }
-        });
-    </script>
 </body>
 
 </html>
