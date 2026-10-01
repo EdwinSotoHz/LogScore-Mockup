@@ -1271,7 +1271,7 @@
         /* ─── Botón cerrar (X) → volver al dashboard ─── */
         document.getElementById('backBtn').addEventListener('click', () => {
             if (window.parent && window.parent !== window) {
-                window.parent.postMessage({ action: 'navigate', screen: 2 }, '*');
+                window.parent.postMessage({ action: 'navigate', screen: 4 }, '*');
             }
         });
     </script>

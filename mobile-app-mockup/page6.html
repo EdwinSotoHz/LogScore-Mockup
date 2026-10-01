@@ -7,20 +7,25 @@
     <title>LogScore — Misiones</title>
     <style>
         :root {
-            --ls-blue-vibrant: #0066FF;
-            --ls-blue-dark: #0052CC;
+            /* ─── Variables base alineadas a page1/page2/page3 ─── */
+            --ls-blue-vibrant: #2563EB;
+            --ls-blue-dark: #1D4ED8;
             --ls-blue-light: #EBF3FF;
+            --ls-blue-special: #70a5ff;
+
             --ls-orange-vibrant: #FF5E36;
+            --ls-orange-light: #FFF0ED;
             --ls-purple-vibrant: #8B5CF6;
             --ls-purple-light: #F3E8FF;
             --ls-green-vibrant: #10B981;
             --ls-green-light: #ECFDF5;
             --ls-yellow-vibrant: #F59E0B;
 
-            --ls-text-main: #0F172A;
-            --ls-text-sub: #64748B;
-            --ls-bg-screen: #F8FAFC;
-            --ls-border-soft: #E2E8F0;
+            --ls-text-main: #1E3A5F;
+            --ls-text-sub: #4A607A;
+            --ls-text-highlight: #2563EB;
+            --ls-bg-screen: #9ec0ff;
+            --ls-border-soft: #D0E1FD;
         }
 
         * {
@@ -49,21 +54,6 @@
             overflow: hidden;
         }
 
-        /* ─── Status bar ─── */
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 22px 4px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--ls-text-main);
-        }
-
-        .status-bar .icons {
-            letter-spacing: 2px;
-        }
-
         /* ─── Top bar ─── */
         .top-bar {
             display: flex;
@@ -79,78 +69,97 @@
             place-items: center;
             border-radius: 50%;
             color: var(--ls-text-sub);
+            background: #FFFFFF;
+            border: 1.5px solid var(--ls-border-soft);
             cursor: pointer;
-            transition: background 0.2s;
-            background: transparent;
-            border: none;
+            transition: all 0.2s;
         }
 
         .top-bar .icon-btn:hover {
-            background: #EEF2F7;
+            border-color: var(--ls-blue-special);
         }
 
-        .top-bar .title-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 1.1;
-        }
-
-        .title-block .label {
-            font-size: 9px;
+        .top-bar .step {
+            font-size: 11px;
             font-weight: 800;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
             color: var(--ls-text-sub);
-        }
-
-        .title-block .title {
-            font-size: 13px;
-            font-weight: 900;
-            letter-spacing: -0.2px;
-            color: var(--ls-text-main);
-            margin-top: 2px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
         }
 
         /* ─── Contenido ─── */
         .content {
             flex: 1;
             overflow-y: auto;
-            padding: 4px 20px 16px;
+            padding: 16px 20px;
+            background: #FFFFFF;
+            border-top-left-radius: 32px;
+            border-top-right-radius: 32px;
             scrollbar-width: none;
+            box-shadow: 0 -4px 20px rgba(37, 99, 235, 0.10);
         }
 
         .content::-webkit-scrollbar {
             display: none;
         }
 
-        /* ─── Intro ─── */
-        .intro {
-            margin-bottom: 18px;
+        /* ─── Mascota / Ilustración ─── */
+        .mascot-wrap {
+            display: flex;
+            justify-content: center;
+            margin: 4px 0 10px;
+            position: relative;
         }
 
-        .intro h1 {
+        .mascot {
+            width: 110px;
+            height: 110px;
+            position: relative;
+            background: var(--ls-blue-light);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            border: 2px solid var(--ls-blue-special);
+        }
+
+        .mascot img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+        }
+
+        /* ─── Hero título + eslogan ─── */
+        .hero-title {
             font-size: 20px;
             font-weight: 900;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
+            line-height: 1.18;
+            letter-spacing: -0.6px;
             color: var(--ls-text-main);
+            margin-bottom: 8px;
+            text-align: center;
         }
 
-        .intro p {
+        .hero-title em {
+            font-style: normal;
+            color: var(--ls-text-highlight);
+        }
+
+        .hero-sub {
             font-size: 12px;
             color: var(--ls-text-sub);
-            line-height: 1.4;
-            margin-top: 6px;
+            line-height: 1.45;
+            margin-bottom: 16px;
             font-weight: 500;
+            text-align: center;
+            padding: 0 4px;
         }
 
-        /* ─── Sección header ─── */
+        /* ─── Sección Headings ─── */
         .section-head {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 4px 0 10px;
+            margin: 16px 0 10px;
         }
 
         .section-head h4 {
@@ -173,14 +182,14 @@
 
         /* ─── Misión activa destacada ─── */
         .mission-hero {
-            background: linear-gradient(150deg, #0066FF 0%, #0052CC 100%);
+            background: linear-gradient(150deg, #3B82F6 0%, #2563EB 100%);
             border-radius: 22px;
             padding: 18px;
             color: #FFFFFF;
             margin-bottom: 12px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 14px 30px -12px rgba(0, 102, 255, 0.5);
+            box-shadow: 0 14px 30px -12px rgba(37, 99, 235, 0.55);
         }
 
         .mission-hero::before {
@@ -190,7 +199,7 @@
             right: -20%;
             width: 70%;
             height: 180%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, transparent 65%);
             pointer-events: none;
         }
 
@@ -208,7 +217,7 @@
             font-weight: 900;
             letter-spacing: 0.6px;
             text-transform: uppercase;
-            background: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.25);
             padding: 4px 10px;
             border-radius: 999px;
             backdrop-filter: blur(6px);
@@ -221,7 +230,7 @@
             font-size: 10px;
             font-weight: 900;
             letter-spacing: 0.3px;
-            background: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.25);
             padding: 4px 10px;
             border-radius: 999px;
             backdrop-filter: blur(6px);
@@ -245,7 +254,7 @@
         .mission-hero .desc {
             font-size: 11px;
             line-height: 1.4;
-            color: #DBEAFE;
+            color: #E0EDFF;
             margin-bottom: 14px;
             position: relative;
             z-index: 1;
@@ -271,7 +280,7 @@
         .progress-row .amounts .total {
             font-size: 11px;
             font-weight: 700;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.75);
             margin-left: 3px;
         }
 
@@ -283,7 +292,7 @@
 
         .progress-track {
             height: 8px;
-            background: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.28);
             border-radius: 999px;
             overflow: hidden;
             position: relative;
@@ -296,7 +305,7 @@
             border-radius: 999px;
             width: 0%;
             transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
         }
 
         /* Insignia de meta */
@@ -306,8 +315,8 @@
             gap: 6px;
             margin-top: 12px;
             padding: 6px 12px;
-            background: rgba(255, 255, 255, 0.22);
-            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 999px;
             font-size: 10px;
             font-weight: 900;
@@ -337,7 +346,7 @@
             border-radius: 18px;
             padding: 15px;
             border: 1.5px solid var(--ls-border-soft);
-            box-shadow: 0 8px 20px -10px rgba(15, 23, 42, 0.08);
+            box-shadow: 0 8px 20px -10px rgba(37, 99, 235, 0.10);
             margin-bottom: 10px;
             transition: border-color 0.2s;
         }
@@ -357,8 +366,8 @@
             width: 38px;
             height: 38px;
             border-radius: 12px;
-            background: #FFF7ED;
-            color: #C2410C;
+            background: var(--ls-orange-light);
+            color: var(--ls-orange-vibrant);
             display: grid;
             place-items: center;
             flex-shrink: 0;
@@ -407,7 +416,7 @@
 
         .mc-progress-track {
             height: 6px;
-            background: #EEF2F7;
+            background: var(--ls-border-soft);
             border-radius: 999px;
             overflow: hidden;
         }
@@ -430,7 +439,7 @@
         /* ─── Badge de pre-evaluación (destacado) ─── */
         .prequal-card {
             margin-top: 16px;
-            background: linear-gradient(150deg, #F0FDF4 0%, #ECFDF5 100%);
+            background: linear-gradient(150deg, #F0FDF4 0%, var(--ls-green-light) 100%);
             border: 1.5px solid #BBF7D0;
             border-radius: 20px;
             padding: 16px;
@@ -448,7 +457,7 @@
             right: -20%;
             width: 50%;
             height: 160%;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 65%);
             pointer-events: none;
         }
 
@@ -456,12 +465,12 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--ls-green-vibrant), #059669);
+            background: linear-gradient(135deg, #34D399, var(--ls-green-vibrant));
             color: #FFFFFF;
             display: grid;
             place-items: center;
             flex-shrink: 0;
-            box-shadow: 0 8px 18px -6px rgba(16, 185, 129, 0.5);
+            box-shadow: 0 8px 18px -6px rgba(16, 185, 129, 0.45);
             position: relative;
             z-index: 1;
         }
@@ -483,7 +492,7 @@
             font-weight: 900;
             letter-spacing: 0.6px;
             text-transform: uppercase;
-            color: #047857;
+            color: #059669;
             margin-bottom: 3px;
         }
 
@@ -497,20 +506,10 @@
 
         .prequal-body .sub {
             font-size: 10px;
-            color: #065F46;
+            color: #047857;
             font-weight: 600;
             margin-top: 3px;
             line-height: 1.3;
-        }
-
-        /* ─── Home indicator ─── */
-        .home-indicator {
-            width: 120px;
-            height: 4px;
-            background: #CBD5E1;
-            border-radius: 999px;
-            margin: 0 auto 8px;
-            flex-shrink: 0;
         }
     </style>
 </head>
@@ -527,10 +526,7 @@
                 </svg>
             </button>
 
-            <div class="title-block">
-                <span class="label">Disciplina</span>
-                <span class="title">Misiones activas</span>
-            </div>
+            <span class="step">Misiones activas</span>
 
             <button class="icon-btn" aria-label="Historial">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"
@@ -544,11 +540,20 @@
         <!-- Contenido -->
         <div class="content">
 
-            <!-- Intro breve -->
-            <div class="intro">
-                <h1>Tu prueba de estrés financiera</h1>
-                <p>Demuestra constancia y desbloquea mejores condiciones.</p>
+            <!-- Mascota / Ilustración -->
+            <div class="mascot-wrap">
+                <div class="mascot">
+                    <img src="../assets/LOG_Logros_Oganizacion_Garantia/alvo_coin2.png" alt="Mascota ALVO Misiones">
+                </div>
             </div>
+
+            <!-- Hero título + subtítulo -->
+            <h1 class="hero-title">
+                Tu <em>prueba de estrés financiera</em>
+            </h1>
+            <p class="hero-sub">
+                Demuestra constancia y desbloquea mejores condiciones para tu perfil.
+            </p>
 
             <!-- Sección: Misión principal -->
             <div class="section-head">
@@ -620,7 +625,7 @@
                 </div>
             </div>
 
-            <!-- Misión secundaria adicional (sobria) -->
+            <!-- Misión secundaria adicional -->
             <div class="mission-card">
                 <div class="mc-head">
                     <div class="mc-icon" style="background: var(--ls-purple-light); color: var(--ls-purple-vibrant);">
@@ -668,18 +673,15 @@
     <script>
         // ─── Animación de progreso al entrar ───
         window.addEventListener('load', () => {
-            // Hero: 100%
             setTimeout(() => {
                 document.getElementById('heroFill').style.width = '100%';
                 document.getElementById('heroBadge').classList.add('show');
             }, 200);
 
-            // Anti-hormiga: 60%
             setTimeout(() => {
                 document.getElementById('antFill').style.width = '60%';
             }, 400);
 
-            // Prueba de estrés: 64%
             setTimeout(() => {
                 document.getElementById('stressFill').style.width = '64%';
             }, 600);
@@ -688,7 +690,7 @@
         // ─── Volver al dashboard ───
         document.getElementById('backBtn').addEventListener('click', () => {
             if (window.parent && window.parent !== window) {
-                window.parent.postMessage({ action: 'navigate', screen: 2 }, '*');
+                window.parent.postMessage({ action: 'navigate', screen: 4 }, '*');
             }
         });
     </script>
