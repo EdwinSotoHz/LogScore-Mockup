@@ -1,17 +1,16 @@
 <div align="center">
 
-![Crevolution](https://img.shields.io/badge/Crevolution-Hackatón_2026-blue?style=for-the-badge)
+![Crevolution](https://img.shields.io/badge/Crevolution-Hackat%C3%B3n_2026-blue?style=for-the-badge)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Fintech](https://img.shields.io/badge/Fintech-Risk--as--a--Service-8B5CF6?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Prototipo_Interactivo-FF5E36?style=for-the-badge)
 
 <br/>
 
-<img src="assets/logo.svg" alt="LogScore Logo" width="200"/>
+<img src="assets/logo.jpeg" alt="LogScore — Diario Financiero" width="400"/>
 
-# LogScore — Diario Financiero Inteligente
+# LogScore — Diario Financiero
 
 > *"Un diario financiero que no confía en lo que el usuario promete tener, sino en lo que demuestra empíricamente que puede sostener."*
 
@@ -23,7 +22,7 @@
 
 ## Descripción
 
-**LogScore** es una plataforma y prototipo interactivo de inclusión financiera desarrollado por el equipo **ITICsLab**. Su objetivo es transformar los hábitos cotidianos en una **reputación financiera verificable** para sectores excluidos del sistema bancario tradicional (estudiantes, trabajadores independientes, microemprendedores y personas sin historial en buró de crédito).
+**LogScore** es un prototipo interactivo de inclusión financiera desarrollado por el equipo **ITICsLab**. Transforma los hábitos cotidianos en una **reputación financiera verificable** para sectores excluidos del sistema bancario tradicional (estudiantes, trabajadores independientes, microemprendedores y personas sin historial en buró de crédito).
 
 Mediante un enfoque de **colateral conductual** y **evaluación no convencional de riesgos**, el sistema permite registrar ingresos y gastos por lenguaje natural u OCR local, cumplir misiones de ahorro y generar un expediente pre-evaluado respaldado por certificaciones académicas y autenticación continua.
 
@@ -32,8 +31,6 @@ Mediante un enfoque de **colateral conductual** y **evaluación no convencional 
 ## Objetivo y Propuesta de Valor
 
 **Objetivo general:** diseñar un sistema integral de reputación financiera alternativa que conecte a usuarios no bancarizados con instituciones financieras mediante un modelo **Risk-as-a-Service (RaaS)**, reduciendo la asimetría de información y el riesgo de impago.
-
-### Audiencias objetivo
 
 | B2C — Usuarios finales | B2B — Instituciones financieras |
 |---|---|
@@ -45,8 +42,6 @@ Mediante un enfoque de **colateral conductual** y **evaluación no convencional 
 
 ## Variables No Convencionales Evaluadas
 
-LogScore trasciende el modelo tradicional de scoring bancario analizando variables conductuales empíricas con estricto apego a la privacidad.
-
 | Dimensión | Variable analizada | Impacto en el score |
 |---|---|---|
 | Estabilidad de rutinas | Geolocalización y patrones de movilidad anonimizados (sin GPS exacto). | Evalúa regularidad y consistencia en la rutina diaria. |
@@ -55,6 +50,26 @@ LogScore trasciende el modelo tradicional de scoring bancario analizando variabl
 | Capacitación (Proof of Knowledge) | Bóveda de credenciales académicas (CONDUSEF, Banxico, CNBV). | Bonificación de puntaje por educación y prevención de fraudes. |
 | Huella digital voluntaria | Análisis semántico opcional de suscripciones y herramientas de productividad. | Distingue inversión en desarrollo vs. ocio desmedido. |
 | Antifraude continuo | Sello de identidad verificada tras 90 días de actividad regular. | Garantiza que la cuenta pertenece al titular y previene suplantaciones. |
+
+---
+
+## Demo Interactiva
+
+<div align="center">
+
+<img src="assets/output-onlinegiftools-com.gif" alt="Mascota LogScore" width="120"/>
+
+**Escanea el QR o visita el enlace para probar el prototipo:**
+
+<br/>
+
+<img src="assets/openqr.png" alt="QR — Demo LogScore" width="160"/>
+
+<br/>
+
+🔗 **Demo (mockup):** [https://edwinsotohz.github.io/LogScore-Mockup/](https://edwinsotohz.github.io/LogScore-Mockup/)
+
+</div>
 
 ---
 
@@ -71,7 +86,7 @@ graph TD
     subgraph FrontEnd ["Capa de Cliente"]
         A1["Landing Page Oficial<br/>(index.html)"]
         A2["Interactive Device Viewer<br/>(interactive-demo-viewer.html)"]
-        A3["Mockup App Móvil<br/>(page1 a page6)"]
+        A3["Mockup App Móvil<br/>(page1 a page8)"]
     end
 
     subgraph EdgeProcessing ["Procesamiento Local (Edge AI / OCR)"]
@@ -110,3 +125,14 @@ graph TD
     class C1,C2 privacy
     class D1,D2,D3 engine
     class E1,E2 b2b
+```
+
+---
+
+<div align="center">
+
+**Equipo ITICsLab** · Instituto Tecnológico Superior del Occidente del Estado de Hidalgo
+
+Edwin Salvador Soto Hernandez · [230110358@itsoeh.edu.mx](mailto:230110358@itsoeh.edu.mx) · [LinkedIn](https://www.linkedin.com/in/edwin-soto-dev)
+
+</div>

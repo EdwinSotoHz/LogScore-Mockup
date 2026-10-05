@@ -1,0 +1,104 @@
+.chips {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* Estado base de los chips */
+.chip .chip-check svg {
+    width: 11px;
+    height: 11px;
+}
+
+/* ─── Estilos de selección por color ─── */
+
+/* 1. Mi primer crédito (Azul) */
+.chip[data-goal="first"].selected {
+    border-color: var(--ls-blue-vibrant);
+    background: var(--ls-blue-light);
+    box-shadow: 0 0 0 3px rgba(0, 71, 171, 0.12);
+}
+
+.chip[data-goal="first"].selected .chip-icon {
+    background: var(--ls-blue-vibrant);
+    color: #FFFFFF;
+}
+
+.chip[data-goal="first"].selected .chip-check {
+    background: var(--ls-blue-vibrant);
+    border-color: var(--ls-blue-vibrant);
+}
+
+.chip[data-goal="first"].selected .chip-check svg {
+    opacity: 1;
+}
+
+/* 2. Salir de deudas (Verde) */
+.chip[data-goal="debt"].selected {
+    border-color: var(--ls-green-vibrant);
+    background: var(--ls-green-light);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.chip[data-goal="debt"].selected .chip-icon {
+    background: var(--ls-green-vibrant);
+    color: #FFFFFF;
+}
+
+.chip[data-goal="debt"].selected .chip-check {
+    background: var(--ls-green-vibrant);
+    border-color: var(--ls-green-vibrant);
+}
+
+.chip[data-goal="debt"].selected .chip-check svg {
+    opacity: 1;
+}
+
+/* 3. Ahorrar (Morado) */
+.chip[data-goal="save"].selected {
+    border-color: var(--ls-purple-vibrant);
+    background: var(--ls-purple-light);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+.chip[data-goal="save"].selected .chip-icon {
+    background: var(--ls-purple-vibrant);
+    color: #FFFFFF;
+}
+
+.chip[data-goal="save"].selected .chip-check {
+    background: var(--ls-purple-vibrant);
+    border-color: var(--ls-purple-vibrant);
+}
+
+.chip[data-goal="save"].selected .chip-check svg {
+    opacity: 1;
+}
+
+/* 4. Prevención (Naranja) */
+.chip[data-goal="prevention"].selected {
+    border-color: var(--ls-orange-vibrant);
+    background: var(--ls-orange-light);
+    box-shadow: 0 0 0 3px rgba(255, 94, 54, 0.12);
+}
+
+.chip[data-goal="prevention"].selected .chip-icon {
+    background: var(--ls-orange-vibrant);
+    color: #FFFFFF;
+}
+
+.chip[data-goal="prevention"].selected .chip-check {
+    background: var(--ls-orange-vibrant);
+    border-color: var(--ls-orange-vibrant);
+}
+
+.chip[data-goal="prevention"].selected .chip-check svg {
+    opacity: 1;
+}
+
+/* Mascota específica de page1 */
+.mascot {
+    width: 120px;
+    height: 120px;
+}

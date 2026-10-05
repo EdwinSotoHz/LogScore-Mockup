@@ -1,0 +1,340 @@
+/* ═══════════════════════════════════════════════════════════
+   PAGE 6 — MISIONES
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Misión activa destacada (hero card) ─── */
+.mission-hero {
+    background: linear-gradient(150deg, #3B82F6 0%, #2563EB 100%);
+    border-radius: 22px;
+    padding: 18px;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 14px 30px -12px rgba(37, 99, 235, 0.55);
+}
+
+.mission-hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 70%;
+    height: 180%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.mission-hero .tag-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.mission-hero .tag {
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 4px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+}
+
+.mission-hero .streak {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 4px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+}
+
+.mission-hero .streak svg {
+    width: 11px;
+    height: 11px;
+}
+
+.mission-hero h2 {
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+.mission-hero .desc {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #E0EDFF;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+}
+
+/* ─── Progreso destacado ─── */
+.progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-row .amounts {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: -0.2px;
+}
+
+.progress-row .amounts .total {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
+    margin-left: 3px;
+}
+
+.progress-row .pct {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+}
+
+.progress-track {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 999px;
+    width: 0%;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+}
+
+/* ─── Badge de meta alcanzada ─── */
+.badge-earned {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all 0.5s ease 0.6s;
+}
+
+.badge-earned.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.badge-earned svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ─── Card de misión secundaria ─── */
+.mission-card {
+    background: #FFFFFF;
+    border-radius: 18px;
+    padding: 15px;
+    border: 1.5px solid var(--ls-border-soft);
+    box-shadow: 0 8px 20px -10px rgba(37, 99, 235, 0.10);
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+}
+
+.mission-card:hover {
+    border-color: var(--ls-blue-vibrant);
+}
+
+.mc-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.mc-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--ls-orange-light);
+    color: var(--ls-orange-vibrant);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.mc-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.mc-icon.purple {
+    background: var(--ls-purple-light);
+    color: var(--ls-purple-vibrant);
+}
+
+.mc-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.mc-title {
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--ls-text-main);
+    letter-spacing: -0.2px;
+    margin-bottom: 3px;
+}
+
+.mc-desc {
+    font-size: 11px;
+    color: var(--ls-text-sub);
+    line-height: 1.35;
+    font-weight: 500;
+}
+
+.mc-progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--ls-text-sub);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
+
+.mc-progress-row .val {
+    color: var(--ls-text-main);
+    font-weight: 900;
+}
+
+.mc-progress-track {
+    height: 6px;
+    background: var(--ls-border-soft);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.mc-progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    width: 0%;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mc-progress-fill.orange {
+    background: linear-gradient(90deg, #FF8A00, var(--ls-orange-vibrant));
+}
+
+.mc-progress-fill.purple {
+    background: linear-gradient(90deg, var(--ls-purple-vibrant), #6366F1);
+}
+
+/* ─── Pre-evaluación (card verde) ─── */
+.prequal-card {
+    margin-top: 16px;
+    background: linear-gradient(150deg, #F0FDF4 0%, var(--ls-green-light) 100%);
+    border: 1.5px solid #BBF7D0;
+    border-radius: 20px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.prequal-card::after {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 50%;
+    height: 160%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.prequal-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #34D399, var(--ls-green-vibrant));
+    color: #FFFFFF;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 18px -6px rgba(16, 185, 129, 0.45);
+    position: relative;
+    z-index: 1;
+}
+
+.prequal-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.prequal-body {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.prequal-body .k {
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #059669;
+    margin-bottom: 3px;
+}
+
+.prequal-body .v {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--ls-text-main);
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+}
+
+.prequal-body .sub {
+    font-size: 10px;
+    color: #047857;
+    font-weight: 600;
+    margin-top: 3px;
+    line-height: 1.3;
+}

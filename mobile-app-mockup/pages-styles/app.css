@@ -1,0 +1,417 @@
+:root {
+    /* ─── Marca ─── */
+    --ls-blue-vibrant: #0047AB;
+    --ls-blue-dark: #002D62;
+    --ls-blue-light: #EBF3FF;
+    --ls-blue-special: #70a5ff;
+
+    --ls-green-vibrant: #10B981;
+    --ls-green-light: #ECFDF5;
+    --ls-green-dark: #047857;
+
+    --ls-orange-vibrant: #FF5E36;
+    --ls-orange-light: #FFF0ED;
+
+    --ls-purple-vibrant: #8B5CF6;
+    --ls-purple-light: #F3E8FF;
+
+    --ls-yellow-vibrant: #F59E0B;
+    --ls-yellow-light: #FFFBEB;
+
+    --ls-red-vibrant: #EF4444;
+    --ls-red-light: #FEF2F2;
+
+    /* ─── Texto ─── */
+    --ls-text-main: #002D62;
+    --ls-text-sub: #4A607A;
+    --ls-text-highlight: #2563EB;
+
+    /* ─── Superficies ─── */
+    --ls-bg-screen: #9ec0ff;
+    --ls-bg-screen-soft: #F8FAFC;
+    --ls-border-soft: #D0E1FD;
+    --ls-card-bg: #FFFFFF;
+    --ls-card-bg-soft: #F8FAFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    padding: 13px 0 0 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ls-text-main);
+    background: var(--ls-bg-screen);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Layout principal ─── */
+.screen {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--ls-bg-screen);
+    position: relative;
+    overflow: hidden;
+}
+
+/* ─── Top bar (estilo app interna: limpio, sin bordes) ─── */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 20px 10px;
+}
+
+.top-bar .icon-btn {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--ls-text-sub);
+    cursor: pointer;
+    transition: background 0.2s;
+    background: #FFFFFF;
+    border: 1.5px solid var(--ls-border-soft);
+    font-family: inherit;
+}
+
+.top-bar .icon-btn:hover {
+    border-color: var(--ls-blue-special);
+    color: var(--ls-blue-vibrant);
+}
+
+/* Top bar para pantallas con contenido blanco (page6) */
+.top-bar.solid .icon-btn {
+    background: #FFFFFF;
+    border: 1.5px solid var(--ls-border-soft);
+}
+
+.top-bar .step {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ls-text-sub);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+/* ─── Contenido scrolleable ─── */
+.content {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Variante: contenido sobre fondo blanco con border-radius superior */
+.content.sheet {
+    padding: 16px 20px;
+    background: #FFFFFF;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    box-shadow: 0 -4px 20px rgba(0, 45, 98, 0.08);
+}
+
+/* Variante: contenido sobre el fondo azul (dashboard) */
+.content.transparent {
+    padding: 0 20px 90px;
+}
+
+/* ─── Mascota / Ilustración ─── */
+.mascot-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 4px 0 10px;
+    position: relative;
+}
+
+.mascot {
+    width: 110px;
+    height: 110px;
+    position: relative;
+    background: var(--ls-blue-light);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--ls-blue-special);
+}
+
+.mascot img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+}
+
+/* ─── Hero título + subtítulo ─── */
+.hero-title {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.18;
+    letter-spacing: -0.6px;
+    color: var(--ls-text-main);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.hero-title em {
+    font-style: normal;
+    color: var(--ls-text-highlight);
+}
+
+.hero-sub {
+    font-size: 12px;
+    color: var(--ls-text-sub);
+    line-height: 1.45;
+    margin-bottom: 16px;
+    font-weight: 500;
+    text-align: center;
+    padding: 0 4px;
+}
+
+/* ─── Encabezado de sección ─── */
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0 10px;
+}
+
+.section-head h4 {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--ls-text-sub);
+}
+
+.section-head .count {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--ls-blue-vibrant);
+    background: var(--ls-blue-light);
+    padding: 3px 9px;
+    border-radius: 999px;
+    letter-spacing: 0.3px;
+}
+
+/* ─── Tarjeta base ─── */
+.card {
+    background: var(--ls-card-bg);
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 14px;
+    border: 1.5px solid var(--ls-border-soft);
+    box-shadow: 0 8px 20px -10px rgba(0, 45, 98, 0.08);
+}
+
+/* ─── Animación compartida ─── */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ─── Indicador de racha / live ─── */
+.live-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--ls-green-vibrant);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+    animation: pulse 1.8s infinite;
+    display: inline-block;
+}
+
+/* ─── Tabs reutilizables ─── */
+.mode-tabs {
+    display: flex;
+    gap: 4px;
+    background: #EEF2F7;
+    border-radius: 999px;
+    padding: 4px;
+    margin: 2px 20px 12px;
+}
+
+.mode-tabs.on-blue {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.mode-tab {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 9px 10px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ls-text-sub);
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.mode-tab svg {
+    width: 13px;
+    height: 13px;
+}
+
+.mode-tab.active {
+    background: #FFFFFF;
+    color: var(--ls-text-main);
+    box-shadow: 0 4px 10px -4px rgba(15, 23, 42, 0.15);
+}
+
+.mode-tabs.on-blue .mode-tab {
+    color: var(--ls-text-main);
+}
+
+.mode-tabs.on-blue .mode-tab.active {
+    color: var(--ls-blue-vibrant);
+    box-shadow: 0 4px 10px -4px rgba(0, 45, 98, 0.15);
+}
+
+/* ─── Bottom bar (por si acaso se usa en más pantallas) ─── */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    height: 68px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1.5px solid var(--ls-border-soft);
+    box-shadow: 0 -4px 20px rgba(0, 45, 98, 0.08);
+    z-index: 50;
+    padding-bottom: 22px;
+}
+
+.bottom-bar a {
+    text-decoration: none;
+    color: inherit;
+    display: contents;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    color: var(--ls-text-sub);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--ls-blue-light);
+    border: 1.5px solid var(--ls-border-soft);
+    border-radius: 10px;
+    font-family: inherit;
+}
+
+.nav-item:hover {
+    border-color: var(--ls-blue-special);
+    color: var(--ls-blue-vibrant);
+}
+
+.nav-item.active {
+    background: var(--ls-blue-light);
+    border-color: var(--ls-blue-vibrant);
+    color: var(--ls-blue-vibrant);
+}
+
+.nav-item svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.2;
+}
+
+.nav-item.center-fab {
+    position: relative;
+    top: -16px;
+    width: 56px;
+    height: 56px;
+    background: var(--ls-blue-light);
+    color: var(--ls-blue-vibrant);
+    border-radius: 50%;
+    border: 2.5px solid var(--ls-blue-vibrant);
+    box-shadow: 0 8px 20px -6px rgba(0, 71, 171, 0.35);
+}
+
+.nav-item.center-fab:hover {
+    background: var(--ls-blue-vibrant);
+    color: #FFFFFF;
+}
+
+.nav-item.center-fab svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5;
+}
+
+/* ─── Toggle switch (reutilizable) ─── */
+.switch {
+    width: 36px;
+    height: 20px;
+    border-radius: 999px;
+    background: #CBD5E1;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.25s;
+    cursor: pointer;
+}
+
+.switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switch.on {
+    background: var(--ls-green-vibrant);
+}
+
+.switch.on::after {
+    transform: translateX(16px);
+}

@@ -1,0 +1,284 @@
+/* ─── Selectores de formulario ─── */
+.field-group {
+    margin-bottom: 16px;
+}
+
+.field-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--ls-text-main);
+    margin-bottom: 6px;
+}
+
+.select-wrap {
+    position: relative;
+}
+
+.select-wrap select {
+    width: 100%;
+    padding: 13px 40px 13px 14px;
+    background: var(--ls-select-bg);
+    border: 1.5px solid var(--ls-border-soft);
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ls-text-main);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.select-wrap select:focus {
+    border-color: var(--ls-blue-vibrant);
+    box-shadow: 0 0 0 3px rgba(3, 166, 248, 0.12);
+    background: #FFFFFF;
+}
+
+.select-wrap select.placeholder {
+    color: var(--ls-text-sub);
+    font-weight: 500;
+}
+
+.select-chevron {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--ls-text-sub);
+}
+
+.select-chevron svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* ─── Burbujas (deudas) — Verde ─── */
+.bubble-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.bubble {
+    padding: 10px 14px;
+    background: var(--ls-select-bg);
+    border: 1.5px solid var(--ls-border-soft);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ls-text-sub);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.bubble:hover {
+    border-color: var(--ls-green-vibrant);
+    color: var(--ls-text-main);
+}
+
+.bubble.selected {
+    background: var(--ls-green-vibrant);
+    border-color: var(--ls-green-vibrant);
+    color: #FFFFFF;
+}
+
+/* ─── Tarjetas multi-select (problemáticas) ─── */
+.grid-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.multi-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #FFFFFF;
+    border: 1.5px solid var(--ls-border-soft);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    text-align: left;
+}
+
+.multi-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.multi-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: #F1F5F9;
+    color: var(--ls-text-sub);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.multi-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.multi-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.multi-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ls-text-main);
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+.multi-desc {
+    font-size: 10.5px;
+    color: var(--ls-text-sub);
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.multi-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1.5px solid var(--ls-border-soft);
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    transition: all 0.2s;
+    background: #FFFFFF;
+}
+
+.multi-check svg {
+    width: 12px;
+    height: 12px;
+    color: #FFFFFF;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+/* ─── Colores individuales por problemática ─── */
+
+/* A) Gastos Hormiga -> Azul */
+.multi-card[data-problem="hormiga"]:hover {
+    border-color: var(--ls-blue-vibrant);
+}
+
+.multi-card[data-problem="hormiga"].selected {
+    border-color: var(--ls-blue-vibrant);
+    background: var(--ls-blue-light);
+}
+
+.multi-card[data-problem="hormiga"].selected .multi-icon {
+    background: var(--ls-blue-vibrant);
+    color: #fff;
+}
+
+.multi-card[data-problem="hormiga"].selected .multi-check {
+    background: var(--ls-blue-vibrant);
+    border-color: var(--ls-blue-vibrant);
+}
+
+.multi-card[data-problem="hormiga"].selected .multi-check svg {
+    opacity: 1;
+}
+
+/* B) Imprevistos -> Verde */
+.multi-card[data-problem="imprevistos"]:hover {
+    border-color: var(--ls-green-vibrant);
+}
+
+.multi-card[data-problem="imprevistos"].selected {
+    border-color: var(--ls-green-vibrant);
+    background: var(--ls-green-light);
+}
+
+.multi-card[data-problem="imprevistos"].selected .multi-icon {
+    background: var(--ls-green-vibrant);
+    color: #fff;
+}
+
+.multi-card[data-problem="imprevistos"].selected .multi-check {
+    background: var(--ls-green-vibrant);
+    border-color: var(--ls-green-vibrant);
+}
+
+.multi-card[data-problem="imprevistos"].selected .multi-check svg {
+    opacity: 1;
+}
+
+/* C) Desorganización -> Morado */
+.multi-card[data-problem="desorganizacion"]:hover {
+    border-color: var(--ls-purple-vibrant);
+}
+
+.multi-card[data-problem="desorganizacion"].selected {
+    border-color: var(--ls-purple-vibrant);
+    background: var(--ls-purple-light);
+}
+
+.multi-card[data-problem="desorganizacion"].selected .multi-icon {
+    background: var(--ls-purple-vibrant);
+    color: #fff;
+}
+
+.multi-card[data-problem="desorganizacion"].selected .multi-check {
+    background: var(--ls-purple-vibrant);
+    border-color: var(--ls-purple-vibrant);
+}
+
+.multi-card[data-problem="desorganizacion"].selected .multi-check svg {
+    opacity: 1;
+}
+
+/* D) Historial -> Naranja */
+.multi-card[data-problem="historial"]:hover {
+    border-color: var(--ls-orange-vibrant);
+}
+
+.multi-card[data-problem="historial"].selected {
+    border-color: var(--ls-orange-vibrant);
+    background: var(--ls-orange-light);
+}
+
+.multi-card[data-problem="historial"].selected .multi-icon {
+    background: var(--ls-orange-vibrant);
+    color: #fff;
+}
+
+.multi-card[data-problem="historial"].selected .multi-check {
+    background: var(--ls-orange-vibrant);
+    border-color: var(--ls-orange-vibrant);
+}
+
+.multi-card[data-problem="historial"].selected .multi-check svg {
+    opacity: 1;
+}
+
+/* Mascota específica de page3 */
+.mascot {
+    width: 110px;
+    height: 110px;
+    border-color: var(--ls-blue-vibrant);
+}
+
+.mascot img {
+    width: 90%;
+    height: 90%;
+}

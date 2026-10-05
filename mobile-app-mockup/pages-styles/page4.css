@@ -1,0 +1,404 @@
+/* ─── Saludo en el top bar ─── */
+.greeting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+}
+
+.greeting .hello {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--ls-text-sub);
+}
+
+.greeting .name {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--ls-text-main);
+    letter-spacing: -0.2px;
+    margin-top: 2px;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--ls-blue-vibrant);
+    color: #FFFFFF;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    border: 1.5px solid var(--ls-blue-special);
+    box-shadow: 0 4px 10px -2px rgba(0, 71, 171, 0.35);
+    font-family: inherit;
+}
+
+/* ─── A. Gauge de Salud Financiera ─── */
+.score-card {
+    text-align: center;
+    padding: 16px 18px 14px;
+}
+
+.score-head h3 {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--ls-text-sub);
+    margin-bottom: 4px;
+}
+
+.gauge-wrap {
+    position: relative;
+    width: 210px;
+    height: 125px;
+    margin: 0 auto;
+}
+
+.gauge-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.gauge-center {
+    position: absolute;
+    left: 50%;
+    bottom: 6px;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
+
+.gauge-value {
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    color: var(--ls-text-main);
+}
+
+.gauge-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--ls-green-dark);
+    background: var(--ls-green-light);
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* ─── B. Gráfica de barras ─── */
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.chart-title {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--ls-text-sub);
+}
+
+.chart-legend {
+    display: flex;
+    gap: 12px;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--ls-text-sub);
+    letter-spacing: 0.2px;
+}
+
+.chart-legend span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dot-in {
+    color: var(--ls-blue-vibrant);
+    font-size: 14px;
+}
+
+.dot-out {
+    color: var(--ls-yellow-vibrant);
+    font-size: 14px;
+}
+
+.chart-bars {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    height: 100px;
+    align-items: end;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed var(--ls-border-soft);
+    padding-bottom: 4px;
+}
+
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.bar-twin {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 3px;
+    height: 100%;
+    width: 100%;
+}
+
+.bar {
+    width: 10px;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.4s ease;
+}
+
+.bar.in {
+    background: var(--ls-blue-vibrant);
+}
+
+.bar.out {
+    background: var(--ls-yellow-vibrant);
+}
+
+.bar-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--ls-text-sub);
+}
+
+/* ─── C. Módulo de metas e historial ─── */
+.goals-card {
+    background: linear-gradient(135deg, #FFFFFF 0%, var(--ls-blue-light) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.goals-info h4 {
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--ls-text-main);
+    margin-bottom: 4px;
+}
+
+.goals-info p {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ls-text-sub);
+}
+
+.goals-btn {
+    background: var(--ls-blue-light);
+    color: var(--ls-blue-vibrant);
+    border: 1.5px solid var(--ls-blue-special);
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.goals-btn:hover {
+    background: var(--ls-blue-vibrant);
+    color: #FFFFFF;
+    border-color: var(--ls-blue-vibrant);
+}
+
+/* ─── D. Barra de progreso de escaneo diario ─── */
+.progress-section {
+    margin-bottom: 14px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.progress-header h4 {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--ls-text-sub);
+}
+
+.progress-header span {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ls-text-main);
+}
+
+.progress-bar-container {
+    display: flex;
+    gap: 4px;
+    height: 8px;
+}
+
+.progress-segment {
+    flex: 1;
+    background: var(--ls-border-soft);
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+.progress-segment.done {
+    background: var(--ls-green-vibrant);
+}
+
+/* ─── E. Checklist diario ─── */
+.checklist {
+    padding: 6px 12px;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--ls-border-soft);
+}
+
+.check-item:last-child {
+    border-bottom: none;
+}
+
+.check-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    font-size: 12px;
+}
+
+.check-icon.done {
+    background: var(--ls-green-light);
+    color: var(--ls-green-dark);
+}
+
+.check-icon.pending {
+    background: var(--ls-orange-light);
+    color: var(--ls-orange-vibrant);
+}
+
+.check-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ls-text-main);
+}
+
+.check-text.strikethrough {
+    color: var(--ls-text-sub);
+    text-decoration: line-through;
+}
+
+/* ─── Bottom nav bar ─── */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    height: 68px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1.5px solid var(--ls-border-soft);
+    box-shadow: 0 -4px 20px rgba(0, 45, 98, 0.08);
+    z-index: 50;
+    padding-bottom: 22px;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    color: var(--ls-text-sub);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--ls-blue-light);
+    border: 1.5px solid var(--ls-border-soft);
+    border-radius: 10px;
+    font-family: inherit;
+}
+
+.nav-item:hover {
+    border-color: var(--ls-blue-special);
+    color: var(--ls-blue-vibrant);
+}
+
+.nav-item.active {
+    background: var(--ls-blue-light);
+    border-color: var(--ls-blue-vibrant);
+    color: var(--ls-blue-vibrant);
+}
+
+.nav-item svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.2;
+}
+
+.nav-item.center-fab {
+    position: relative;
+    top: -16px;
+    width: 56px;
+    height: 56px;
+    background: var(--ls-blue-light);
+    color: var(--ls-blue-vibrant);
+    border-radius: 50%;
+    border: 2.5px solid var(--ls-blue-vibrant);
+    box-shadow: 0 8px 20px -6px rgba(0, 71, 171, 0.35);
+}
+
+.nav-item.center-fab:hover {
+    background: var(--ls-blue-vibrant);
+    color: #FFFFFF;
+}
+
+.nav-item.center-fab svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5;
+}
+
+.bottom-bar a {
+    text-decoration: none;
+    color: inherit;
+    display: contents;
+}

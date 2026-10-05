@@ -1,0 +1,376 @@
+:root {
+    /* Fondo del certificado (azul profundo → azul vibrante) */
+    --ls-cert-bg-start: #1E3A8A;
+    --ls-cert-bg-end: #2563EB;
+}
+
+/* ─── Certificado ejecutivo (hero card) ─── */
+.certificate {
+    background: linear-gradient(150deg, var(--ls-cert-bg-start) 0%, var(--ls-cert-bg-end) 100%);
+    border-radius: 22px;
+    padding: 18px;
+    color: #FFFFFF;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 32px -14px rgba(37, 99, 235, 0.55);
+}
+
+.certificate::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 70%;
+    height: 180%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.cert-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.cert-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cert-brand .mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #60A5FA, #A78BFA);
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    font-size: 11px;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+}
+
+.cert-brand .name {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.cert-brand .name span {
+    color: #BFDBFE;
+}
+
+.cert-id {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.14);
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.cert-title {
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.cert-sub {
+    font-size: 11px;
+    color: #BFDBFE;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+}
+
+.cert-ready {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 12px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 14px;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(6px);
+}
+
+.cert-ready .check {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--ls-green-vibrant);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
+}
+
+.cert-ready .check svg {
+    width: 14px;
+    height: 14px;
+    color: #FFFFFF;
+}
+
+.cert-ready .txt {
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+}
+
+.cert-ready .txt small {
+    display: block;
+    font-size: 9.5px;
+    font-weight: 600;
+    color: #C7F9E0;
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+}
+
+/* ─── Bóveda académica (lista) ─── */
+.vault-list {
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1.5px solid var(--ls-border-soft);
+    box-shadow: 0 8px 20px -10px rgba(37, 99, 235, 0.10);
+    overflow: hidden;
+}
+
+.vault-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--ls-border-soft);
+}
+
+.vault-item:last-child {
+    border-bottom: none;
+}
+
+.vault-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: var(--ls-purple-light);
+    color: var(--ls-purple-vibrant);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.vault-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+.vault-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.vault-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--ls-text-main);
+    letter-spacing: -0.1px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vault-issuer {
+    font-size: 10px;
+    color: var(--ls-text-sub);
+    font-weight: 600;
+    letter-spacing: 0.1px;
+}
+
+.vault-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: var(--ls-blue-vibrant);
+    background: var(--ls-blue-light);
+    border: 1px solid transparent;
+    padding: 6px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.vault-view:hover {
+    background: var(--ls-blue-vibrant);
+    color: #FFFFFF;
+}
+
+.vault-view svg {
+    width: 11px;
+    height: 11px;
+}
+
+/* ─── Autenticación continua ─── */
+.auth-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1.5px solid var(--ls-border-soft);
+    box-shadow: 0 8px 20px -10px rgba(37, 99, 235, 0.10);
+    padding: 15px;
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+}
+
+.auth-seal {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.auth-seal svg {
+    width: 100%;
+    height: 100%;
+}
+
+.auth-seal .seal-icon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #FFFFFF;
+}
+
+.auth-seal .seal-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.auth-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.auth-title {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--ls-text-main);
+    letter-spacing: -0.1px;
+    margin-bottom: 3px;
+}
+
+.auth-desc {
+    font-size: 10.5px;
+    color: var(--ls-text-sub);
+    line-height: 1.4;
+    font-weight: 500;
+    margin-bottom: 9px;
+}
+
+.auth-metrics {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.auth-metric {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: var(--ls-text-main);
+    background: var(--ls-blue-light);
+    padding: 4px 8px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.auth-metric .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--ls-green-vibrant);
+}
+
+/* ─── CTA Exportar ─── */
+.footer-cta {
+    padding: 12px 20px 20px;
+    background: #FFFFFF;
+    flex-shrink: 0;
+}
+
+.btn-export {
+    width: 100%;
+    border: none;
+    border-radius: 999px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--ls-blue-vibrant) 0%, var(--ls-blue-dark) 100%);
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 10px 24px -6px rgba(37, 99, 235, 0.45);
+    transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-export:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px -6px rgba(37, 99, 235, 0.55);
+}
+
+.btn-export:active {
+    transform: translateY(0);
+}
+
+.btn-export:disabled {
+    cursor: not-allowed;
+    opacity: 0.75;
+}
+
+.export-note {
+    text-align: center;
+    font-size: 10px;
+    color: var(--ls-text-sub);
+    margin-top: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    line-height: 1.4;
+}
+
+.export-note strong {
+    color: var(--ls-text-main);
+    font-weight: 800;
+}

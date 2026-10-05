@@ -16,7 +16,6 @@ const titles = [
     'Registro Conversacional & Escanner',
     'Metas',
     'Certificado',
-    'Perfil',
     'Anaisis'
 ];
 
